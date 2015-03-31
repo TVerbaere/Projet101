@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Diagramdrawer
+Bundle-SymbolicName: org.eclipse.papyrus.diagramdrawer
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipse.papyrus.diagramdrawer.Activator
+Bundle-Vendor: Thibaud VERBAERE & Allan RAKOTOARIVONY
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
