@@ -8,15 +8,28 @@ Bundle-Vendor: Thibaud VERBAERE & Allan RAKOTOARIVONY
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.papyrus.uml.tools,
- org.eclipse.emf.ecore
+ org.eclipse.emf.ecore,
+ org.eclipse.gmf.runtime.emf.core,
+ org.eclipse.ui.views.properties.tabbed;bundle-version="3.6.0",
+ org.eclipse.papyrus.uml.diagram.common
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.draw2d.geometry,
  org.eclipse.emf.edit.command,
  org.eclipse.emf.transaction.util,
+ org.eclipse.gef,
+ org.eclipse.gef.commands,
+ org.eclipse.gmf.runtime.diagram.ui.editparts,
+ org.eclipse.gmf.runtime.diagram.ui.parts,
+ org.eclipse.gmf.runtime.diagram.ui.requests,
  org.eclipse.gmf.runtime.notation,
  org.eclipse.gmf.runtime.notation.impl,
  org.eclipse.papyrus.commands,
  org.eclipse.papyrus.diagram.programmaticcreation.exception,
+ org.eclipse.papyrus.editor,
+ org.eclipse.papyrus.infra.core.editor,
  org.eclipse.papyrus.infra.core.resource,
+ org.eclipse.papyrus.infra.gmfdiag.common.utils,
+ org.eclipse.papyrus.infra.gmfdiag.menu.utils,
+ org.eclipse.papyrus.uml.diagram.menu.actions,
  org.eclipse.uml2.uml

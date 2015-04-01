@@ -4,7 +4,11 @@
 
 Etat du projet :
 ----------------
-+ DiagramType 		[OK]
-+ Position		[OK]
 + UMLModelHelper	[OK]
++ AbstractDiagramHandler [En cours... interface pour les draw a confirmer]
+
++ ModelFactory [??]
++ DiagramFactory [??]
+
++ Tests
 

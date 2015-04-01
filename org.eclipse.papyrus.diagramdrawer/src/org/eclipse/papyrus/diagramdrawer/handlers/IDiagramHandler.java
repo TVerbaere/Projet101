@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.papyrus.diagram.programmaticcreation.exception.NotResizableViewException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.UnmovableViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.ViewNotDrawnException;
 import org.eclipse.papyrus.diagramdrawer.utils.Position;
 import org.eclipse.uml2.uml.Element;
@@ -110,7 +112,7 @@ public interface IDiagramHandler {
 		 * @return A point representing the coordinate of the upper left-most point of the view
 		 * @throws NonExistantViewException If the view does not exists in the handled diagram
 		 */
-		public Point getLocation(View view) /*throws NonExistantViewException*/;
+		public Point getLocation(View view) throws LocationNotFoundException/*throws NonExistantViewException*/;
 		
 		/**
 		 * Moves the view to the given location. The upper left-most point of the view is placed to the location given in parameter.
@@ -120,7 +122,7 @@ public interface IDiagramHandler {
 		 * @throws OccupiedLocationException If the view overlaps another view after the move
 		 * @throws InvalidViewOperationException If the view cannot be moved
 		 */
-		public void setLocation(View view,Point location) /*throws NonExistantViewException,OccupiedLocationException,InvalidViewOperationException*/;
+		public void setLocation(View view,Point location) throws UnmovableViewException/*throws NonExistantViewException,OccupiedLocationException,InvalidViewOperationException*/;
 		
 		/**
 		 * Returns a list of all views representing the element which name is given as parameter.
