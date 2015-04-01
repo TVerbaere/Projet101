@@ -6,9 +6,15 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.papyrus.diagramdrawer.Activator
 Bundle-Vendor: Thibaud VERBAERE & Allan RAKOTOARIVONY
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.eclipse.papyrus.uml.tools,
+ org.eclipse.emf.ecore
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.draw2d.geometry,
+ org.eclipse.emf.edit.command,
+ org.eclipse.emf.transaction.util,
  org.eclipse.gmf.runtime.notation,
+ org.eclipse.papyrus.commands,
+ org.eclipse.papyrus.infra.core.resource,
  org.eclipse.uml2.uml
