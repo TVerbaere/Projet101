@@ -7,4 +7,10 @@ package org.eclipse.papyrus.diagramdrawer.handlers;
  */
 public class ClassDiagramHandler extends AbstractDiagramHandler {
 
+	@Override
+	public void executeDrop() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
