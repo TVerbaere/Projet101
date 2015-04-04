@@ -4,21 +4,21 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.papyrus.editor.PapyrusMultiDiagramEditor;
-import org.eclipse.papyrus.uml.diagram.clazz.part.UMLDiagramEditor;
+import org.eclipse.papyrus.uml.diagram.activity.part.UMLDiagramEditor;
 
 /**
- * used to handle elements on a class diagram.
+ * used to handle elements on an activity diagram.
  * 
  * @author Thibaud VERBAERE
  *
  */
-public class ClassDiagramHandler extends AbstractDiagramHandler {
+public class ActivityDiagramHandler extends AbstractDiagramHandler {
 	
 	
 	private UMLDiagramEditor diagramEditor;
 	
 
-	public ClassDiagramHandler(EObject model,
+	public ActivityDiagramHandler(EObject model,
 			PapyrusMultiDiagramEditor papyrusEditor) {
 		super(model, papyrusEditor);
 	}

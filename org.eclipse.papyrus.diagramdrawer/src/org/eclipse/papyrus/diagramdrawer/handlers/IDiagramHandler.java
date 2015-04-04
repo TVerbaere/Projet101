@@ -5,9 +5,9 @@ import java.util.List;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.UnmovableViewException;
-import org.eclipse.papyrus.diagramdrawer.exceptions.ViewNotDrawnException;
 import org.eclipse.papyrus.diagramdrawer.utils.Position;
 import org.eclipse.uml2.uml.Element;
 /*import org.elipse.papyrus.diagramdrawer.exception.OccupiedLocationException;
@@ -66,8 +66,9 @@ public interface IDiagramHandler {
 		 * @param cascade
 		 * @throws InvalidContainerException if the element cannot be placed inside the container or the container does not exists
 		 * @return A view representing the drawn element
+		 * @throws LocationNotFoundException 
 		 */
-		public View drawElementInside(View container, Element element, boolean cascade) /*throws InvalidContainerException*/;
+		public View drawElementInside(View container, Element element, boolean cascade) throws LocationNotFoundException /*throws InvalidContainerException*/;
 		
 		/**
 		 * Draws all elements at their locations.
@@ -78,7 +79,7 @@ public interface IDiagramHandler {
 		 * @return A list of the drawn views
 		 * @throws IllegalArgumentException If locations size is smaller than elements size
 		 */
-		public List<View> drawAll(List<Element> elements,List<Point>locations, boolean cascade) /*throws IllegalArgumentException,OccupiedLocationException*/;
+		public List<View> drawAll(List<Element> elements,List<Point>locations, boolean cascade) throws IllegalArgumentException/*,OccupiedLocationException*/;
 		
 		/**
 		 * 
@@ -88,8 +89,9 @@ public interface IDiagramHandler {
 		 * @param interval
 		 * @param cascade
 		 * @return
+		 * @throws LocationNotFoundException 
 		 */
-		public View drawAtPosition(Element element, Position position, View base, int interval, boolean cascade);
+		public View drawAtPosition(Element element, Position position, View base, int interval, boolean cascade) throws LocationNotFoundException;
 		
 		/**
 		 * Deletes the view in the handled diagram.
@@ -137,7 +139,7 @@ public interface IDiagramHandler {
 		 * @return
 		 * @throws ViewNotDrawnException
 		 */
-		public int getWidth(View view) throws ViewNotDrawnException;
+		public int getWidth(View view) throws NotDimensionedViewException;
 		
 		/**
 		 * 
@@ -145,7 +147,7 @@ public interface IDiagramHandler {
 		 * @return
 		 * @throws ViewNotDrawnException
 		 */
-		public int getHeight(View view) throws ViewNotDrawnException;
+		public int getHeight(View view) throws NotDimensionedViewException;
 
 		/**
 		 * 

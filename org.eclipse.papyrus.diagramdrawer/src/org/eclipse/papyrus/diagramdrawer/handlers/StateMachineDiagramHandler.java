@@ -4,21 +4,22 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.papyrus.editor.PapyrusMultiDiagramEditor;
-import org.eclipse.papyrus.uml.diagram.clazz.part.UMLDiagramEditor;
+import org.eclipse.papyrus.uml.diagram.statemachine.part.UMLDiagramEditor;
+
 
 /**
- * used to handle elements on a class diagram.
+ * used to handle elements on a state-machine diagram.
  * 
  * @author Thibaud VERBAERE
  *
  */
-public class ClassDiagramHandler extends AbstractDiagramHandler {
+public class StateMachineDiagramHandler extends AbstractDiagramHandler {
 	
 	
 	private UMLDiagramEditor diagramEditor;
 	
 
-	public ClassDiagramHandler(EObject model,
+	public StateMachineDiagramHandler(EObject model,
 			PapyrusMultiDiagramEditor papyrusEditor) {
 		super(model, papyrusEditor);
 	}

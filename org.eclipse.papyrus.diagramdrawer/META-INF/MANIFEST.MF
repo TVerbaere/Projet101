@@ -11,7 +11,17 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.ecore,
  org.eclipse.gmf.runtime.emf.core,
  org.eclipse.ui.views.properties.tabbed;bundle-version="3.6.0",
- org.eclipse.papyrus.uml.diagram.common
+ org.eclipse.papyrus.uml.diagram.common,
+ org.eclipse.papyrus.uml.diagram.clazz,
+ org.eclipse.papyrus.uml.diagram.activity,
+ org.eclipse.papyrus.uml.diagram.communication,
+ org.eclipse.papyrus.uml.diagram.component,
+ org.eclipse.papyrus.uml.diagram.composite,
+ org.eclipse.papyrus.uml.diagram.deployment,
+ org.eclipse.papyrus.uml.diagram.sequence,
+ org.eclipse.papyrus.uml.diagram.statemachine,
+ org.eclipse.papyrus.uml.diagram.timing,
+ org.eclipse.papyrus.uml.diagram.usecase
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.draw2d.geometry,

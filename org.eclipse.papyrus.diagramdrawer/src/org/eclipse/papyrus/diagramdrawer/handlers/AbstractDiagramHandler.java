@@ -6,8 +6,10 @@ import java.util.List;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CompoundCommand;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramGraphicalViewer;
@@ -18,9 +20,9 @@ import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.gmf.runtime.notation.impl.BoundsImpl;
 import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.UnmovableViewException;
-import org.eclipse.papyrus.diagramdrawer.exceptions.ViewNotDrawnException;
 import org.eclipse.papyrus.diagramdrawer.utils.Position;
 import org.eclipse.papyrus.editor.PapyrusMultiDiagramEditor;
 import org.eclipse.papyrus.infra.gmfdiag.menu.utils.DeleteActionUtil;
@@ -29,6 +31,7 @@ import org.eclipse.papyrus.uml.diagram.menu.actions.SizeAction;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.NamedElement;
+import org.eclipse.uml2.uml.Relationship;
 
 
 /**
@@ -55,6 +58,11 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 	 */
 	protected DropObjectsRequest drop;
 	
+	/**
+	 * the Diagram Edit Part.
+	 */
+	protected DiagramEditPart clazzdiagrameditPart;
+	
 	
 	/**
 	 * 
@@ -67,44 +75,112 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 		this.model = model;
 		this.papyrusEditor = papyrusEditor;
 		this.drop = new DropObjectsRequest();
+		DiagramEditor editor  = ((DiagramEditor)this.papyrusEditor.getActiveEditor());
+		this.clazzdiagrameditPart = (DiagramEditPart) editor.getDiagramGraphicalViewer().getEditPartRegistry().get(editor.getDiagram());
 	}
 
 	
 	@Override
 	public View draw(Element element, boolean cascade) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.draw(element,null,cascade);
 	}
 
 	
 	@Override
 	public View draw(Element element, Point location, boolean cascade) {
-		// TODO Auto-generated method stub
-		return null;
+		this.abstractDraw(element,location,cascade,this.clazzdiagrameditPart);
+		//TODO : voir si elle se trouve en dernier ou premier dans la liste.
+		return this.getViewByElement(element).get(0);
 	}
 
 	
 	@Override
 	public View drawElementInside(View container, Element element,
-			boolean cascade) {
-		// TODO Auto-generated method stub
-		return null;
+			boolean cascade) throws LocationNotFoundException {
+		List<EditPart> editparts = this.viewToEditParts(container);
+		for (EditPart editpart : editparts) {
+			if (editpart instanceof GraphicalEditPart) {
+				this.abstractDraw(element,null,cascade,editpart);
+				//TODO : voir si elle se trouve en dernier ou premier dans la liste.
+				return this.getViewByElement(element).get(0);
+			}
+		}
+		
+		throw new LocationNotFoundException();
 	}
 
 	
+	private void abstractDraw(Element element,Point location, boolean cascade,
+			EditPart editpart) {
+
+		// Create the list for the DropObjectsRequest.
+		ArrayList<Element> list = new ArrayList<Element>();
+		list.add(element);
+			
+		// Parameterization of the request.
+		this.drop.setObjects(list);
+		if (location != null)
+			this.drop.setLocation(location);
+					
+		// Execution.
+		this.executeDropOn(editpart);
+		
+		if (cascade) {
+			List<Relationship> relations = element.getRelationships();
+			for (Relationship relation : relations) {
+				this.draw(relation.getOwner(),cascade);
+			}
+			
+			//TODO : voir si elle se trouve en dernier ou premier dans la liste.
+			View view = this.getViewByElement(element).get(0);
+			
+			for (Element elem : element.allOwnedElements()) {
+				try {
+					this.drawElementInside(view, elem, cascade);
+				} catch (LocationNotFoundException e) {
+					// Ignore
+				}
+			}
+			
+		}
+		
+	}
+
+
 	@Override
 	public List<View> drawAll(List<Element> elements, List<Point> locations,
-			boolean cascade) {
-		// TODO Auto-generated method stub
-		return null;
+			boolean cascade) throws IllegalArgumentException {
+		List<View> views = new ArrayList<View>();
+		
+		// It's not possible with differents sizes.
+		if (elements.size() != locations.size())
+			throw new IllegalArgumentException();
+		
+		// Draw elements.
+		for (int i=0; i< elements.size(); i++)
+			views.add(this.draw(elements.get(i), locations.get(i), cascade));
+		
+		return views;
 	}
 
 	
 	@Override
 	public View drawAtPosition(Element element, Position position, View base,
-			int interval, boolean cascade) {
-		// TODO Auto-generated method stub
-		return null;
+			int interval, boolean cascade) throws LocationNotFoundException {
+		
+		Point base_location = this.getLocation(base);
+		
+		switch (position) {
+			case BOTTOM:
+				return this.draw(element, new Point(base_location.x,base_location.y+interval), cascade);
+			case TOP:
+				return this.draw(element, new Point(base_location.x,base_location.y-interval), cascade);
+			case LEFT:
+				return this.draw(element, new Point(base_location.x-interval,base_location.y), cascade);
+			default : // RIGHT
+				return this.draw(element, new Point(base_location.x+interval,base_location.y), cascade);
+		}
+		
 	}
 
 	
@@ -223,7 +299,7 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 
 	
 	@Override
-	public int getWidth(View view) throws ViewNotDrawnException {
+	public int getWidth(View view) throws NotDimensionedViewException {
 		// the view have a width only if the view is an instance of Node. 
 		if (view instanceof Node) {
 			
@@ -234,12 +310,12 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 
 		}
 		else
-			throw new ViewNotDrawnException();
+			throw new NotDimensionedViewException();
 	}
 
 	
 	@Override
-	public int getHeight(View view) throws ViewNotDrawnException {
+	public int getHeight(View view) throws NotDimensionedViewException {
 		// the view have an height only if the view is an instance of Node. 
 		if (view instanceof Node) {
 			
@@ -250,7 +326,7 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 
 		}
 		else
-			throw new ViewNotDrawnException();
+			throw new NotDimensionedViewException();
 	}
 
 	
@@ -295,7 +371,7 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 	 */
 	@SuppressWarnings("unchecked")
 	private List<EditPart> viewToEditParts(View view) {
-		// Find the active EditorPart.
+
 		IEditorPart activeEditor = this.papyrusEditor.getActiveEditor();
 		
 		if (activeEditor instanceof DiagramEditor) {
@@ -305,14 +381,13 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 			
 			return viewer.findEditPartsForElement(elementID, EditPart.class);
 		}
-		
 		return null;
-	}
-	
+
+	}	
 	
 	/**
-	 * Execute the DropObjectsRequest.
+	 * Execute the DropObjectsRequest on a specific edit part.
 	 */
-	protected abstract void executeDrop();
+	public abstract void executeDropOn(EditPart editpart);
 
 }
