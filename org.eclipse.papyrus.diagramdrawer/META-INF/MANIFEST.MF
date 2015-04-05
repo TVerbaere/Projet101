@@ -43,3 +43,5 @@ Import-Package: org.eclipse.draw2d.geometry,
  org.eclipse.papyrus.infra.gmfdiag.menu.utils,
  org.eclipse.papyrus.uml.diagram.menu.actions,
  org.eclipse.uml2.uml
+Export-Package: org.eclipse.papyrus.diagramdrawer.exceptions,
+ org.eclipse.papyrus.diagramdrawer.handlers

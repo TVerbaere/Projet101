@@ -4,11 +4,21 @@
 
 Etat du projet :
 ----------------
-+ UMLModelHelper	[OK]
-+ AbstractDiagramHandler [En cours... interface pour les draw a confirmer]
-
-+ ModelFactory [??]
-+ DiagramFactory [??]
-
-+ Tests
++ UMLModelHelper		[OK]
+  + delete 			[OK]
++ AbstractDiagramHandler	[En cours...]
+  + getModel 	  		[OK]
+  + setWidth			[OK]
+  + setHeight			[OK]
+  + getWidth			[OK]
+  + getHeight			[OK]
+  + getLocation			[OK]
+  + setLocation			[OK]
+  + getElementViewByName	[OK]
+  + getViewElement	 	[OK]
+  + delete			[OK]
+  + autoSize			[OK]
+  + draw			[En cours de tests]
++ ModelFactory 			[??]
++ DiagramFactory 		[??]
 

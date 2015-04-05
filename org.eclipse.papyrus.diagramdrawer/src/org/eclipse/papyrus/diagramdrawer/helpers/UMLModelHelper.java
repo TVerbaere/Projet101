@@ -1,5 +1,6 @@
 package org.eclipse.papyrus.diagramdrawer.helpers;
 
+import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.command.DeleteCommand;
@@ -51,7 +52,7 @@ public class UMLModelHelper {
 			EList<Relationship> relationships = element.getRelationships();
 
 			// Create the command.
-			org.eclipse.emf.common.command.Command command = DeleteCommand.create(TransactionUtil.getEditingDomain(model),element);
+			Command command = DeleteCommand.create(TransactionUtil.getEditingDomain(model),element);
 			
 			if (command.canExecute()) {
 				// Execute the command.

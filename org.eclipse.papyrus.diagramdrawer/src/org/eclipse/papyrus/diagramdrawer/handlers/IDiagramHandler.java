@@ -3,15 +3,18 @@ package org.eclipse.papyrus.diagramdrawer.handlers;
 import java.util.List;
 
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.papyrus.diagramdrawer.exceptions.DeleteViewException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.InvalidContainerException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.UnmovableViewException;
 import org.eclipse.papyrus.diagramdrawer.utils.Position;
 import org.eclipse.uml2.uml.Element;
-/*import org.elipse.papyrus.diagramdrawer.exception.OccupiedLocationException;
-import org.elipse.papyrus.diagramdrawer.exception.DeleteViewException;*/
+/*import org.elipse.papyrus.diagramdrawer.exception.OccupiedLocationException;*/
 
 /**
  * Provides methods to draw elements inside a diagram.
@@ -20,7 +23,7 @@ import org.elipse.papyrus.diagramdrawer.exception.DeleteViewException;*/
  * @author Allan RAKOTOARIVONY
  * @author Thibaud VERBAERE
  * 
- * @version 1.1
+ * @version 1.3
  *
  */
 public interface IDiagramHandler {
@@ -29,7 +32,7 @@ public interface IDiagramHandler {
 		 * Sets the size of the view v to the maximum size of its contents.
 		 * @param v the view
 		 */
-		public void AutoSize(View v);
+		public void autoSize(View v);
 		
 		/**
 		 * Draws the requested element into the handled diagram.
@@ -66,9 +69,8 @@ public interface IDiagramHandler {
 		 * @param cascade
 		 * @throws InvalidContainerException if the element cannot be placed inside the container or the container does not exists
 		 * @return A view representing the drawn element
-		 * @throws LocationNotFoundException 
 		 */
-		public View drawElementInside(View container, Element element, boolean cascade) throws LocationNotFoundException /*throws InvalidContainerException*/;
+		public View drawElementInside(View container, Element element, boolean cascade) throws InvalidContainerException;
 		
 		/**
 		 * Draws all elements at their locations.
@@ -76,8 +78,8 @@ public interface IDiagramHandler {
 		 * @param elements A list of elements to be drawn
 		 * @param locations A list of location corresponding to the elements
 		 * @param cascade
-		 * @return A list of the drawn views
 		 * @throws IllegalArgumentException If locations size is smaller than elements size
+		 * @return A list of the drawn views
 		 */
 		public List<View> drawAll(List<Element> elements,List<Point>locations, boolean cascade) throws IllegalArgumentException/*,OccupiedLocationException*/;
 		
@@ -99,7 +101,7 @@ public interface IDiagramHandler {
 		 * @param view The view to delete from the handled diagram
 		 * @throws DeleteViewException If the view does not exists or cannot be deleted
 		 */
-		public void delete(View view) /*throws DeleteViewException*/;
+		public void delete(View view) throws DeleteViewException;
 		
 		/**
 		 * Returns a list of all views representing the element given as parameter.
@@ -112,19 +114,18 @@ public interface IDiagramHandler {
 		 * Returns the location of a view inside the handled diagram.
 		 * @param view the view which we want to get the location
 		 * @return A point representing the coordinate of the upper left-most point of the view
-		 * @throws NonExistantViewException If the view does not exists in the handled diagram
+		 * @throws LocationNotFoundException If the view has no location or does exist.
 		 */
-		public Point getLocation(View view) throws LocationNotFoundException/*throws NonExistantViewException*/;
+		public Point getLocation(View view) throws LocationNotFoundException;
 		
 		/**
 		 * Moves the view to the given location. The upper left-most point of the view is placed to the location given in parameter.
 		 * @param view The view to move
 		 * @param location The location where the view will be moved
-		 * @throws NonExistantViewException If the view does't exists
+		 * @throws UnmovableViewException If the view cannot be moved
 		 * @throws OccupiedLocationException If the view overlaps another view after the move
-		 * @throws InvalidViewOperationException If the view cannot be moved
 		 */
-		public void setLocation(View view,Point location) throws UnmovableViewException/*throws NonExistantViewException,OccupiedLocationException,InvalidViewOperationException*/;
+		public void setLocation(View view,Point location) throws UnmovableViewException/*OccupiedLocationException*/;
 		
 		/**
 		 * Returns a list of all views representing the element which name is given as parameter.
@@ -137,7 +138,7 @@ public interface IDiagramHandler {
 		 * 
 		 * @param view
 		 * @return
-		 * @throws ViewNotDrawnException
+		 * @throws NotDimensionedViewException
 		 */
 		public int getWidth(View view) throws NotDimensionedViewException;
 		
@@ -145,7 +146,7 @@ public interface IDiagramHandler {
 		 * 
 		 * @param view
 		 * @return
-		 * @throws ViewNotDrawnException
+		 * @throws NotDimensionedViewException
 		 */
 		public int getHeight(View view) throws NotDimensionedViewException;
 
@@ -164,4 +165,16 @@ public interface IDiagramHandler {
 		 * @throws NotResizableViewException
 		 */
 		public void setWidth(View view, int newwidth) throws NotResizableViewException;
+		
+		/**
+		 * 
+		 * @return
+		 */
+		public EObject getModel();
+
+		/**
+		 * 
+		 * @return
+		 */
+		public TransactionalEditingDomain getTED();
 }

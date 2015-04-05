@@ -1,10 +1,14 @@
 package org.eclipse.papyrus.diagramdrawer.handlers;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.commands.Command;
@@ -19,7 +23,10 @@ import org.eclipse.gmf.runtime.notation.LayoutConstraint;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.gmf.runtime.notation.impl.BoundsImpl;
+import org.eclipse.papyrus.diagramdrawer.exceptions.DeleteViewException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.InvalidContainerException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.NonExistantViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.UnmovableViewException;
@@ -63,6 +70,11 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 	 */
 	protected DiagramEditPart clazzdiagrameditPart;
 	
+	/**
+	 * Transactional editing domain.
+	 */
+	private TransactionalEditingDomain ted;
+	
 	
 	/**
 	 * 
@@ -77,6 +89,7 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 		this.drop = new DropObjectsRequest();
 		DiagramEditor editor  = ((DiagramEditor)this.papyrusEditor.getActiveEditor());
 		this.clazzdiagrameditPart = (DiagramEditPart) editor.getDiagramGraphicalViewer().getEditPartRegistry().get(editor.getDiagram());
+		this.ted = TransactionUtil.getEditingDomain(this.model);
 	}
 
 	
@@ -96,8 +109,16 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 	
 	@Override
 	public View drawElementInside(View container, Element element,
-			boolean cascade) throws LocationNotFoundException {
-		List<EditPart> editparts = this.viewToEditParts(container);
+			boolean cascade) throws InvalidContainerException {
+		List<EditPart> editparts = null;
+		
+		try {
+			editparts = this.viewToEditParts(container);
+		}
+		catch (NonExistantViewException e) {
+			throw new InvalidContainerException();
+		}
+		
 		for (EditPart editpart : editparts) {
 			if (editpart instanceof GraphicalEditPart) {
 				this.abstractDraw(element,null,cascade,editpart);
@@ -106,7 +127,7 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 			}
 		}
 		
-		throw new LocationNotFoundException();
+		throw new InvalidContainerException();
 	}
 
 	
@@ -137,8 +158,9 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 			for (Element elem : element.allOwnedElements()) {
 				try {
 					this.drawElementInside(view, elem, cascade);
-				} catch (LocationNotFoundException e) {
-					// Ignore
+				}
+				catch (InvalidContainerException e) {
+					// ignore
 				}
 			}
 			
@@ -188,10 +210,17 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 	
 	
 	@Override
-	public void AutoSize(View view) {
+	public void autoSize(View view) {
 			
-		List<EditPart> parts = this.viewToEditParts(view);
-			
+		List<EditPart> parts = null;
+	
+		try {
+			parts = this.viewToEditParts(view);
+		}
+		catch (NonExistantViewException e) {
+			throw new IllegalArgumentException();
+		}
+					
 		for (EditPart part : parts) {
 			
 			if (part instanceof IGraphicalEditPart) {
@@ -210,13 +239,20 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 	}
 	
 	@Override
-	public void delete(View view) {
+	public void delete(View view) throws DeleteViewException {
 		
 		String DELETE = "Delete From Diagram";
 		// Create the command.
 		CompoundCommand command = new CompoundCommand(DELETE);
 		
-		List<EditPart> parts = this.viewToEditParts(view);
+		List<EditPart> parts = null;
+		
+		try {
+			parts = this.viewToEditParts(view);
+		}
+		catch (NonExistantViewException e) {
+			throw new DeleteViewException();
+		}
 		
 		for (EditPart part : parts) {
 			// Send the request for each instance of IGraphicalEditPart.
@@ -240,29 +276,9 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 	
 	@Override
 	public List<View> getElementViewByName(String name) {
-		List<Element> list = new ArrayList<Element>();
-		NamedElement element;
-		
-		// Crossing the model.
-		for(int i = 0; i < ((Element)this.model).getOwnedElements().size(); ++i) {
-			// The element must be a NamedElement.
-			element = (NamedElement) ((Element)this.model).getOwnedElements().get(i);
-
-			// If the element is found, it's added into the list
-			if (element.getName() != null && element.getName().equals(name))
-				list.add(element);
-
-		}
-	
-		List<View> views = new ArrayList<View>();
-		// For each element find associted views.
-		for (Element elem : list)
-			views.addAll(this.getViewByElement(elem));
-			
-		return views;
-
+		return this.getElementViewByName(name, (Element)this.model);
 	}
-
+		
 	
 	@Override
 	public Point getLocation(View view) throws LocationNotFoundException {
@@ -363,14 +379,65 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 	}
 	
 	
+	@Override
+	public EObject getModel() {
+		return this.model;
+	}
+	
+	
+	@Override
+	public TransactionalEditingDomain getTED() {
+		return this.ted;
+	}
+	
+	
+	/**
+	 * 
+	 * @param name
+	 * @param elem
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private List<View> getElementViewByName(String name,Element elem) {
+		List<Element> list = new ArrayList<Element>();
+		Set<View> views = new HashSet<View>();
+		NamedElement nelement;
+		
+		// Crossing the model.
+		for(int i = 0; i < elem.getOwnedElements().size(); i++) {
+			Element element = elem.getOwnedElements().get(i);
+			// The element must be a NamedElement.
+			if (element instanceof NamedElement) {
+				nelement = (NamedElement) element;
+				// If the element is found, it's added into the list
+				if (nelement.getName() != null && nelement.getName().equals(name))
+					list.add(element);
+	
+				for (Element se : elem.getOwnedElements()) {
+						views.addAll(this.getElementViewByName(name,se));
+				}
+			}
+		}
+	
+		// For each element find associated views.
+		for (Element e : list) {
+			views.addAll(this.getViewByElement(e));
+		}
+			
+		return new ArrayList(views);
+
+	}
+	
+	
 	/**
 	 *
 	 * 
 	 * @param view
 	 * @return
+	 * @throws NonExistantViewException 
 	 */
 	@SuppressWarnings("unchecked")
-	private List<EditPart> viewToEditParts(View view) {
+	private List<EditPart> viewToEditParts(View view) throws NonExistantViewException {
 
 		IEditorPart activeEditor = this.papyrusEditor.getActiveEditor();
 		
@@ -381,9 +448,11 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 			
 			return viewer.findEditPartsForElement(elementID, EditPart.class);
 		}
-		return null;
+		
+		throw new NonExistantViewException();
 
-	}	
+	}
+	
 	
 	/**
 	 * Execute the DropObjectsRequest on a specific edit part.
