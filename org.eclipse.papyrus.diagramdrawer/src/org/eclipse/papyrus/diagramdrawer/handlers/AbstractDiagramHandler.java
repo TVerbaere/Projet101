@@ -45,7 +45,7 @@ import org.eclipse.uml2.uml.Relationship;
  * @author Thibaud VERBAERE
  *
  */
-public abstract class AbstractDiagramHandler implements IDiagramHandler {
+public class AbstractDiagramHandler implements IDiagramHandler {
 	
 	
 	/**
@@ -66,7 +66,7 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 	/**
 	 * the Diagram Edit Part.
 	 */
-	protected DiagramEditPart clazzdiagrameditPart;
+	protected DiagramEditPart diagrameditPart;
 	
 	/**
 	 * Transactional editing domain.
@@ -86,7 +86,7 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 		this.papyrusEditor = papyrusEditor;
 		this.drop = new DropObjectsRequest();
 		DiagramEditor editor  = ((DiagramEditor)this.papyrusEditor.getActiveEditor());
-		this.clazzdiagrameditPart = (DiagramEditPart) editor.getDiagramGraphicalViewer().getEditPartRegistry().get(editor.getDiagram());
+		this.diagrameditPart = (DiagramEditPart) editor.getDiagramGraphicalViewer().getEditPartRegistry().get(editor.getDiagram());
 		this.ted = TransactionUtil.getEditingDomain(this.model);
 	}
 
@@ -99,9 +99,7 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 	
 	@Override
 	public View draw(Element element, Point location, boolean cascade) {
-		this.abstractDraw(element,location,cascade,this.clazzdiagrameditPart);
-		//TODO : voir si elle se trouve en dernier ou premier dans la liste.
-		return this.getViewByElement(element).get(0);
+		return this.abstractDraw(element,location,cascade,this.diagrameditPart);
 	}
 
 	
@@ -119,9 +117,7 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 		
 		for (EditPart editpart : editparts) {
 			if (editpart instanceof GraphicalEditPart) {
-				this.abstractDraw(element,null,cascade,editpart);
-				//TODO : voir si elle se trouve en dernier ou premier dans la liste.
-				return this.getViewByElement(element).get(0);
+				return this.abstractDraw(element,null,cascade,editpart);
 			}
 		}
 		
@@ -129,7 +125,7 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 	}
 
 	
-	private void abstractDraw(Element element,Point location, boolean cascade,
+	private View abstractDraw(Element element,Point location, boolean cascade,
 			EditPart editpart) {
 
 		// Create the list for the DropObjectsRequest.
@@ -144,14 +140,14 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 		// Execution.
 		this.executeDropOn(editpart);
 		
+		//TODO : voir si elle se trouve en dernier ou premier dans la liste.
+		View view = this.getViewByElement(element).get(0);
+		
 		if (cascade) {
 			List<Relationship> relations = element.getRelationships();
 			for (Relationship relation : relations) {
 				this.draw(relation.getOwner(),cascade);
 			}
-			
-			//TODO : voir si elle se trouve en dernier ou premier dans la liste.
-			View view = this.getViewByElement(element).get(0);
 			
 			for (Element elem : element.allOwnedElements()) {
 				try {
@@ -163,6 +159,8 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 			}
 			
 		}
+		
+		return view;
 		
 	}
 
@@ -183,25 +181,26 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 		return views;
 	}
 
-	
-//	@Override
-//	public View drawAtPosition(Element element, Position position, View base,
-//			int interval, boolean cascade) throws LocationNotFoundException {
-//		
-//		Point base_location = this.getLocation(base);
-//		
-//		switch (position) {
-//			case BOTTOM:
-//				return this.draw(element, new Point(base_location.x,base_location.y+interval), cascade);
-//			case TOP:
-//				return this.draw(element, new Point(base_location.x,base_location.y-interval), cascade);
-//			case LEFT:
-//				return this.draw(element, new Point(base_location.x-interval,base_location.y), cascade);
-//			default : // RIGHT
-//				return this.draw(element, new Point(base_location.x+interval,base_location.y), cascade);
-//		}
-//		
-//	}
+	/*
+	@Override
+	public View drawAtPosition(Element element, Position position, View base,
+			int interval, boolean cascade) throws LocationNotFoundException {
+		
+		Point base_location = this.getLocation(base);
+		
+		switch (position) {
+			case BOTTOM:
+				return this.draw(element, new Point(base_location.x,base_location.y+interval), cascade);
+			case TOP:
+				return this.draw(element, new Point(base_location.x,base_location.y-interval), cascade);
+			case LEFT:
+				return this.draw(element, new Point(base_location.x-interval,base_location.y), cascade);
+			default : // RIGHT
+				return this.draw(element, new Point(base_location.x+interval,base_location.y), cascade);
+		}
+		
+	}
+	*/
 
 	
 	/* ------------------------------------------------------------------------ */
@@ -270,6 +269,12 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 	@Override
 	public List<View> getElementViewByName(String name) {
 		return this.getElementViewByName(name, (Element)this.model);
+	}
+	
+	
+	@Override
+	public List<Element> getElementByName(String name) {
+		return this.getElementByName(name, (Element)this.model);
 	}
 		
 	
@@ -383,6 +388,33 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 		return this.ted;
 	}
 	
+	/**
+	 * 
+	 *
+	 * @param name
+	 * @param elem
+	 * @return
+	 */
+	public List<Element> getElementByName(String name,Element elem) {
+		NamedElement nelement;
+		Set<Element> list = new HashSet<Element>();
+		
+		// Crossing the model.
+		for(int i = 0; i < elem.getOwnedElements().size(); i++) {
+			Element element = elem.getOwnedElements().get(i);
+			// The element must be a NamedElement.
+			if (element instanceof NamedElement) {
+				nelement = (NamedElement) element;
+				// If the element is found, it's added into the list
+				if (nelement.getName() != null && nelement.getName().equals(name))
+					list.add(element);
+				// For each, search in sub-elements
+				list.addAll(this.getElementByName(name, element));
+			}
+		}
+			
+		return new ArrayList<Element>(list);
+	}
 	
 	/**
 	 * 
@@ -450,6 +482,13 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 	/**
 	 * Execute the DropObjectsRequest on a specific edit part.
 	 */
-	public abstract void executeDropOn(EditPart editpart);
+	public void executeDropOn(EditPart editpart) {
+		// Create the command with the request.
+		Command commandDrop = editpart.getCommand(this.drop);
+		
+		// Execute the command.
+		if (commandDrop.canExecute())
+			this.diagrameditPart.getDiagramEditDomain().getDiagramCommandStack().execute(commandDrop);
+	}	
 
 }

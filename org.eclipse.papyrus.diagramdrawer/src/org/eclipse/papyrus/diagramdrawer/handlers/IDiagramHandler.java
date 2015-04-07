@@ -133,6 +133,8 @@ public interface IDiagramHandler {
 		 */
 		public List<View> getElementViewByName(String name);
 		
+		public List<Element> getElementByName(String name);
+		
 		/**
 		 * 
 		 * @param view
