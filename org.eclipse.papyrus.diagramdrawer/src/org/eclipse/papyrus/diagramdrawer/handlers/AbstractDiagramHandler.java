@@ -23,14 +23,12 @@ import org.eclipse.gmf.runtime.notation.LayoutConstraint;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.gmf.runtime.notation.impl.BoundsImpl;
-import org.eclipse.papyrus.diagramdrawer.exceptions.DeleteViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.InvalidContainerException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NonExistantViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.UnmovableViewException;
-import org.eclipse.papyrus.diagramdrawer.utils.Position;
 import org.eclipse.papyrus.editor.PapyrusMultiDiagramEditor;
 import org.eclipse.papyrus.infra.gmfdiag.menu.utils.DeleteActionUtil;
 import org.eclipse.papyrus.uml.diagram.common.util.DiagramEditPartsUtil;
@@ -186,24 +184,24 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 	}
 
 	
-	@Override
-	public View drawAtPosition(Element element, Position position, View base,
-			int interval, boolean cascade) throws LocationNotFoundException {
-		
-		Point base_location = this.getLocation(base);
-		
-		switch (position) {
-			case BOTTOM:
-				return this.draw(element, new Point(base_location.x,base_location.y+interval), cascade);
-			case TOP:
-				return this.draw(element, new Point(base_location.x,base_location.y-interval), cascade);
-			case LEFT:
-				return this.draw(element, new Point(base_location.x-interval,base_location.y), cascade);
-			default : // RIGHT
-				return this.draw(element, new Point(base_location.x+interval,base_location.y), cascade);
-		}
-		
-	}
+//	@Override
+//	public View drawAtPosition(Element element, Position position, View base,
+//			int interval, boolean cascade) throws LocationNotFoundException {
+//		
+//		Point base_location = this.getLocation(base);
+//		
+//		switch (position) {
+//			case BOTTOM:
+//				return this.draw(element, new Point(base_location.x,base_location.y+interval), cascade);
+//			case TOP:
+//				return this.draw(element, new Point(base_location.x,base_location.y-interval), cascade);
+//			case LEFT:
+//				return this.draw(element, new Point(base_location.x-interval,base_location.y), cascade);
+//			default : // RIGHT
+//				return this.draw(element, new Point(base_location.x+interval,base_location.y), cascade);
+//		}
+//		
+//	}
 
 	
 	/* ------------------------------------------------------------------------ */
@@ -239,7 +237,7 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 	}
 	
 	@Override
-	public void delete(View view) throws DeleteViewException {
+	public void delete(View view) throws NonExistantViewException {
 		
 		String DELETE = "Delete From Diagram";
 		// Create the command.
@@ -247,12 +245,7 @@ public abstract class AbstractDiagramHandler implements IDiagramHandler {
 		
 		List<EditPart> parts = null;
 		
-		try {
-			parts = this.viewToEditParts(view);
-		}
-		catch (NonExistantViewException e) {
-			throw new DeleteViewException();
-		}
+		parts = this.viewToEditParts(view);
 		
 		for (EditPart part : parts) {
 			// Send the request for each instance of IGraphicalEditPart.

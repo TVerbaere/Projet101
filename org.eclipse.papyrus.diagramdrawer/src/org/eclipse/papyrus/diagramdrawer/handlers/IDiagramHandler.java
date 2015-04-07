@@ -6,13 +6,12 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.papyrus.diagramdrawer.exceptions.DeleteViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.InvalidContainerException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.NonExistantViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.UnmovableViewException;
-import org.eclipse.papyrus.diagramdrawer.utils.Position;
 import org.eclipse.uml2.uml.Element;
 /*import org.elipse.papyrus.diagramdrawer.exception.OccupiedLocationException;*/
 
@@ -58,7 +57,7 @@ public interface IDiagramHandler {
 		 * @param cascade
 		 */
 		
-		public View draw(Element element, Point location, boolean cascade) /*throws OccupiedLocationException*/;
+		public View draw(Element element, Point location, boolean cascade);
 		
 		/**
 		 * Draws the view of the element inside a view.
@@ -78,30 +77,30 @@ public interface IDiagramHandler {
 		 * @param elements A list of elements to be drawn
 		 * @param locations A list of location corresponding to the elements
 		 * @param cascade
-		 * @throws IllegalArgumentException If locations size is smaller than elements size
+		 * @throws IllegalArgumentException If the number of locations is smaller than the  number of elements
 		 * @return A list of the drawn views
 		 */
-		public List<View> drawAll(List<Element> elements,List<Point>locations, boolean cascade) throws IllegalArgumentException/*,OccupiedLocationException*/;
+		public List<View> drawAll(List<Element> elements,List<Point>locations, boolean cascade) throws IllegalArgumentException;
 		
-		/**
-		 * 
-		 * @param element
-		 * @param position
-		 * @param base
-		 * @param interval
-		 * @param cascade
-		 * @return
-		 * @throws LocationNotFoundException 
-		 */
-		public View drawAtPosition(Element element, Position position, View base, int interval, boolean cascade) throws LocationNotFoundException;
+//		/**
+//		 * 
+//		 * @param element
+//		 * @param position
+//		 * @param base
+//		 * @param interval
+//		 * @param cascade
+//		 * @return
+//		 * @throws LocationNotFoundException 
+//		 */
+//		public View drawAtPosition(Element element, Position position, View base, int interval, boolean cascade) throws LocationNotFoundException;
 		
 		/**
 		 * Deletes the view in the handled diagram.
 		 * An exception is thrown if the view does not exists or cannot be deleted.
 		 * @param view The view to delete from the handled diagram
-		 * @throws DeleteViewException If the view does not exists or cannot be deleted
+		 * @throws NonExistantViewException If the view does not exists
 		 */
-		public void delete(View view) throws DeleteViewException;
+		public void delete(View view) throws NonExistantViewException;
 		
 		/**
 		 * Returns a list of all views representing the element given as parameter.
@@ -125,7 +124,7 @@ public interface IDiagramHandler {
 		 * @throws UnmovableViewException If the view cannot be moved
 		 * @throws OccupiedLocationException If the view overlaps another view after the move
 		 */
-		public void setLocation(View view,Point location) throws UnmovableViewException/*OccupiedLocationException*/;
+		public void setLocation(View view,Point location) throws UnmovableViewException;
 		
 		/**
 		 * Returns a list of all views representing the element which name is given as parameter.

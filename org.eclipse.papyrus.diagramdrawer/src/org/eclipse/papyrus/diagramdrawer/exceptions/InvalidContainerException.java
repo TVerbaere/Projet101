@@ -1,7 +1,7 @@
 package org.eclipse.papyrus.diagramdrawer.exceptions;
 
 /**
- * 
+ * Is thrown when an element cannot be placed in the container
  * @author rakotoarivony
  *
  */
