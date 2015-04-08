@@ -21,7 +21,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.papyrus.uml.diagram.sequence,
  org.eclipse.papyrus.uml.diagram.statemachine,
  org.eclipse.papyrus.uml.diagram.timing,
- org.eclipse.papyrus.uml.diagram.usecase
+ org.eclipse.papyrus.uml.diagram.usecase,
+ org.eclipse.equinox.p2.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.draw2d.geometry,
@@ -41,6 +42,7 @@ Import-Package: org.eclipse.draw2d.geometry,
  org.eclipse.papyrus.infra.gmfdiag.common.utils,
  org.eclipse.papyrus.infra.gmfdiag.menu.utils,
  org.eclipse.papyrus.uml.diagram.menu.actions,
+ org.eclipse.papyrus.uml.diagram.profile.part,
  org.eclipse.uml2.uml
 Export-Package: org.eclipse.papyrus.diagramdrawer.exceptions,
  org.eclipse.papyrus.diagramdrawer.handlers
