@@ -3,15 +3,14 @@ package org.eclipse.papyrus.diagramdrawer.test.actions;
 
 import java.util.List;
 
-import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.UnmovableViewException;
 import org.eclipse.papyrus.diagramdrawer.handlers.AbstractDiagramHandler;
-import org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler;
 import org.eclipse.papyrus.editor.PapyrusMultiDiagramEditor;
 import org.eclipse.papyrus.infra.core.resource.ModelSet;
 import org.eclipse.papyrus.infra.core.resource.NotFoundException;
@@ -34,27 +33,28 @@ public class Scenario {
 		EObject model = umlModel.lookupRoot();
 
 		// Création du handler pour un diagramme de classe :
-		final IDiagramHandler handler = new AbstractDiagramHandler(model,papyrusEditor);
+		final AbstractDiagramHandler handler = new AbstractDiagramHandler(model,papyrusEditor);
 		TransactionalEditingDomain ted = handler.getTED();
 		
 		// On doit faire les actions dans la transaction pour les undo/redo
 		ted.getCommandStack().execute(new RecordingCommand(ted) {
 			protected void doExecute() {
 				
-		
-				List<View> views = handler.getElementViewByName("Sith");
-
-				View sith_view = views.get(0);
 				try {
-					Element elem = handler.getElementByName("ennemy").get(0);
-					System.out.println(elem);
-					handler.draw(elem, false);
+										
+					List<View> view = handler.getElementViewByName("Location");
+					View viewpere = view.get(0);
+					List<Element> elem = handler.getElementByName("att");
 					
-				} catch (Exception e) {
+					List<View> att2 = handler.getElementViewByName("att2");
+										
+					handler.drawElementInside(viewpere, elem.get(0), false);
+									
+										
+				}
+				catch (Exception e) {
 					e.printStackTrace();
 				}
-
-			
 			
 			}
 		});

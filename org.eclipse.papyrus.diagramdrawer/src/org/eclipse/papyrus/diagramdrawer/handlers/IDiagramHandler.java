@@ -178,4 +178,12 @@ public interface IDiagramHandler {
 		 * @return
 		 */
 		public TransactionalEditingDomain getTED();
+
+		/**
+		 * 
+		 * @param name
+		 * @param elem
+		 * @return
+		 */
+		List<Element> getElementByName(String name, Element elem);
 }

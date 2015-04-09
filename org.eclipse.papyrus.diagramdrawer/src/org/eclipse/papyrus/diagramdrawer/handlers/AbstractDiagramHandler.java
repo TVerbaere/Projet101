@@ -83,6 +83,9 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	}
 
 	
+	/* ------------------------------------------------------------------------ */
+	
+	
 	@Override
 	public View draw(Element element, boolean cascade) {
 		return this.draw(element,new Point(0,0),cascade);
@@ -103,6 +106,17 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 		views_after.removeAll(views_before);
 		
 		//TODO : FONCTIONNE UNIQUEMENT EN EXECUTION SEPAREE !
+		/* ex : draw(element,location,false)
+		 * 		execution
+		 * 		draw(association,false)
+		 * 		execution
+		 * 
+		 * 		MAIS PAS :
+		 * 		draw(element,location,false)
+		 * 		draw(association,false)
+		 * 		execution
+		 */
+		
 		
 		if (cascade) {
 			// Draw all relationships.
@@ -136,37 +150,11 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	@Override
 	public View drawElementInside(View container, Element element,
 			boolean cascade) throws InvalidContainerException {
-		// TODO : NE FONCTIONNE PAS !!!!!
-		View new_view = this.draw(element,new Point(0,0),cascade);
-		container.insertChild(new_view);
-		return new_view;
-	}
-
-	
-	/**
-	 * 
-	 * @param element
-	 * @param location
-	 */
-	private void simpleDraw(Element element,Point location) {
-			
-		DropObjectsRequest drop = new DropObjectsRequest();
-		// Create the list for the DropObjectsRequest.
-		ArrayList<Element> list = new ArrayList<Element>();
-		list.add(element);
-			
-		// Parameterization of the request.
-		drop.setObjects(list);
-		drop.setLocation(location);
-					
-
-		// Create the command with the request.
-		Command commandDrop = this.diagrameditPart.getCommand(drop);
-				
-		// Execute the command.
-		if (commandDrop.canExecute())
-			this.diagrameditPart.getDiagramEditDomain().getDiagramCommandStack().execute(commandDrop);
-				
+		//TODO
+		Node compartment = null; // Comment touver le bon compartiment dans le container ???
+		View new_view = null; // Il faut creer la vue -> Factory ?
+		compartment.insertChild(new_view);
+		return null;//new_view;
 	}
 
 
@@ -213,10 +201,12 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	
 	@Override
 	public void autoSize(View view) {
+		// autoSize only works with node.
 		if (view.getElement() instanceof Node) {
 			List<EditPart> parts = null;
 		
 			try {
+				// Find the editpart of the node.
 				parts = this.viewToEditParts(view);
 			}
 			catch (NonExistantViewException e) {
@@ -240,29 +230,34 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 		}
 	}
 	
+	
 	@Override
 	public void delete(View view) throws NonExistantViewException {
-		// TODO: A AMEILIORER !
-		// Quand on cherche l'editpart d'un sous-element on a l'editpart père !!
-		// -> Quand on veut supprimer un attribut -> on supprime tout !
-		String DELETE = "Delete From Diagram";
-		// Create the command.
-		CompoundCommand command = new CompoundCommand(DELETE);
+		// The view is a node -> delete all the editpart.
+		if (view.getElement() instanceof Node) {
+			String DELETE = "Delete From Diagram";
+			// Create the command.
+			CompoundCommand command = new CompoundCommand(DELETE);
 		
-		List<EditPart> parts = null;
+			List<EditPart> parts = null;
 		
-		parts = this.viewToEditParts(view);
+			parts = this.viewToEditParts(view);
 		
-		for (EditPart part : parts) {
-			// Send the request for each instance of IGraphicalEditPart.
-			if (part instanceof IGraphicalEditPart)
-				command.add(DeleteActionUtil.getDeleteFromDiagramCommand((IGraphicalEditPart) part));
+			for (EditPart part : parts) {
+				// Send the request for each instance of IGraphicalEditPart.
+				if (part instanceof IGraphicalEditPart)
+					command.add(DeleteActionUtil.getDeleteFromDiagramCommand((IGraphicalEditPart) part));
+			}
+		
+			// Execute the command.
+			if (command.canExecute())
+				command.execute();
 		}
-		
-		// Execute the command.
-		if (command.canExecute())
-			command.execute();
-
+		else {
+			// Else, it's a compartment of a node -> delete only the compartment.
+			Node compartment = (Node) view.eContainer();
+			compartment.removeChild(view);
+		}
 	}
 
 	
@@ -395,13 +390,11 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 		return this.ted;
 	}
 	
-	/**
-	 * 
-	 *
-	 * @param name
-	 * @param elem
-	 * @return
-	 */
+	
+	/* ------------------------------------------------------------------------ */
+	
+	
+	@Override
 	public List<Element> getElementByName(String name,Element elem) {
 		NamedElement nelement;
 		Set<Element> list = new HashSet<Element>();
@@ -422,6 +415,34 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 			
 		return new ArrayList<Element>(list);
 	}
+	
+	
+	/**
+	 * 
+	 * @param element
+	 * @param location
+	 */
+	private void simpleDraw(Element element,Point location) {
+			
+		DropObjectsRequest drop = new DropObjectsRequest();
+		// Create the list for the DropObjectsRequest.
+		ArrayList<Element> list = new ArrayList<Element>();
+		list.add(element);
+			
+		// Parameterization of the request.
+		drop.setObjects(list);
+		drop.setLocation(location);
+					
+
+		// Create the command with the request.
+		Command commandDrop = this.diagrameditPart.getCommand(drop);
+				
+		// Execute the command.
+		if (commandDrop.canExecute())
+			this.diagrameditPart.getDiagramEditDomain().getDiagramCommandStack().execute(commandDrop);
+				
+	}
+	
 	
 	/**
 	 * 
@@ -469,7 +490,7 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	 * @throws NonExistantViewException 
 	 */
 	@SuppressWarnings("unchecked")
-	public List<EditPart> viewToEditParts(View view) throws NonExistantViewException {
+	private List<EditPart> viewToEditParts(View view) throws NonExistantViewException {
 
 		IEditorPart activeEditor = this.papyrusEditor.getActiveEditor();
 		
