@@ -541,7 +541,12 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 			IDiagramGraphicalViewer viewer = ((DiagramEditor)activeEditor).getDiagramGraphicalViewer();
 			String elementID = EMFCoreUtil.getProxyID(view.getElement());
 			
-			return viewer.findEditPartsForElement(elementID, EditPart.class);
+			List<EditPart> editparts = viewer.findEditPartsForElement(elementID, EditPart.class);
+			
+			if (editparts.isEmpty())
+				throw new NonExistantViewException();
+			else
+				return editparts;
 		}
 		
 		throw new NonExistantViewException();
