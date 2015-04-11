@@ -11,6 +11,7 @@ import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NonExistantViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.TargetOrSourceNotDrawnException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.UnmovableViewException;
 import org.eclipse.uml2.uml.Element;
 
@@ -41,8 +42,9 @@ public interface IDiagramHandler {
 		 * @param element The element to be drawn on the handled diagram
 		 * @param cascade True if all contents in the element must be drawn in the same time, False in the other case
 		 * @return A View representing the element in the diagram
+		 * @throws TargetOrSourceNotDrawnException if the element to draw is a relationship and the source or the target element is not drawn
 		 */
-		public View draw(Element element, boolean cascade);
+		public View draw(Element element, boolean cascade) throws TargetOrSourceNotDrawnException;
 		
 		/**
 		 * Draws the requested element into the handled diagram at the given position.

@@ -28,6 +28,7 @@ import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NonExistantViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.TargetOrSourceNotDrawnException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.UnmovableViewException;
 import org.eclipse.papyrus.editor.PapyrusMultiDiagramEditor;
 import org.eclipse.papyrus.infra.gmfdiag.menu.utils.DeleteActionUtil;
@@ -46,6 +47,9 @@ import org.eclipse.uml2.uml.Relationship;
  */
 public class AbstractDiagramHandler implements IDiagramHandler {
 	
+	private static int DEFAULT_X = 0;
+	private static int DEFAULT_Y = 0;
+	
 	/**
 	 * the Papyrus editor.
 	 */
@@ -59,12 +63,12 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	/**
 	 * the Diagram Edit Part.
 	 */
-	public DiagramEditPart diagrameditPart;
+	protected DiagramEditPart diagrameditPart;
 	
 	/**
 	 * Transactional editing domain.
 	 */
-	private TransactionalEditingDomain ted;
+	protected TransactionalEditingDomain ted;
 	
 	
 	/**
@@ -87,8 +91,39 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	
 	
 	@Override
-	public View draw(Element element, boolean cascade) {
-		return this.draw(element,new Point(0,0),cascade);
+	public View draw(Element element, boolean cascade) throws TargetOrSourceNotDrawnException {
+		
+		if (element instanceof Relationship) {
+			// Find the target and the source of the relationship (normally 2 elements).
+			List<Element> related = ((Relationship)element).getRelatedElements();
+			
+			if (cascade) {
+				// If the mode cascade is active then draw source and target element.
+				for (Element e : related) {
+					if (!this.isDrawn(e)) {
+						this.draw(e, new Point(DEFAULT_X,DEFAULT_Y), false);
+					}
+					
+				}
+				// Finally draw the relationship.
+				return this.draw(element,new Point(DEFAULT_X,DEFAULT_Y),cascade);
+			}
+			else {
+				if (this.isDrawn(related.get(0)) && this.isDrawn(related.get(1))) {
+					// Draw the relationship normally.
+					return this.draw(element,new Point(DEFAULT_X,DEFAULT_Y),cascade);
+				}
+				else {
+					// It's not possible to draw the relationship.
+					throw new TargetOrSourceNotDrawnException();
+				}
+			}
+			
+		}
+		else
+			// Draw the element at the default location (0,0).
+			return this.draw(element,new Point(DEFAULT_X,DEFAULT_Y),cascade);
+		
 	}
 
 	
@@ -110,27 +145,30 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 		// Remove before-elements to find the view created.
 		views_after.removeAll(views_before);	
 		
-		/*
+		
 		if (cascade) {
 			// Draw all relationships.
 			List<Relationship> relations = element.getRelationships();
 			for (Relationship relation : relations) {
-				this.draw(relation,cascade);
+				try {
+					this.draw(relation,cascade);
+				} 
+				catch (TargetOrSourceNotDrawnException e) {
+					// Ignore, cascade mode is active.
+				}
 			}
-			
-			
 			
 			for (Element elem : element.allOwnedElements()) {
 
 				try {
-					this.drawElementInside(view, elem, cascade);
+					this.drawElementInside(views_after.get(0), elem, cascade);
 				}
 				catch (InvalidContainerException e) {
 					// ignore
 				}
 			}
 			
-		}*/
+		}
 
 		return views_after.get(0);
 
@@ -145,7 +183,7 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 		
 		// Draw the element
 		try {
-			this.simpleDraw(element,new Point(0,0),container);
+			this.simpleDraw(element,new Point(DEFAULT_X,DEFAULT_Y),container);
 		}
 		catch (NonExistantViewException e1) {
 			throw new InvalidContainerException();
@@ -156,12 +194,17 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 		// Remove before-elements to find the view created.
 		views_after.removeAll(views_before);		
 		
-		/*
+		
 		if (cascade) {
 			// Draw all relationships.
 			List<Relationship> relations = element.getRelationships();
 			for (Relationship relation : relations) {
-				this.draw(relation,cascade);
+				try {
+					this.draw(relation,cascade);
+				}
+				catch (TargetOrSourceNotDrawnException e) {
+					// Ignore; cascade mode is active.
+				}
 			}
 			
 			
@@ -169,16 +212,16 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 			for (Element elem : element.allOwnedElements()) {
 
 				try {
-					this.drawElementInside(view, elem, cascade);
+					this.drawElementInside(views_after.get(0), elem, cascade);
 				}
 				catch (InvalidContainerException e) {
 					// ignore
 				}
 			}
 			
-		}*/
+		}
 
-		return null;//views_after.get(0);
+		return views_after.get(0);
 	}
 
 
@@ -226,33 +269,33 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	
 	@Override
 	public void autoSize(View view) {
-		// autoSize only works with node.
-		if (view.getElement() instanceof Node) {
-			List<EditPart> parts = null;
+		List<EditPart> parts = null;
 		
-			try {
-				// Find the editpart of the node.
-				parts = this.viewToEditParts(view);
-			}
-			catch (NonExistantViewException e) {
-				throw new IllegalArgumentException();
-			}
-						
-			for (EditPart part : parts) {
+		try {
+			// Find the editpart of the node.
+			parts = this.viewToEditParts(view);
+		}
+		catch (NonExistantViewException e) {
+			throw new IllegalArgumentException();
+		}
+		
+		
+		for (EditPart part : parts) {
+			
+			if (part instanceof IGraphicalEditPart) {
+				List<IGraphicalEditPart> edit = new ArrayList<IGraphicalEditPart>();
+				edit.add((IGraphicalEditPart)part);
+
+				// Send the request for each instance of IGraphicalEditPart.
+				SizeAction action = new SizeAction(SizeAction.PARAMETER_AUTOSIZE, edit);
+				Command cmd = action.getCommand();
 				
-				if (part instanceof IGraphicalEditPart) {
-					List<IGraphicalEditPart> edit = new ArrayList<IGraphicalEditPart>();
-					edit.add((IGraphicalEditPart)part);
-					// Send the request for each instance of IGraphicalEditPart.
-					SizeAction action = new SizeAction(SizeAction.PARAMETER_AUTOSIZE, edit);
-					Command cmd = action.getCommand();
-				
-					// Execute the command.
-					if (cmd.canExecute())
-						cmd.execute();
-				}
+				// Execute the command.
+				if (cmd.canExecute())
+					cmd.execute();
 			}
 		}
+		
 	}
 	
 	
@@ -463,7 +506,7 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 		
 		if (father != null) {
 			List<EditPart> edit = this.viewToEditParts(father);
-			System.out.println(edit);
+
 			Iterator<EditPart> it = edit.iterator();
 			
 			// Search the good EditPart and create the command with the request.
@@ -552,6 +595,33 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 		
 		throw new NonExistantViewException();
 
-	}	
+	}
+	
+	
+	/**
+	 * Return if an element is drawn on the diagram.
+	 * @param element the element
+	 * @return True or False if the element is drawn
+	 */
+	private boolean isDrawn(Element element) {
+		List<View> views = getViewByElement(element);
+		List<EditPart> editparts = new ArrayList<EditPart>();
+		
+		// No associated view, so not drawn !
+		if (views.isEmpty())
+			return false;
+		else {
+			for (View view : views) {
+				try {
+					editparts.addAll(this.viewToEditParts(view));
+				}
+				catch (NonExistantViewException e) {
+					// Ignore 
+				}
+			}
+		}
+		// If there are editparts for the view, not drawn !
+		return !editparts.isEmpty();
+	}
 
 }
