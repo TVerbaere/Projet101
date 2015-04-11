@@ -45,7 +45,6 @@ import org.eclipse.uml2.uml.Relationship;
  *
  */
 public class AbstractDiagramHandler implements IDiagramHandler {
-	//TODO : Mode Cascade -> concurrence de stack ?
 	
 	/**
 	 * the Papyrus editor.
@@ -97,7 +96,7 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	public View draw(Element element, Point location, boolean cascade) {
 		// Find the list of views for the element before executing the request.
 		List<View> views_before = this.getViewByElement(element);
-		
+
 		// Draw the element
 		try {
 			this.simpleDraw(element,location,null);
@@ -105,28 +104,20 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 		catch (NonExistantViewException e) {
 			// Ignore : No parameter view
 		}
-		
+
 		// Find the list of views for the element after.
 		List<View> views_after = this.getViewByElement(element);
 		// Remove before-elements to find the view created.
 		views_after.removeAll(views_before);	
 		
+		/*
 		if (cascade) {
 			// Draw all relationships.
 			List<Relationship> relations = element.getRelationships();
 			for (Relationship relation : relations) {
-				try {
-					this.simpleDraw(relation,new Point(0,0),null);
-				}
-				catch (NonExistantViewException e) {
-					// Ignore : No parameter view
-				}
+				this.draw(relation,cascade);
 			}
 			
-		}
-		
-		/*
-		if (cascade) {
 			
 			
 			for (Element elem : element.allOwnedElements()) {
@@ -142,6 +133,7 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 		}*/
 
 		return views_after.get(0);
+
 	}
 
 
@@ -164,22 +156,14 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 		// Remove before-elements to find the view created.
 		views_after.removeAll(views_before);		
 		
+		/*
 		if (cascade) {
 			// Draw all relationships.
 			List<Relationship> relations = element.getRelationships();
 			for (Relationship relation : relations) {
-				try {
-					this.simpleDraw(relation,new Point(0,0),null);
-				}
-				catch (NonExistantViewException e) {
-					// Ignore : No parameter view
-				}
+				this.draw(relation,cascade);
 			}
 			
-		}
-		
-		/*
-		if (cascade) {
 			
 			
 			for (Element elem : element.allOwnedElements()) {
@@ -194,7 +178,7 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 			
 		}*/
 
-		return views_after.get(0);
+		return null;//views_after.get(0);
 	}
 
 
@@ -214,6 +198,7 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 		return views;
 	}
 
+	
 	/*
 	@Override
 	public View drawAtPosition(Element element, Position position, View base,
@@ -465,7 +450,7 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	 * @throws NonExistantViewException 
 	 */
 	private void simpleDraw(Element element,Point location,View father) throws NonExistantViewException {
-			
+		
 		DropObjectsRequest drop = new DropObjectsRequest();
 		// Create the list for the DropObjectsRequest.
 		ArrayList<Element> list = new ArrayList<Element>();
@@ -478,6 +463,7 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 		
 		if (father != null) {
 			List<EditPart> edit = this.viewToEditParts(father);
+			System.out.println(edit);
 			Iterator<EditPart> it = edit.iterator();
 			
 			// Search the good EditPart and create the command with the request.
@@ -493,7 +479,8 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 		// Execute the command.
 		if (commandDrop != null && commandDrop.canExecute())
 			this.diagrameditPart.getDiagramEditDomain().getDiagramCommandStack().execute(commandDrop);
-				
+
+		//TODO enregistrer programmatiquement les modifications ??
 	}
 	
 	
