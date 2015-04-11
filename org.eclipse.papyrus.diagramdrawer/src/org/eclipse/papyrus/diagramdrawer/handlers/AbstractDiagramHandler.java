@@ -480,7 +480,8 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 		if (commandDrop != null && commandDrop.canExecute())
 			this.diagrameditPart.getDiagramEditDomain().getDiagramCommandStack().execute(commandDrop);
 
-		//TODO enregistrer programmatiquement les modifications ??
+		this.diagrameditPart.refresh();
+
 	}
 	
 	
@@ -532,7 +533,7 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	 * @throws NonExistantViewException if the view doesn't exist
 	 */
 	@SuppressWarnings("unchecked")
-	private List<EditPart> viewToEditParts(View view) throws NonExistantViewException {
+	public List<EditPart> viewToEditParts(View view) throws NonExistantViewException {
 
 		IEditorPart activeEditor = this.papyrusEditor.getActiveEditor();
 		
