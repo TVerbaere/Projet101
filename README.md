@@ -4,7 +4,7 @@
 
 Etat du projet :
 ----------------
-+ UMLModelHelper		[OK]
++ UMLModelHelper		[OK : TV]
   + delete 			[OK]
 + AbstractDiagramHandler	[En cours...]
   + getModel 	  		[OK]
@@ -16,9 +16,14 @@ Etat du projet :
   + setLocation			[OK]
   + getElementViewByName	[OK]
   + getViewElement	 	[OK]
+  + getElementByName		[OK]
   + delete			[OK]
   + autoSize			[OK]
-  + draw			[En cours de tests]
+  + draws			[Mode Cascade à effectuer : TV]
++ Tests unitaires Helper	[à venir : TV]
++ Tests unitaires Handlers	[à venir : TV]
++ ProjectFactory  		[??]
 + ModelFactory 			[??]
 + DiagramFactory 		[??]
++ Tests intégrations		[??]
 
