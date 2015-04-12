@@ -567,7 +567,7 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	 * @throws NonExistantViewException if the view doesn't exist
 	 */
 	@SuppressWarnings("unchecked")
-	public List<EditPart> viewToEditParts(View view) throws NonExistantViewException {
+	private List<EditPart> viewToEditParts(View view) throws NonExistantViewException {
 		// Find the diagramGraphicalViewer of the diagram.
 		IDiagramGraphicalViewer viewer=(IDiagramGraphicalViewer)this.diagrameditPart.getViewer();
 		// Find the ID of the element.
