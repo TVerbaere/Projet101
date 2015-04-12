@@ -9,6 +9,8 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.papyrus.diagramdrawer.exceptions.InvalidContainerException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NonExistantViewException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.NotAValidLocationException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.NotAValidSizeException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.TargetOrSourceNotDrawnException;
@@ -57,9 +59,10 @@ public interface IDiagramHandler {
 		 * @param location The location of the element
 		 * @param cascade True if all contents in the element must be drawn in the same time, False in the other case
 		 * @return A view representing the drawn element
+		 * @throws NotAValidLocationException 
 		 */
 		
-		public View draw(Element element, Point location, boolean cascade);
+		public View draw(Element element, Point location, boolean cascade) throws NotAValidLocationException;
 		
 		/**
 		 * Draws the view of the element inside a view.
@@ -80,9 +83,10 @@ public interface IDiagramHandler {
 		 * @param locations A list of location corresponding to the elements
 		 * @param cascade True if all contents in the element must be drawn in the same time, False in the other case
 		 * @throws IllegalArgumentException If the number of locations is smaller than the  number of elements
+		 * @throws NotAValidLocationException If the location is not valid 
 		 * @return A list of the drawn views
 		 */
-		public List<View> drawAll(List<Element> elements,List<Point>locations, boolean cascade) throws IllegalArgumentException;
+		public List<View> drawAll(List<Element> elements,List<Point>locations, boolean cascade) throws IllegalArgumentException, NotAValidLocationException;
 		
 //		/**
 //		 * 
@@ -124,8 +128,9 @@ public interface IDiagramHandler {
 		 * @param view The view to move
 		 * @param location The location where the view will be moved
 		 * @throws UnmovableViewException If the view cannot be moved
+		 * @throws NotAValidLocationException If the location is not valid 
 		 */
-		public void setLocation(View view,Point location) throws UnmovableViewException;
+		public void setLocation(View view,Point location) throws UnmovableViewException, NotAValidLocationException;
 		
 		/**
 		 * Returns a list of all views representing the element which name is given as parameter.
@@ -162,16 +167,18 @@ public interface IDiagramHandler {
 		 * @param view the view which we want to change his height
 		 * @param newheight the newest value of the height
 		 * @throws NotResizableViewException if the view hasn't dimensions
+		 * @throws NotAValidSizeException if the height is not valid
 		 */
-		public void setHeight(View view, int newheight) throws NotResizableViewException;
+		public void setHeight(View view, int newheight) throws NotResizableViewException, NotAValidSizeException;
 		
 		/**
 		 * Change the width of a view which name is given as parameter.
 		 * @param view the view which we want to change his width
 		 * @param newheight the newest value of the width
 		 * @throws NotResizableViewException if the view hasn't dimensions
+		 * @throws NotAValidSizeException if the width is not valid
 		 */
-		public void setWidth(View view, int newwidth) throws NotResizableViewException;
+		public void setWidth(View view, int newwidth) throws NotResizableViewException, NotAValidSizeException;
 		
 		/**
 		 * Return the model of the diagram.
@@ -184,5 +191,18 @@ public interface IDiagramHandler {
 		 * @return the TransactionalEditingDomain
 		 */
 		public TransactionalEditingDomain getTED();
+
+		/**
+		 * Change the default location to display element.
+		 * @param location the new default location
+		 * @throws NotAValidLocationException if the location is not valid
+		 */
+		public void setDefaultLocation(Point location) throws NotAValidLocationException;
+
+		/**
+		 * Return the default location to display element.
+		 * @return the location
+		 */
+		public Point getDefaultLocation();
 
 }

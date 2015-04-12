@@ -25,6 +25,8 @@ import org.eclipse.gmf.runtime.notation.impl.BoundsImpl;
 import org.eclipse.papyrus.diagramdrawer.exceptions.InvalidContainerException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NonExistantViewException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.NotAValidLocationException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.NotAValidSizeException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.TargetOrSourceNotDrawnException;
@@ -44,8 +46,10 @@ import org.eclipse.uml2.uml.Relationship;
  */
 public class AbstractDiagramHandler implements IDiagramHandler {
 	
-	private static int DEFAULT_X = 0;
-	private static int DEFAULT_Y = 0;
+	/**
+	 * Default location to display element without location.
+	 */
+	protected Point DEFAULT_LOCATION;
 	
 	/**
 	 * The diagram model.
@@ -75,6 +79,7 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 		this.model = model;
 		this.diagrameditPart = diagrameditPart;
 		this.ted = TransactionUtil.getEditingDomain(this.model);
+		this.DEFAULT_LOCATION = new Point(0,0);
 	}
 
 	
@@ -92,17 +97,32 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 				// If the mode cascade is active then draw source and target element.
 				for (Element e : related) {
 					if (!this.isDrawn(e)) {
-						this.draw(e, new Point(DEFAULT_X,DEFAULT_Y),cascade);
+						try {
+							this.draw(e,DEFAULT_LOCATION,cascade);
+						}
+						catch (NotAValidLocationException e1) {
+							// Ignore : Impossible because it's the default location.
+						}
 					}
 					
 				}
 				// Finally draw the relationship.
-				return this.draw(element,new Point(DEFAULT_X,DEFAULT_Y),cascade);
+				try {
+					return this.draw(element,DEFAULT_LOCATION,cascade);
+				}
+				catch (NotAValidLocationException e1) {
+					// Ignore : Impossible because it's the default location.
+				}
 			}
 			else {
 				if (this.isDrawn(related.get(0)) && this.isDrawn(related.get(1))) {
 					// Draw the relationship normally.
-					return this.draw(element,new Point(DEFAULT_X,DEFAULT_Y),cascade);
+					try {
+						return this.draw(element,DEFAULT_LOCATION,cascade);
+					}
+					catch (NotAValidLocationException e) {
+						// Ignore : Impossible because it's the default location.
+					}
 				}
 				else {
 					// It's not possible to draw the relationship.
@@ -110,16 +130,21 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 				}
 			}
 			
+		} else {
+			try {
+				return this.draw(element,DEFAULT_LOCATION,cascade);
+			}
+			catch (NotAValidLocationException e) {
+				// Ignore : Impossible because it's the default location.
+			}
 		}
-		else
-			// Draw the element at the default location (0,0).
-			return this.draw(element,new Point(DEFAULT_X,DEFAULT_Y),cascade);
 		
+		return null;
 	}
 
 	
 	@Override
-	public View draw(Element element, Point location, boolean cascade) {
+	public View draw(Element element, Point location, boolean cascade) throws NotAValidLocationException {
 		// Find the list of views for the element before executing the request.
 		List<View> views_before = this.getViewByElement(element);
 
@@ -174,10 +199,13 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 		
 		// Draw the element
 		try {
-			this.simpleDraw(element,new Point(DEFAULT_X,DEFAULT_Y),container);
+			this.simpleDraw(element,DEFAULT_LOCATION,container);
 		}
 		catch (NonExistantViewException e1) {
 			throw new InvalidContainerException();
+		}
+		catch (NotAValidLocationException e) {
+			// Ignore : Impossible because it's the default location.
 		}
 		
 		// Find the list of views for the element after.
@@ -218,7 +246,7 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 
 	@Override
 	public List<View> drawAll(List<Element> elements, List<Point> locations,
-			boolean cascade) throws IllegalArgumentException {
+			boolean cascade) throws IllegalArgumentException, NotAValidLocationException {
 		List<View> views = new ArrayList<View>();
 		
 		// It's not possible with differents sizes.
@@ -349,7 +377,9 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 
 	
 	@Override
-	public void setLocation(View view, Point location) throws UnmovableViewException {
+	public void setLocation(View view, Point location) throws UnmovableViewException, NotAValidLocationException {
+		if (!this.isValidLocation(location))
+			throw new NotAValidLocationException();
 		// X and Y can be set only if the view is an instance of Node. 
 		if (view instanceof Node) {
 			
@@ -399,7 +429,9 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 
 	
 	@Override
-	public void setHeight(View view, int newheight) throws NotResizableViewException {
+	public void setHeight(View view, int newheight) throws NotResizableViewException, NotAValidSizeException {
+		if (newheight < 0)
+			throw new NotAValidSizeException();
 		// the height can be resize only if the view is an instance of Node. 
 		if (view instanceof Node) {
 			
@@ -415,7 +447,9 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 
 	
 	@Override
-	public void setWidth(View view, int newwidth) throws NotResizableViewException {
+	public void setWidth(View view, int newwidth) throws NotResizableViewException, NotAValidSizeException {
+		if (newwidth < 0)
+			throw new NotAValidSizeException();
 		// the width can be resize only if the view is an instance of Node. 
 		if (view instanceof Node) {
 			
@@ -443,6 +477,21 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	}
 	
 	
+	@Override
+	public Point getDefaultLocation() {
+		return DEFAULT_LOCATION;
+	}
+	
+	
+	@Override
+	public void setDefaultLocation(Point location) throws NotAValidLocationException {
+		if (this.isValidLocation(location))
+			DEFAULT_LOCATION = location;
+		else
+			throw new NotAValidLocationException();
+	}
+	
+
 	/* ------------------------------------------------------------------------ */
 	
 	
@@ -481,9 +530,14 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	 * @param element the element to draw
 	 * @param location the location of the element
 	 * @param father the view father (or null if the element hasn't father)
-	 * @throws NonExistantViewException 
+	 * @throws NonExistantViewException if the view doesn't exist
+	 * @throws NotAValidLocationException if the location is not valid
 	 */
-	private void simpleDraw(Element element,Point location,View father) throws NonExistantViewException {
+	private void simpleDraw(Element element,Point location,View father) throws NonExistantViewException, NotAValidLocationException {
+		
+		if (!this.isValidLocation(location))
+			throw new NotAValidLocationException();
+			
 		
 		DropObjectsRequest drop = new DropObjectsRequest();
 		// Create the list for the DropObjectsRequest.
@@ -585,7 +639,7 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	
 	
 	/**
-	 * Return if an element is drawn on the diagram.
+	 * Check if an element is drawn on the diagram.
 	 * @param element the element
 	 * @return True or False if the element is drawn
 	 */
@@ -608,6 +662,20 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 		}
 		// If there are editparts for the view, not drawn !
 		return !editparts.isEmpty();
+	}
+	
+	
+	/**
+	 * Check if the location is valid.
+	 * A location is valid if x and y is positive.
+	 * @param location the location to check.
+	 * @return True | False
+	 */
+	private boolean isValidLocation(Point location) {
+		if (location.x >= 0 && location.y >= 0)
+			return true;
+		
+		return false;
 	}
 
 }
