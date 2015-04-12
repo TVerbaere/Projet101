@@ -15,7 +15,6 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.requests.DropObjectsRequest;
 import org.eclipse.gmf.runtime.emf.core.util.EMFCoreUtil;
@@ -30,17 +29,15 @@ import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.TargetOrSourceNotDrawnException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.UnmovableViewException;
-import org.eclipse.papyrus.editor.PapyrusMultiDiagramEditor;
 import org.eclipse.papyrus.infra.gmfdiag.menu.utils.DeleteActionUtil;
 import org.eclipse.papyrus.uml.diagram.common.util.DiagramEditPartsUtil;
 import org.eclipse.papyrus.uml.diagram.menu.actions.SizeAction;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Relationship;
 
 /**
- * Abstract drawer used to handle elements on a diagram.
+ * Drawer used to handle elements on a diagram.
  * 
  * @author Thibaud VERBAERE
  *
@@ -49,11 +46,6 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	
 	private static int DEFAULT_X = 0;
 	private static int DEFAULT_Y = 0;
-	
-	/**
-	 * the Papyrus editor.
-	 */
-	protected PapyrusMultiDiagramEditor papyrusEditor;
 	
 	/**
 	 * The diagram model.
@@ -75,14 +67,13 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	 * 
 	 * Constructor.
 	 *
-	 * @param model
+	 * @param model the model of the diagram
 	 * @param papyrusEditor
+	 * @param diagrameditPart the editpart of the diagram to handle
 	 */
-	public AbstractDiagramHandler(EObject model,PapyrusMultiDiagramEditor papyrusEditor) {
+	public AbstractDiagramHandler(EObject model,DiagramEditPart diagrameditPart) {
 		this.model = model;
-		this.papyrusEditor = papyrusEditor;
-		DiagramEditor editor  = ((DiagramEditor)this.papyrusEditor.getActiveEditor());
-		this.diagrameditPart = (DiagramEditPart) editor.getDiagramGraphicalViewer().getEditPartRegistry().get(editor.getDiagram());
+		this.diagrameditPart = diagrameditPart;
 		this.ted = TransactionUtil.getEditingDomain(this.model);
 	}
 
@@ -101,7 +92,7 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 				// If the mode cascade is active then draw source and target element.
 				for (Element e : related) {
 					if (!this.isDrawn(e)) {
-						this.draw(e, new Point(DEFAULT_X,DEFAULT_Y), false);
+						this.draw(e, new Point(DEFAULT_X,DEFAULT_Y),cascade);
 					}
 					
 				}
@@ -151,10 +142,10 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 			List<Relationship> relations = element.getRelationships();
 			for (Relationship relation : relations) {
 				try {
-					this.draw(relation,cascade);
+					this.draw(relation,false);
 				} 
 				catch (TargetOrSourceNotDrawnException e) {
-					// Ignore, cascade mode is active.
+					// Ignore, draw just possible relationships.
 				}
 			}
 			
@@ -200,10 +191,10 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 			List<Relationship> relations = element.getRelationships();
 			for (Relationship relation : relations) {
 				try {
-					this.draw(relation,cascade);
+					this.draw(relation,false);
 				}
 				catch (TargetOrSourceNotDrawnException e) {
-					// Ignore; cascade mode is active.
+					// Ignore, draw just possible relationships.
 				}
 			}
 			
@@ -577,23 +568,18 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<EditPart> viewToEditParts(View view) throws NonExistantViewException {
+		// Find the diagramGraphicalViewer of the diagram.
+		IDiagramGraphicalViewer viewer=(IDiagramGraphicalViewer)this.diagrameditPart.getViewer();
+		// Find the ID of the element.
+		String elementID = EMFCoreUtil.getProxyID(view.getElement());
+		// Now, we can found editparts of the element.
+		List<EditPart> editparts = viewer.findEditPartsForElement(elementID, EditPart.class);
 
-		IEditorPart activeEditor = this.papyrusEditor.getActiveEditor();
-		
-		if (activeEditor instanceof DiagramEditor) {
-			// If the EditorPart is an instance of DiagramEditor we can found editparts of the view.
-			IDiagramGraphicalViewer viewer = ((DiagramEditor)activeEditor).getDiagramGraphicalViewer();
-			String elementID = EMFCoreUtil.getProxyID(view.getElement());
-			
-			List<EditPart> editparts = viewer.findEditPartsForElement(elementID, EditPart.class);
-			
-			if (editparts.isEmpty())
-				throw new NonExistantViewException();
-			else
-				return editparts;
-		}
-		
-		throw new NonExistantViewException();
+		if (editparts.isEmpty())
+			throw new NonExistantViewException();
+		else
+			return editparts;
+
 
 	}
 	
