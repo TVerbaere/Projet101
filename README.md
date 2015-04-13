@@ -1,13 +1,18 @@
 #Projet 101
 
-#Création de diagrammes Papyrus programmatiquement.
+##Création programmatique de diagrammes Papyrus.
 
 Etat du projet :
 ----------------
+
+Implémentation :
+----------------
+----------------
+
 + UMLModelHelper		[OK : TV]
   + delete 			[OK]
-+ AbstractDiagramHandler	[En cours...]
-  + getModel 	  		[OK]
++ AbstractDiagramHandler	[OK : TV]
+  + getModel / getTED  		[OK]
   + setWidth			[OK]
   + setHeight			[OK]
   + getWidth			[OK]
@@ -15,15 +20,21 @@ Etat du projet :
   + getLocation			[OK]
   + setLocation			[OK]
   + getElementViewByName	[OK]
-  + getViewElement	 	[OK]
+  + getViewByElement	 	[OK]
   + getElementByName		[OK]
   + delete			[OK]
-  + autoSize			[OK]
-  + draws			[Mode Cascade à effectuer : TV]
-+ Tests unitaires Helper	[à venir : TV]
-+ Tests unitaires Handlers	[à venir : TV]
+  + autoSize			[OK : même comportement que celui de papyrus]
+  + draw (avec location)	[OK]
+  + drawInside 			[OK]
+  + draw (sans location) 	[OK]
 + ProjectFactory  		[en cours : AR]
 + ModelFactory 			[en cours : AR]
 + DiagramFactory 		[à voir si il faut garder : AR]
-+ Tests intégrations		[à venir : AR]
 
+Tests unitaires :
+-----------------
+-----------------
++ Tests unitaires Helper	[en cours : TV]
++ Tests unitaires Handlers	[en cours : TV]
++ Tests unitaires Factories	[non affecté]
++ Tests d'intégrations		[affecté à AR]
