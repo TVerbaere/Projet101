@@ -27,9 +27,9 @@ Implémentation :
   + draw (avec location)	[OK]
   + drawInside 			[OK]
   + draw (sans location) 	[OK]
-+ ProjectFactory  		[en cours : AR]
-+ ModelFactory 			[en cours : AR]
-+ DiagramFactory 		[à voir si il faut garder : AR]
++ ProjectFactory  		[OK : AR]
++ ModelFactory 			[OK : AR]
++ DiagramFactory 		[en cours : AR]
 
 Tests unitaires :
 -----------------
@@ -37,4 +37,4 @@ Tests unitaires :
 + Tests unitaires Helper	[en cours : TV]
 + Tests unitaires Handlers	[en cours : TV]
 + Tests unitaires Factories	[non affecté]
-+ Tests d'intégrations		[affecté à AR]
++ Tests d'intégrations		[en cours : AR]
