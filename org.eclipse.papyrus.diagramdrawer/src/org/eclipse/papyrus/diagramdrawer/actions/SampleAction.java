@@ -1,8 +1,16 @@
 package org.eclipse.papyrus.diagramdrawer.actions;
 
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.papyrus.diagram.programmaticcreation.othersources.ExecutionException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.CreationCommandNotFoundException;
+import org.eclipse.papyrus.diagramdrawer.factory.DiagramFactory;
+import org.eclipse.papyrus.diagramdrawer.factory.ModelSetFactory;
+import org.eclipse.papyrus.diagramdrawer.factory.ProjectFactory;
+import org.eclipse.papyrus.diagramdrawer.othersources.EclipseProject;
+import org.eclipse.papyrus.diagramdrawer.othersources.ExecutionException;
+import org.eclipse.papyrus.diagramdrawer.utils.DiagramType;
+import org.eclipse.papyrus.infra.core.resource.ModelSet;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 
@@ -29,7 +37,26 @@ public class SampleAction implements IWorkbenchWindowActionDelegate {
 	 * @see IWorkbenchWindowActionDelegate#run
 	 */
 	public void run(IAction action) {
+		try {
+			createDiagram();
+			MessageDialog.openInformation(
+					window.getShell(),
+					"TestApi",
+					"Your project is created");
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (CreationCommandNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+	}
+
+	private void createDiagram() throws ExecutionException, CreationCommandNotFoundException {
+		EclipseProject project = ProjectFactory.instance.build("mon projet");
+		ModelSet modelSet = ModelSetFactory.instance.createIn(project, "mon modele", true);
+		DiagramFactory.instance.create(modelSet, "mon diagramme", DiagramType.Class);
 	}
 
 	/**

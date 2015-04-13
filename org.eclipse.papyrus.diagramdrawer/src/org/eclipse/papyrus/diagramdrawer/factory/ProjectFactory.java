@@ -1,7 +1,7 @@
 package org.eclipse.papyrus.diagramdrawer.factory;
 
-import org.eclipse.papyrus.diagram.programmaticcreation.othersources.EclipseProject;
-import org.eclipse.papyrus.diagram.programmaticcreation.othersources.ExecutionException;
+import org.eclipse.papyrus.diagramdrawer.othersources.EclipseProject;
+import org.eclipse.papyrus.diagramdrawer.othersources.ExecutionException;
 
 /**
  * Lets to create new papyrus project programatically.

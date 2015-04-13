@@ -6,8 +6,8 @@ import java.io.IOException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.papyrus.diagram.programmaticcreation.othersources.EclipseProject;
-import org.eclipse.papyrus.diagram.programmaticcreation.othersources.ExecutionException;
+import org.eclipse.papyrus.diagramdrawer.othersources.EclipseProject;
+import org.eclipse.papyrus.diagramdrawer.othersources.ExecutionException;
 import org.eclipse.papyrus.infra.core.resource.ModelSet;
 import org.eclipse.papyrus.infra.core.resource.ModelsReader;
 import org.eclipse.papyrus.uml.tools.model.UmlModel;
@@ -21,11 +21,11 @@ import org.eclipse.papyrus.uml.tools.model.UmlUtils;
  * @author Cedric Dumoulin
  *
  */
-public class ModelFactory {
+public class ModelSetFactory {
 
-	public static final ModelFactory instance = new ModelFactory();
+	public static final ModelSetFactory instance = new ModelSetFactory();
 	
-	private ModelFactory(){}
+	private ModelSetFactory(){}
 	
 	/**
 	 * 
@@ -34,7 +34,7 @@ public class ModelFactory {
 	 * @throws ExecutionException 
 	 */
 	@SuppressWarnings("deprecation")
-	public UmlModel createIn(EclipseProject eclipseProject,
+	public ModelSet createIn(EclipseProject eclipseProject,
 			String modelName, boolean override) throws ExecutionException {
 		try {
 			eclipseProject.createFolders(modelName);
@@ -51,7 +51,7 @@ public class ModelFactory {
 			else{
 				ModelSet modelSet= new ModelSet();
 				modelSet.loadModels(file);
-				return UmlUtils.getUmlModel(modelSet);
+				return modelSet;
 			}
 		} catch (Exception e) {
 			throw new ExecutionException("Can't init Project and Resources", e);
@@ -65,12 +65,12 @@ public class ModelFactory {
 	 * @return
 	 * @throws ExecutionException 
 	 */
-	public UmlModel load(EclipseProject eclipseProject, String modelName) throws ExecutionException {
+	public ModelSet load(EclipseProject eclipseProject, String modelName) throws ExecutionException {
 		return createIn(eclipseProject, modelName, false);
 	}
 
 	@SuppressWarnings("deprecation")
-	protected UmlModel createModel(IFile file) throws CoreException, IOException {
+	protected ModelSet createModel(IFile file) throws CoreException, IOException {
 
 		// Create ModelSet and initialize it with models declared in eclipse extensions
 		ModelSet modelSet = new ModelSet();
@@ -87,7 +87,7 @@ public class ModelFactory {
 		// command.createDiagram(modelSet, null, "DiagramToTest");
 		modelSet.save(new NullProgressMonitor());
 		
-		return umlModel;
+		return modelSet;
 		
 	}
 

@@ -57,7 +57,7 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	protected EObject model;
 	
 	/**
-	 * the Diagram Edit Part.
+	 * the Diagram Edit Part that is handled.
 	 */
 	protected DiagramEditPart diagrameditPart;
 	

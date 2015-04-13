@@ -38,7 +38,7 @@ Import-Package: org.eclipse.draw2d.geometry,
  org.eclipse.gmf.runtime.notation,
  org.eclipse.gmf.runtime.notation.impl,
  org.eclipse.papyrus.commands,
- org.eclipse.papyrus.diagram.programmaticcreation.othersources,
+ org.eclipse.papyrus.diagramdrawer.othersources,
  org.eclipse.papyrus.editor,
  org.eclipse.papyrus.infra.core.editor,
  org.eclipse.papyrus.infra.core.resource,
@@ -50,4 +50,6 @@ Import-Package: org.eclipse.draw2d.geometry,
  org.eclipse.uml2.uml
 Export-Package: org.eclipse.papyrus.diagramdrawer.exceptions,
  org.eclipse.papyrus.diagramdrawer.factory,
- org.eclipse.papyrus.diagramdrawer.handlers
+ org.eclipse.papyrus.diagramdrawer.handlers,
+ org.eclipse.papyrus.diagramdrawer.othersources,
+ org.eclipse.papyrus.diagramdrawer.utils
