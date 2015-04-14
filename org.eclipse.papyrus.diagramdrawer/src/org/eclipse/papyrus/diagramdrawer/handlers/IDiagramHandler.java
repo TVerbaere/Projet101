@@ -3,8 +3,6 @@ package org.eclipse.papyrus.diagramdrawer.handlers;
 import java.util.List;
 
 import org.eclipse.draw2d.geometry.Point;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.papyrus.diagramdrawer.exceptions.InvalidContainerException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
@@ -15,6 +13,7 @@ import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.TargetOrSourceNotDrawnException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.UnmovableViewException;
+import org.eclipse.papyrus.uml.tools.model.UmlModel;
 import org.eclipse.uml2.uml.Element;
 
 /**
@@ -24,7 +23,7 @@ import org.eclipse.uml2.uml.Element;
  * @author Allan RAKOTOARIVONY
  * @author Thibaud VERBAERE
  * 
- * @version 1.4
+ * @version 1.5
  *
  */
 public interface IDiagramHandler {
@@ -184,13 +183,7 @@ public interface IDiagramHandler {
 		 * Return the model of the diagram.
 		 * @return the model.
 		 */
-		public EObject getModel();
-
-		/**
-		 * Return the TransactionalEditingDomain of the diagram.
-		 * @return the TransactionalEditingDomain
-		 */
-		public TransactionalEditingDomain getTED();
+		public UmlModel getModel();
 
 		/**
 		 * Change the default location to display element.

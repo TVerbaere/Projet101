@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.draw2d.geometry.Point;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gef.EditPart;
@@ -31,9 +30,11 @@ import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.TargetOrSourceNotDrawnException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.UnmovableViewException;
+import org.eclipse.papyrus.infra.core.resource.NotFoundException;
 import org.eclipse.papyrus.infra.gmfdiag.menu.utils.DeleteActionUtil;
 import org.eclipse.papyrus.uml.diagram.common.util.DiagramEditPartsUtil;
 import org.eclipse.papyrus.uml.diagram.menu.actions.SizeAction;
+import org.eclipse.papyrus.uml.tools.model.UmlModel;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Relationship;
@@ -44,7 +45,7 @@ import org.eclipse.uml2.uml.Relationship;
  * @author Thibaud VERBAERE
  *
  */
-public class AbstractDiagramHandler implements IDiagramHandler {
+public class DefaultDiagramHandler implements IDiagramHandler {
 	
 	/**
 	 * Default location to display element without location.
@@ -54,7 +55,7 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	/**
 	 * The diagram model.
 	 */
-	protected EObject model;
+	protected UmlModel model;
 	
 	/**
 	 * the Diagram Edit Part that is handled.
@@ -72,13 +73,17 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	 * Constructor.
 	 *
 	 * @param model the model of the diagram
-	 * @param papyrusEditor
 	 * @param diagrameditPart the editpart of the diagram to handle
 	 */
-	public AbstractDiagramHandler(EObject model,DiagramEditPart diagrameditPart) {
+	public DefaultDiagramHandler(UmlModel model,DiagramEditPart diagrameditPart) {
 		this.model = model;
 		this.diagrameditPart = diagrameditPart;
-		this.ted = TransactionUtil.getEditingDomain(this.model);
+		try {
+			this.ted = TransactionUtil.getEditingDomain(this.model.lookupRoot());
+		}
+		catch (NotFoundException e) {
+			// Ignore
+		}
 		this.DEFAULT_LOCATION = new Point(0,0);
 	}
 
@@ -86,7 +91,15 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	/* ------------------------------------------------------------------------ */
 	
 	
-	@Override
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#draw(org.eclipse.uml2.uml.Element, boolean)
+	 *
+	 * @param element
+	 * @param cascade
+	 * @return
+	 * @throws TargetOrSourceNotDrawnException
+	 */
 	public View draw(Element element, boolean cascade) throws TargetOrSourceNotDrawnException {
 		
 		if (element instanceof Relationship) {
@@ -143,7 +156,16 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	}
 
 	
-	@Override
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#draw(org.eclipse.uml2.uml.Element, org.eclipse.draw2d.geometry.Point, boolean)
+	 *
+	 * @param element
+	 * @param location
+	 * @param cascade
+	 * @return
+	 * @throws NotAValidLocationException
+	 */
 	public View draw(Element element, Point location, boolean cascade) throws NotAValidLocationException {
 		// Find the list of views for the element before executing the request.
 		List<View> views_before = this.getViewByElement(element);
@@ -191,7 +213,16 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	}
 
 
-	@Override
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#drawElementInside(org.eclipse.gmf.runtime.notation.View, org.eclipse.uml2.uml.Element, boolean)
+	 *
+	 * @param container
+	 * @param element
+	 * @param cascade
+	 * @return
+	 * @throws InvalidContainerException
+	 */
 	public View drawElementInside(View container, Element element,
 			boolean cascade) throws InvalidContainerException {
 		// Find the list of views for the element before executing the request.
@@ -244,7 +275,17 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	}
 
 
-	@Override
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#drawAll(java.util.List, java.util.List, boolean)
+	 *
+	 * @param elements
+	 * @param locations
+	 * @param cascade
+	 * @return
+	 * @throws IllegalArgumentException
+	 * @throws NotAValidLocationException
+	 */
 	public List<View> drawAll(List<Element> elements, List<Point> locations,
 			boolean cascade) throws IllegalArgumentException, NotAValidLocationException {
 		List<View> views = new ArrayList<View>();
@@ -286,7 +327,12 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	/* ------------------------------------------------------------------------ */
 	
 	
-	@Override
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#autoSize(org.eclipse.gmf.runtime.notation.View)
+	 *
+	 * @param view
+	 */
 	public void autoSize(View view) {
 		List<EditPart> parts = null;
 		
@@ -318,7 +364,13 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	}
 	
 	
-	@Override
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#delete(org.eclipse.gmf.runtime.notation.View)
+	 *
+	 * @param view
+	 * @throws NonExistantViewException
+	 */
 	public void delete(View view) throws NonExistantViewException {
 		// The view is a node -> delete all the editpart.
 			String DELETE = "Delete From Diagram";
@@ -341,26 +393,62 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	}
 
 	
-	@Override
 	@SuppressWarnings("unchecked")
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getViewByElement(org.eclipse.uml2.uml.Element)
+	 *
+	 * @param element
+	 * @return
+	 */
 	public List<View> getViewByElement(Element element) {
-		return DiagramEditPartsUtil.getEObjectViews(element);
+		return DiagramEditPartsUtil.getEObjectViews(element); // A changer par org.eclipse.papyrus.infra.gmfdiag.common.utils.DiagramEditPartsUtil
 	}
 	
 	
-	@Override
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getElementViewByName(java.lang.String)
+	 *
+	 * @param name
+	 * @return
+	 */
 	public List<View> getElementViewByName(String name) {
-		return this.getElementViewByName(name, (Element)this.model);
+		try {
+			return this.getElementViewByName(name, (Element)this.model.lookupRoot());
+		}
+		catch (NotFoundException e) {
+			return null;
+		}
 	}
 	
 	
-	@Override
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getElementByName(java.lang.String)
+	 *
+	 * @param name
+	 * @return
+	 */
 	public List<Element> getElementByName(String name) {
-		return this.getElementByName(name, (Element)this.model);
+		try {
+			return this.getElementByName(name, (Element)this.model.lookupRoot());
+		}
+		catch (NotFoundException e) {
+			return null;
+		}
+		
 	}
 		
 	
-	@Override
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getLocation(org.eclipse.gmf.runtime.notation.View)
+	 *
+	 * @param view
+	 * @return
+	 * @throws LocationNotFoundException
+	 */
 	public Point getLocation(View view) throws LocationNotFoundException {
 		// X and Y can be return only if the view is an instance of Node. 
 		if (view instanceof Node) {
@@ -376,7 +464,15 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	}
 
 	
-	@Override
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#setLocation(org.eclipse.gmf.runtime.notation.View, org.eclipse.draw2d.geometry.Point)
+	 *
+	 * @param view
+	 * @param location
+	 * @throws UnmovableViewException
+	 * @throws NotAValidLocationException
+	 */
 	public void setLocation(View view, Point location) throws UnmovableViewException, NotAValidLocationException {
 		if (!this.isValidLocation(location))
 			throw new NotAValidLocationException();
@@ -396,7 +492,14 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	}
 
 	
-	@Override
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getWidth(org.eclipse.gmf.runtime.notation.View)
+	 *
+	 * @param view
+	 * @return
+	 * @throws NotDimensionedViewException
+	 */
 	public int getWidth(View view) throws NotDimensionedViewException {
 		// the view have a width only if the view is an instance of Node. 
 		if (view instanceof Node) {
@@ -412,7 +515,14 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	}
 
 	
-	@Override
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getHeight(org.eclipse.gmf.runtime.notation.View)
+	 *
+	 * @param view
+	 * @return
+	 * @throws NotDimensionedViewException
+	 */
 	public int getHeight(View view) throws NotDimensionedViewException {
 		// the view have an height only if the view is an instance of Node. 
 		if (view instanceof Node) {
@@ -428,7 +538,15 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	}
 
 	
-	@Override
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#setHeight(org.eclipse.gmf.runtime.notation.View, int)
+	 *
+	 * @param view
+	 * @param newheight
+	 * @throws NotResizableViewException
+	 * @throws NotAValidSizeException
+	 */
 	public void setHeight(View view, int newheight) throws NotResizableViewException, NotAValidSizeException {
 		if (newheight < 0)
 			throw new NotAValidSizeException();
@@ -446,7 +564,15 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	}
 
 	
-	@Override
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#setWidth(org.eclipse.gmf.runtime.notation.View, int)
+	 *
+	 * @param view
+	 * @param newwidth
+	 * @throws NotResizableViewException
+	 * @throws NotAValidSizeException
+	 */
 	public void setWidth(View view, int newwidth) throws NotResizableViewException, NotAValidSizeException {
 		if (newwidth < 0)
 			throw new NotAValidSizeException();
@@ -465,25 +591,35 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	}
 	
 	
-	@Override
-	public EObject getModel() {
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getModel()
+	 *
+	 * @return
+	 */
+	public UmlModel getModel() {
 		return this.model;
 	}
 	
 	
-	@Override
-	public TransactionalEditingDomain getTED() {
-		return this.ted;
-	}
-	
-	
-	@Override
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getDefaultLocation()
+	 *
+	 * @return
+	 */
 	public Point getDefaultLocation() {
 		return DEFAULT_LOCATION;
 	}
 	
 	
-	@Override
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#setDefaultLocation(org.eclipse.draw2d.geometry.Point)
+	 *
+	 * @param location
+	 * @throws NotAValidLocationException
+	 */
 	public void setDefaultLocation(Point location) throws NotAValidLocationException {
 		if (this.isValidLocation(location))
 			DEFAULT_LOCATION = location;
@@ -667,7 +803,7 @@ public class AbstractDiagramHandler implements IDiagramHandler {
 	
 	/**
 	 * Check if the location is valid.
-	 * A location is valid if x and y is positive.
+	 * A location is valid if x and y are positives.
 	 * @param location the location to check.
 	 * @return True | False
 	 */

@@ -16,7 +16,7 @@ import org.eclipse.papyrus.diagramdrawer.exceptions.TargetOrSourceNotDrawnExcept
 import org.eclipse.papyrus.diagramdrawer.factory.DiagramFactory;
 import org.eclipse.papyrus.diagramdrawer.factory.ModelSetFactory;
 import org.eclipse.papyrus.diagramdrawer.factory.ProjectFactory;
-import org.eclipse.papyrus.diagramdrawer.handlers.AbstractDiagramHandler;
+import org.eclipse.papyrus.diagramdrawer.handlers.DefaultDiagramHandler;
 import org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler;
 import org.eclipse.papyrus.diagramdrawer.helpers.UMLModelHelper;
 import org.eclipse.papyrus.diagramdrawer.othersources.EclipseProject;
@@ -61,7 +61,7 @@ public class IntegrationTest {
 					model = (Model) UmlUtils.getUmlModel(modelSet).lookupRoot();
 					DiagramEditPart diagram = DiagramFactory.instance.create(
 							modelSet, "TEST DIAGRAM 1", DiagramType.Class);
-					IDiagramHandler diagramHandler = new AbstractDiagramHandler(
+					IDiagramHandler diagramHandler = new DefaultDiagramHandler(
 							model, diagram);
 					Class class1 = model.createOwnedClass("class 1", false);
 					Class class2 = model.createOwnedClass("class 2", false);

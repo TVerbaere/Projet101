@@ -1,6 +1,7 @@
 package org.eclipse.papyrus.diagramdrawer.exceptions;
 
 /**
+ * Exception thrown when an user want to display an element at a bad location.
  * 
  * @author Thibaud VERBAERE
  *

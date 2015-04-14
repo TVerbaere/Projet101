@@ -2,6 +2,8 @@ package org.eclipse.papyrus.diagramdrawer.exceptions;
 
 
 /**
+ * Exception thrown when draw is called with cascade mode on a relationship but
+ * the target or/and the source of this relationship is not drawn.
  * 
  * @author Thibaud VERBAERE
  *
