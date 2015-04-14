@@ -223,8 +223,7 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	 * @return
 	 * @throws InvalidContainerException
 	 */
-	public View drawElementInside(View container, Element element,
-			boolean cascade) throws InvalidContainerException {
+	public View drawElementInside(View container, Element element, boolean cascade) throws InvalidContainerException {
 		// Find the list of views for the element before executing the request.
 		List<View> views_before = this.getViewByElement(element);
 		
@@ -286,8 +285,7 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	 * @throws IllegalArgumentException
 	 * @throws NotAValidLocationException
 	 */
-	public List<View> drawAll(List<Element> elements, List<Point> locations,
-			boolean cascade) throws IllegalArgumentException, NotAValidLocationException {
+	public List<View> drawAll(List<Element> elements, List<Point> locations, boolean cascade) throws IllegalArgumentException, NotAValidLocationException {
 		List<View> views = new ArrayList<View>();
 		
 		// It's not possible with differents sizes.
