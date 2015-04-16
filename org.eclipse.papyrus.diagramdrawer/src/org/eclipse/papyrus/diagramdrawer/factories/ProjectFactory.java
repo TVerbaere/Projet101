@@ -1,4 +1,4 @@
-package org.eclipse.papyrus.diagramdrawer.factory;
+package org.eclipse.papyrus.diagramdrawer.factories;
 
 import org.eclipse.papyrus.diagramdrawer.othersources.EclipseProject;
 import org.eclipse.papyrus.diagramdrawer.othersources.ExecutionException;

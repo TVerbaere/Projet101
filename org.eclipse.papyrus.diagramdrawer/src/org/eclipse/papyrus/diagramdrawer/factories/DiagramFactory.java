@@ -1,4 +1,4 @@
-package org.eclipse.papyrus.diagramdrawer.factory;
+package org.eclipse.papyrus.diagramdrawer.factories;
 
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.notation.Diagram;

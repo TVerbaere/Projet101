@@ -16,7 +16,7 @@ import org.eclipse.uml2.uml.Relationship;
  * @author Thibaud VERBAERE
  *
  */
-public class UMLModelHelper {
+public class UmlModelHelper {
 
 	/**
 	 * The UML model.
@@ -30,7 +30,7 @@ public class UMLModelHelper {
 	 * @param model
 	 *            the model where modifications take place.
 	 */
-	public UMLModelHelper(UmlModel model) {
+	public UmlModelHelper(UmlModel model) {
 		this.model = model;
 	}
 
@@ -51,8 +51,7 @@ public class UMLModelHelper {
 		EList<Relationship> relationships = element.getRelationships();
 
 		// Create the command.
-		Command command = DeleteCommand.create(
-				TransactionUtil.getEditingDomain(model), element);
+		Command command = DeleteCommand.create(TransactionUtil.getEditingDomain(model), element);
 
 		if (command.canExecute()) {
 			// Execute the command.

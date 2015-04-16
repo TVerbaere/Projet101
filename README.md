@@ -30,11 +30,16 @@ Implémentation :
 + ProjectFactory  		[OK : AR]
 + ModelFactory 			[OK : AR]
 + DiagramFactory 		[OK : AR]
++ Supprimer (ou plutôt integrer) othersources et revoir les factories pour les loads.
 
 Tests unitaires :
 -----------------
 -----------------
-+ Tests unitaires Helper	[en cours : TV]
-+ Tests unitaires Handlers	[en cours : TV]
++ Tests unitaires Helper	[en cours(90%) : TV] - Il faut les factories pour finaliser (setUp)!
++ Tests unitaires Handlers	[en cours(40%) : TV]
 + Tests unitaires Factories	[non affecté]
-+ Tests d'intégrations		[en cours(50%) : AR]
++ Tests d'intégrations		[en cours(50%) : AR] - Recrèer un plugin pour les tests (Test sauvegardé à la racine du projet)
++ Tester pour les autres types de diagrammes (Activité...)
+
+
++ Rapport

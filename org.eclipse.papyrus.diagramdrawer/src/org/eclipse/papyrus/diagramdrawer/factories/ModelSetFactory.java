@@ -1,4 +1,4 @@
-package org.eclipse.papyrus.diagramdrawer.factory;
+package org.eclipse.papyrus.diagramdrawer.factories;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
