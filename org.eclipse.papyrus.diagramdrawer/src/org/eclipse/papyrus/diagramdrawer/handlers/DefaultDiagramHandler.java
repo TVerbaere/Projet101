@@ -777,7 +777,7 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	 * @param element the element
 	 * @return True or False if the element is drawn
 	 */
-	private boolean isDrawn(Element element) {
+	public boolean isDrawn(Element element) {
 		List<View> views = getViewByElement(element);
 		List<EditPart> editparts = new ArrayList<EditPart>();
 		

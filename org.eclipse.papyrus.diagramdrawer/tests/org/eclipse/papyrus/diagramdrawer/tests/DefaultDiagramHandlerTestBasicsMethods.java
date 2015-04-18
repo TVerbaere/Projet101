@@ -2,9 +2,12 @@ package org.eclipse.papyrus.diagramdrawer.tests;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.NonExistantViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotAValidLocationException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotAValidSizeException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
@@ -13,7 +16,11 @@ import org.eclipse.papyrus.diagramdrawer.exceptions.TargetOrSourceNotDrawnExcept
 import org.eclipse.papyrus.diagramdrawer.exceptions.UnmovableViewException;
 import org.eclipse.papyrus.diagramdrawer.handlers.DefaultDiagramHandler;
 import org.eclipse.papyrus.diagramdrawer.othersources.ExecutionException;
+import org.eclipse.uml2.uml.AggregationKind;
+import org.eclipse.uml2.uml.Class;
+import org.eclipse.uml2.uml.Association;
 import org.eclipse.uml2.uml.Element;
+import org.eclipse.uml2.uml.Package;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -29,7 +36,15 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 	
 	private View drawn_element;
 	
+	private View drawn_element2;
+	
 	private View drawn_association;
+	
+	private Class element;
+	
+	private Class element2;
+	
+	private Association association;
 	
 	@BeforeClass
 	public void setUp() throws ExecutionException {
@@ -38,17 +53,21 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 		// + creer une association.
 		// -> Quand les factories seront créées !
 		
+		Package model = null;
+		handler = null;
 		
-		// Draw a class.
-		Element element = null;
-		Element element2 = null;
-		Element association = null;
+		// Dans la transaction :
+		element = model.createOwnedClass("Class1", false);
+		element2 = model.createOwnedClass("Class2", false);
+		association = element.createAssociation(true, AggregationKind.COMPOSITE_LITERAL, "name1", 1, 1, element2, true, AggregationKind.SHARED_LITERAL, "name2", 0, 1);
+		association.setName("asso");
 		try {
 			drawn_element = handler.draw(element, false);
-			handler.draw(element2, false);
+			drawn_element2 = handler.draw(element2, false);
 			drawn_association = handler.draw(association, false);
 		} catch (TargetOrSourceNotDrawnException e) {
-			// Ignore.
+			// Normally it's impossible !
+			assertTrue(false);
 		}
 
 	}
@@ -98,7 +117,8 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 		try {
 			handler.setWidth(drawn_element, illegal_width);
 		} catch (NotResizableViewException e) {
-			// Ignore : it's a class.
+			// Normally it's impossible !
+			assertTrue(false);
 		} catch (NotAValidSizeException e) {
 			result = true;
 		}
@@ -118,7 +138,8 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 		try {
 			width = handler.getWidth(drawn_element);
 		} catch (NotDimensionedViewException e) {
-			//Ignore.
+			// Normally it's impossible !
+			assertTrue(false);
 		}
 		assertEquals(legal_width,width);
 		
@@ -138,7 +159,8 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 		} catch (NotResizableViewException e) {
 			result = true;
 		} catch (NotAValidSizeException e) {
-			// Ignore, good value.
+			// Normally it's impossible !
+			assertTrue(false);
 		}
 		assertTrue(result);
 		
@@ -167,7 +189,8 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 		try {
 			handler.setHeight(drawn_element, legal_height);
 		} catch (NotResizableViewException e) {
-			// Ignore : it's a class.
+			// Normally it's impossible !
+			assertTrue(false);
 		} catch (NotAValidSizeException e) {
 			result = false;
 		}
@@ -177,7 +200,8 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 		try {
 			height = handler.getHeight(drawn_element);
 		} catch (NotDimensionedViewException e) {
-			//Ignore.
+			// Normally it's impossible !
+			assertTrue(false);
 		}
 		assertEquals(legal_height,height);
 		
@@ -196,7 +220,8 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 		} catch (NotResizableViewException e) {
 			result = true;
 		} catch (NotAValidSizeException e) {
-			// Ignore, good value.
+			// Normally it's impossible !
+			assertTrue(false);
 		}
 		assertTrue(result);
 		
@@ -217,7 +242,8 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 		} catch (NotAValidLocationException e) {
 			result = true;
 		} catch (UnmovableViewException e) {
-			// Ignore.
+			// Normally it's impossible !
+			assertTrue(false);
 		}
 		assertTrue(result);
 		
@@ -227,7 +253,8 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 		} catch (NotAValidLocationException e) {
 			result = false;
 		} catch (UnmovableViewException e) {
-			// Ignore.
+			// Normally it's impossible !
+			assertTrue(false);
 		}
 		assertTrue(result);
 		
@@ -263,25 +290,92 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 	
 	@Test
 	public void getElementByNameTest() {
-		//TODO
+		List<Element> noclass = handler.getElementByName("NoClass");
+		
+		assertEquals(0,noclass.size());
+		
+		List<Element> class1 = handler.getElementByName("Class1");
+		
+		assertEquals(1,class1.size());
+		assertEquals(element,class1.get(0));
+		
+		List<Element> class2 = handler.getElementByName("Class2");
+		
+		assertEquals(1,class2.size());
+		assertEquals(element2,class2.get(0));
+		
+		List<Element> asso = handler.getElementByName("asso");
+		
+		assertEquals(1,asso.size());
+		assertEquals(association,asso.get(0));
 	}
 	
 	
 	@Test
 	public void getElementViewByNameTest() {
-		//TODO
+		List<View> noclass = handler.getElementViewByName("NoClass");
+		
+		assertEquals(0,noclass.size());
+		
+		List<View> class1 = handler.getElementViewByName("Class1");
+		
+		assertEquals(1,class1.size());
+		assertEquals(drawn_element,class1.get(0));
+		
+		List<View> class2 = handler.getElementViewByName("Class2");
+		
+		assertEquals(1,class2.size());
+		assertEquals(drawn_element2,class2.get(0));
+		
+		List<View> asso = handler.getElementViewByName("asso");
+		
+		assertEquals(1,asso.size());
+		assertEquals(drawn_association,asso.get(0));
 	}
 	
 	
 	@Test
 	public void deleteTest() {
-		//TODO
+		try {
+			handler.delete(drawn_element);
+		} catch (NonExistantViewException e) {
+			// Normally it's impossible !
+			assertTrue(false);
+		}
+		
+		assertFalse(handler.isDrawn(element));
+		assertFalse(handler.isDrawn(association));
+		assertTrue(handler.isDrawn(element2));
+		
+		boolean already_delete = false;
+		
+		try {
+			handler.delete(drawn_element);
+		} catch (NonExistantViewException e) {
+			already_delete = true;
+		}
+		
+		assertTrue(already_delete);
 	}
 	
 	
 	@Test
 	public void autoSizeTest() {
-		//TODO
+		try {
+			handler.setHeight(drawn_element2, 10);
+			handler.setWidth(drawn_element2, 10);
+			
+			handler.autoSize(drawn_element2);
+			
+			assertNotEquals(10,handler.getHeight(drawn_element2));
+			assertNotEquals(10,handler.getWidth(drawn_element2));
+		
+		}
+		catch (Exception e) {
+			// Normally it's impossible !
+			assertTrue(false);
+		}
+	
 	}
-
+	
 }

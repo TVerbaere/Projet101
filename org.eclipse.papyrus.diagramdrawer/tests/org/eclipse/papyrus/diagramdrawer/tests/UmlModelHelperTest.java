@@ -13,6 +13,7 @@ import org.eclipse.papyrus.infra.core.resource.NotFoundException;
 import org.eclipse.papyrus.uml.tools.model.UmlModel;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.NamedElement;
+import org.eclipse.uml2.uml.Package;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -37,7 +38,10 @@ public class UmlModelHelperTest {
 		//TODO : Creer un model avec les factories et ajouter une classe dedans : ClassTest.
 		// -> Quand les factories seront créées !
 		umlModel = null;
-	
+		Package model = null;
+		// Dans la transaction :
+		added_element = model.createOwnedClass("ClassTest", false);
+		
 		helper = new UmlModelHelper(umlModel);
 	}
 	
@@ -62,7 +66,7 @@ public class UmlModelHelperTest {
 		assertTrue(elements.size() == 0);
 	}
 	
-	/* --------------------------------------------------------------------------- */
+	/* ----------------------------Useful methods----------------------------------------------- */
 	
 	
 	private List<Element> getElementByName(String name) {

@@ -19,6 +19,8 @@ Implémentation :
   + getHeight			[OK]
   + getLocation			[OK]
   + setLocation			[OK]
+  + getDefaultLocation		[OK]
+  + setDefaultLocation		[OK]
   + getElementViewByName	[OK]
   + getViewByElement	 	[OK]
   + getElementByName		[OK]
@@ -35,8 +37,8 @@ Implémentation :
 Tests unitaires :
 -----------------
 -----------------
-+ Tests unitaires Helper	[en cours(90%) : TV] - Il faut les factories pour finaliser (setUp)!
-+ Tests unitaires Handlers	[en cours(40%) : TV]
++ Tests unitaires Helper	[en cours(95%) : TV] - Il faut les factories pour finaliser (setUp)!
++ Tests unitaires Handlers	[en cours(55%) : TV] - Reste tests des draws
 + Tests unitaires Factories	[non affecté]
 + Tests d'intégrations		[en cours(50%) : AR] - Recrèer un plugin pour les tests (Test sauvegardé à la racine du projet)
 + Tester pour les autres types de diagrammes (Activité...)
