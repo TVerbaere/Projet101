@@ -128,7 +128,8 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 		try {
 			handler.setWidth(drawn_element, legal_width);
 		} catch (NotResizableViewException e) {
-			// Ignore : it's a class.
+			// Normally it's impossible !
+			assertTrue(false);
 		} catch (NotAValidSizeException e) {
 			result = false;
 		}
@@ -179,7 +180,8 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 		try {
 			handler.setHeight(drawn_element, illegal_height);
 		} catch (NotResizableViewException e) {
-			// Ignore : it's a class.
+			// Normally it's impossible !
+			assertTrue(false);
 		} catch (NotAValidSizeException e) {
 			result = true;
 		}
@@ -262,7 +264,8 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 		try {
 			location = handler.getLocation(drawn_element);
 		} catch (LocationNotFoundException e) {
-			// Ignore.
+			// Normally it's impossible !
+			assertTrue(false);
 		}
 		assertEquals(legal_location,location);
 		
@@ -279,7 +282,8 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 		try {
 			handler.setLocation(drawn_association, legal_location);
 		} catch (NotAValidLocationException e) {
-			// Ignore.
+			// Normally it's impossible !
+			assertTrue(false);
 		} catch (UnmovableViewException e) {
 			result = true;
 		}
@@ -336,6 +340,7 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 	
 	@Test
 	public void deleteTest() {
+		// Delete :
 		try {
 			handler.delete(drawn_element);
 		} catch (NonExistantViewException e) {
@@ -343,12 +348,13 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 			assertTrue(false);
 		}
 		
+		/// element and association not drawn.
 		assertFalse(handler.isDrawn(element));
 		assertFalse(handler.isDrawn(association));
 		assertTrue(handler.isDrawn(element2));
 		
 		boolean already_delete = false;
-		
+		// It's impossible to delete an element already delected.
 		try {
 			handler.delete(drawn_element);
 		} catch (NonExistantViewException e) {
@@ -362,9 +368,10 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 	@Test
 	public void autoSizeTest() {
 		try {
+			// Change height and width :
 			handler.setHeight(drawn_element2, 10);
 			handler.setWidth(drawn_element2, 10);
-			
+			// Autosize :
 			handler.autoSize(drawn_element2);
 			
 			assertNotEquals(10,handler.getHeight(drawn_element2));

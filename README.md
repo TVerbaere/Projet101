@@ -37,8 +37,8 @@ Implémentation :
 Tests unitaires :
 -----------------
 -----------------
-+ Tests unitaires Helper	[en cours(95%) : TV] - Il faut les factories pour finaliser (setUp)!
-+ Tests unitaires Handlers	[en cours(55%) : TV] - Reste tests des draws
++ Tests unitaires Helper	[en cours(98%) : TV] - Il faut les factories pour finaliser (setUp) et pouvoir les executer !!!
++ Tests unitaires Handlers	[en cours(98%) : TV] - Il faut les factories pour finaliser (setUp) et pouvoir les executer !!!
 + Tests unitaires Factories	[non affecté]
 + Tests d'intégrations		[en cours(50%) : AR] - Recrèer un plugin pour les tests (Test sauvegardé à la racine du projet)
 + Tester pour les autres types de diagrammes (Activité...)
