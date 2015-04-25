@@ -10,7 +10,7 @@ Implémentation :
 ----------------
 
 + UMLModelHelper		[Tests OK : TV]
-+ AbstractDiagramHandler	[Tests OK : TV]
++ AbstractDiagramHandler	[en cours : TV] - Affichage des UML de profondeur > 3 impossibles
 + ProjectFactory  		[?? : AR] 
 + ModelFactory 			[?? : AR]
 + DiagramFactory 		[?? : AR]

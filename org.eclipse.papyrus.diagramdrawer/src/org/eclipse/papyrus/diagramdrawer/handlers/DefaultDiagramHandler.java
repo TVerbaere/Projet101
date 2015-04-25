@@ -1,5 +1,6 @@
 package org.eclipse.papyrus.diagramdrawer.handlers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -61,7 +62,7 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	/**
 	 * the Diagram Edit Part that is handled.
 	 */
-	protected DiagramEditPart diagrameditPart;
+	public DiagramEditPart diagrameditPart;
 	
 	/**
 	 * Transactional editing domain.
@@ -169,7 +170,7 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	 */
 	public View draw(Element element, Point location, boolean cascade) throws NotAValidLocationException {
 		View view = null;
-		
+		System.out.println("draw : "+element);
 		// Draw the element
 		try {
 			view = this.simpleDraw(element,location,null);
@@ -218,7 +219,7 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	 */
 	public View drawElementInside(View container, Element element, boolean cascade) throws InvalidContainerException {
 		View view = null;
-		
+		System.out.println("draw : "+element+" in "+container);
 		// Draw the element
 		try {
 			view = this.simpleDraw(element,DEFAULT_LOCATION,container);
@@ -235,9 +236,9 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 			List<Relationship> relations = element.getRelationships();
 			for (Relationship relation : relations) {
 				try {
-					this.draw(relation,false);
+					this.drawElementInside(view,relation,false);
 				}
-				catch (TargetOrSourceNotDrawnException e) {
+				catch (InvalidContainerException e) {
 					// Ignore
 				}
 			}
@@ -637,7 +638,7 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	 * @throws NotAValidLocationException if the location is not valid
 	 */
 	private View simpleDraw(Element element,Point location,View father) throws NonExistantViewException, NotAValidLocationException {
-		
+
 		if (!this.isValidLocation(location))
 			throw new NotAValidLocationException();
 		
@@ -731,16 +732,18 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	 * @return EditParts associated to the view
 	 * @throws NonExistantViewException if the view doesn't exist
 	 */
-	private List<EditPart> viewToEditParts(View view) throws NonExistantViewException {
+	public List<EditPart> viewToEditParts(View view) throws NonExistantViewException {
 		// Find the diagramGraphicalViewer of the diagram.
 		IDiagramGraphicalViewer viewer=(IDiagramGraphicalViewer)this.diagrameditPart.getViewer();
 		// Find the ID of the element.
 		String elementID = EMFCoreUtil.getProxyID(view.getElement());
+
 		// Now, we can found editparts of the element.
 		List<EditPart> editparts = viewer.findEditPartsForElement(elementID, EditPart.class);
-
-		if (editparts.isEmpty())
+		
+		if (editparts.isEmpty()) {
 			throw new NonExistantViewException();
+		}
 		else
 			return editparts;
 
