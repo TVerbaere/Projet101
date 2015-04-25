@@ -9,39 +9,22 @@ Implémentation :
 ----------------
 ----------------
 
-+ UMLModelHelper		[OK : TV]
-  + delete 			[OK]
-+ AbstractDiagramHandler	[OK : TV]
-  + getModel / getTED  		[OK]
-  + setWidth			[OK]
-  + setHeight			[OK]
-  + getWidth			[OK]
-  + getHeight			[OK]
-  + getLocation			[OK]
-  + setLocation			[OK]
-  + getDefaultLocation		[OK]
-  + setDefaultLocation		[OK]
-  + getElementViewByName	[OK]
-  + getViewByElement	 	[OK]
-  + getElementByName		[OK]
-  + delete			[OK]
-  + autoSize			[OK : même comportement que celui de papyrus]
-  + draw (avec location)	[OK]
-  + drawInside 			[OK]
-  + draw (sans location) 	[OK]
-+ ProjectFactory  		[OK : AR]
-+ ModelFactory 			[OK : AR]
-+ DiagramFactory 		[OK : AR]
-+ Supprimer (ou plutôt integrer) othersources et revoir les factories pour les loads.
++ UMLModelHelper		[Tests OK : TV]
++ AbstractDiagramHandler	[Tests OK : TV]
++ ProjectFactory  		[?? : AR] 
++ ModelFactory 			[?? : AR]
++ DiagramFactory 		[?? : AR]
+
 
 Tests unitaires :
 -----------------
 -----------------
-+ Tests unitaires Helper	[en cours(98%) : TV] - Il faut les factories pour finaliser (setUp) et pouvoir les executer !!!
-+ Tests unitaires Handlers	[en cours(98%) : TV] - Il faut les factories pour finaliser (setUp) et pouvoir les executer !!!
++ Tests unitaires Helper	[en cours(98%) : TV] - OK mais reste à finaliser le SetUp (factories !)
++ Tests unitaires Handlers	[en cours(98%) : TV] - OK mais reste à finaliser le SetUp (factories !)
 + Tests unitaires Factories	[non affecté]
+
 + Tests d'intégrations		[en cours(50%) : AR] - Recrèer un plugin pour les tests (Test sauvegardé à la racine du projet)
-+ Tester pour les autres types de diagrammes (Activité...)
++ Tester pour les autres types de diagrammes (Activité...) -> Dans les tests d'intégrations
 
 
-+ Rapport
++ Rapport (10%)

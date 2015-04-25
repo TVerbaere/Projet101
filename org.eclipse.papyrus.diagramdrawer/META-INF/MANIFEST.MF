@@ -39,4 +39,5 @@ Import-Package: org.eclipse.draw2d.geometry,
 Export-Package: org.eclipse.papyrus.diagramdrawer.exceptions,
  org.eclipse.papyrus.diagramdrawer.factories,
  org.eclipse.papyrus.diagramdrawer.handlers,
+ org.eclipse.papyrus.diagramdrawer.helpers,
  org.eclipse.papyrus.diagramdrawer.utils
