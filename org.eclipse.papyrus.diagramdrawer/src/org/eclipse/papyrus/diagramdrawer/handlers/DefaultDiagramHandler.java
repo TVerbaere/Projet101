@@ -183,7 +183,8 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 			List<Relationship> relations = element.getRelationships();
 			for (Relationship relation : relations) {
 				try {
-					this.draw(relation,false);
+					if (!this.isDrawn(relation))
+						this.draw(relation,false);
 				} 
 				catch (TargetOrSourceNotDrawnException e) {
 					// Ignore
