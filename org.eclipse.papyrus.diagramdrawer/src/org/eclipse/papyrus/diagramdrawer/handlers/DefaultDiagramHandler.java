@@ -1,19 +1,16 @@
 package org.eclipse.papyrus.diagramdrawer.handlers;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gef.EditPart;
-import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
@@ -64,7 +61,7 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	/**
 	 * the Diagram Edit Part that is handled.
 	 */
-	public DiagramEditPart diagrameditPart;
+	protected DiagramEditPart diagrameditPart;
 	
 	/**
 	 * Transactional editing domain.
@@ -765,7 +762,7 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	 * @return EditParts associated to the view
 	 * @throws NonExistantViewException if the view doesn't exist
 	 */
-	public List<EditPart> viewToEditParts(View view) throws NonExistantViewException {
+	private List<EditPart> viewToEditParts(View view) throws NonExistantViewException {
 		// Find the diagramGraphicalViewer of the diagram.
 		IDiagramGraphicalViewer viewer=(IDiagramGraphicalViewer)this.diagrameditPart.getViewer();
 		// Find the ID of the element.
