@@ -23,7 +23,7 @@ import org.eclipse.uml2.uml.Element;
  * @author Allan RAKOTOARIVONY
  * @author Thibaud VERBAERE
  * 
- * @version 1.5
+ * @version 1.6
  *
  */
 public interface IDiagramHandler {
@@ -74,6 +74,19 @@ public interface IDiagramHandler {
 		 * @return A view representing the drawn element
 		 */
 		public View drawElementInside(View container, Element element, boolean cascade) throws InvalidContainerException;
+		
+		/**
+		 * Draws the view of the element inside a view at a given location.
+		 * The view must be a valid location for the element which means that the view must be a parent representation of the element.
+		 * Otherwise, an exception is thrown.
+		 * @param container The view n which the element will be drawn
+		 * @param element The element to be drawn in the view
+		 * @param location the location
+		 * @param cascade True if all contents in the element must be drawn in the same time, False in the other case
+		 * @throws InvalidContainerException if the element cannot be placed inside the container or the container does not exists
+		 * @return A view representing the drawn element
+		 */
+		public View drawElementInsideAtLocation(View container, Element element, Point location, boolean cascade) throws InvalidContainerException;
 		
 		/**
 		 * Draws all elements at their locations.

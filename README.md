@@ -10,7 +10,7 @@ Implémentation :
 ----------------
 
 + UMLModelHelper		[Tests OK : TV]
-+ AbstractDiagramHandler	[en cours : TV] - Affichage des UML de profondeur > 3 impossibles
++ DafaultDiagramHandler		[Tests OK : TV] - diagrammes de profondeur >3 semblent OK
 + ProjectFactory  		[?? : AR] 
 + ModelFactory 			[?? : AR]
 + DiagramFactory 		[?? : AR]

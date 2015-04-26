@@ -7,11 +7,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
@@ -170,7 +172,7 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	 */
 	public View draw(Element element, Point location, boolean cascade) throws NotAValidLocationException {
 		View view = null;
-		System.out.println("draw : "+element);
+		
 		// Draw the element
 		try {
 			view = this.simpleDraw(element,location,null);
@@ -218,11 +220,46 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	 * @throws InvalidContainerException
 	 */
 	public View drawElementInside(View container, Element element, boolean cascade) throws InvalidContainerException {
+		return this.drawElementInside(container, element, null, cascade);
+	}
+	
+	
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#drawElementInsideAtLocation(org.eclipse.gmf.runtime.notation.View, org.eclipse.uml2.uml.Element, org.eclipse.draw2d.geometry.Point, boolean)
+	 *
+	 * @param container
+	 * @param element
+	 * @param location
+	 * @param cascade
+	 * @return
+	 * @throws InvalidContainerException
+	 */
+	public View drawElementInsideAtLocation(View container, Element element, Point location, boolean cascade) throws InvalidContainerException {
+		return this.drawElementInside(container, element, location, cascade);
+	}
+	
+	
+	/**
+	 * Draws the view of the element inside a view at a given location.
+	 * The view must be a valid location for the element which means that the view must be a parent representation of the element.
+	 * Otherwise, an exception is thrown.
+	 * @param container The view n which the element will be drawn
+	 * @param element The element to be drawn in the view
+	 * @param location the location
+	 * @param cascade True if all contents in the element must be drawn in the same time, False in the other case
+	 * @throws InvalidContainerException if the element cannot be placed inside the container or the container does not exists
+	 * @return A view representing the drawn element
+	 */
+	private View drawElementInside(View container, Element element,Point location, boolean cascade) throws InvalidContainerException {
 		View view = null;
-		System.out.println("draw : "+element+" in "+container);
+
 		// Draw the element
 		try {
-			view = this.simpleDraw(element,DEFAULT_LOCATION,container);
+			if (location == null)
+				view = this.simpleDraw(element,DEFAULT_LOCATION,container);
+			else
+				view = this.simpleDraw(element,location,container);
 		}
 		catch (NonExistantViewException e1) {
 			throw new InvalidContainerException();
@@ -232,17 +269,6 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 		}
 
 		if (cascade) {
-			// Draw all relationships.
-			List<Relationship> relations = element.getRelationships();
-			for (Relationship relation : relations) {
-				try {
-					this.drawElementInside(view,relation,false);
-				}
-				catch (InvalidContainerException e) {
-					// Ignore
-				}
-			}
-			
 			// Draw inside elements.
 			for (Element elem : element.getOwnedElements()) {
 
@@ -644,7 +670,7 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 		
 		// Find the list of views for the element before executing the request.
 		List<View> views_before = this.getViewByElement(element);
-		
+				
 		DropObjectsRequest drop = new DropObjectsRequest();
 		// Create the list for the DropObjectsRequest.
 		ArrayList<Element> list = new ArrayList<Element>();
@@ -655,25 +681,32 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 		drop.setLocation(location);
 		Command commandDrop = null;	
 		
+		EditPart editpart_selected = null;
+		
 		if (father != null) {
 			List<EditPart> edit = this.viewToEditParts(father);
 			Iterator<EditPart> it = edit.iterator();
 			
 			// Search the good EditPart and create the command with the request.
 			while (commandDrop == null && it.hasNext()) {
-				commandDrop = it.next().getCommand(drop);
+				editpart_selected = it.next();
+				commandDrop = editpart_selected.getCommand(drop);
 			}
 		}
 		else {
 			// Create the command with the request.
 			commandDrop = this.diagrameditPart.getCommand(drop);
 		}
-		
+				
 		// Execute the command.
 		if (commandDrop != null && commandDrop.canExecute())
 			this.diagrameditPart.getDiagramEditDomain().getDiagramCommandStack().execute(commandDrop);
 
-		this.diagrameditPart.refresh();
+		// Refresh the editpart
+		if (father == null)
+			this.diagrameditPart.refresh();
+		else
+			editpart_selected.refresh();
 		
 		// Find the list of views for the element after.
 		List<View> views_after = this.getViewByElement(element);
@@ -746,8 +779,7 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 		}
 		else
 			return editparts;
-
-
+	
 	}
 	
 	
