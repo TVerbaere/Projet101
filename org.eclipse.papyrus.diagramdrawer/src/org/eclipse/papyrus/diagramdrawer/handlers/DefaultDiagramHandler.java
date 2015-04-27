@@ -244,7 +244,7 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	 * Otherwise, an exception is thrown.
 	 * @param container The view n which the element will be drawn
 	 * @param element The element to be drawn in the view
-	 * @param location the location
+	 * @param location the location in the container
 	 * @param cascade True if all contents in the element must be drawn in the same time, False in the other case
 	 * @throws InvalidContainerException if the element cannot be placed inside the container or the container does not exists
 	 * @return A view representing the drawn element
@@ -267,6 +267,18 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 		}
 
 		if (cascade) {
+			// Draw all relationships.
+			List<Relationship> relations = element.getRelationships();
+			for (Relationship relation : relations) {
+				try {
+					if (!this.isDrawn(relation))
+						this.draw(relation,false);
+				} 
+				catch (TargetOrSourceNotDrawnException e) {
+					// Ignore
+				}
+			}
+			
 			// Draw inside elements.
 			for (Element elem : element.getOwnedElements()) {
 
@@ -368,14 +380,15 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 		
 			for (EditPart part : parts) {
 				// Send the request for each instance of IGraphicalEditPart.
-				if (part instanceof IGraphicalEditPart)
+				if (part instanceof IGraphicalEditPart) {
 					command.add(DeleteActionUtil.getDeleteFromDiagramCommand((IGraphicalEditPart) part));
+					
+					// Execute the command.
+					if (command.canExecute())
+						command.execute();
+				}
 			}
-		
-			// Execute the command.
-			if (command.canExecute())
-				command.execute();
-			
+
 	}
 
 	

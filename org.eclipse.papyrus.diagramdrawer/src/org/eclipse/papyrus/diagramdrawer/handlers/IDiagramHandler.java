@@ -81,7 +81,7 @@ public interface IDiagramHandler {
 		 * Otherwise, an exception is thrown.
 		 * @param container The view n which the element will be drawn
 		 * @param element The element to be drawn in the view
-		 * @param location the location
+		 * @param location the location in the container
 		 * @param cascade True if all contents in the element must be drawn in the same time, False in the other case
 		 * @throws InvalidContainerException if the element cannot be placed inside the container or the container does not exists
 		 * @return A view representing the drawn element
@@ -99,18 +99,6 @@ public interface IDiagramHandler {
 		 * @return A list of the drawn views
 		 */
 		public List<View> drawAll(List<Element> elements,List<Point>locations, boolean cascade) throws IllegalArgumentException, NotAValidLocationException;
-		
-//		/**
-//		 * 
-//		 * @param element
-//		 * @param position
-//		 * @param base
-//		 * @param interval
-//		 * @param cascade
-//		 * @return
-//		 * @throws LocationNotFoundException 
-//		 */
-//		public View drawAtPosition(Element element, Position position, View base, int interval, boolean cascade) throws LocationNotFoundException;
 		
 		/**
 		 * Deletes the view in the handled diagram.
