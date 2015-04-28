@@ -632,6 +632,22 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	}
 	
 
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#isDrawn(org.eclipse.uml2.uml.Element)
+	 *
+	 * @param element
+	 * @return
+	 */
+	public boolean isDrawn(Element element) {
+		List<View> views = getViewByElement(element);
+
+		// No associated view, so not drawn !
+		return !views.isEmpty();
+
+	}
+	
+
 	/* ------------------------------------------------------------------------ */
 	
 	
@@ -791,20 +807,6 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 		else
 			return editparts;
 	
-	}
-	
-	
-	/**
-	 * Check if an element is drawn on the diagram.
-	 * @param element the element
-	 * @return True or False if the element is drawn
-	 */
-	public boolean isDrawn(Element element) {
-		List<View> views = getViewByElement(element);
-
-		// No associated view, so not drawn !
-		return !views.isEmpty();
-
 	}
 	
 	

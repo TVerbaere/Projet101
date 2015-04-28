@@ -19,9 +19,11 @@ import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.TargetOrSourceNotDrawnException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.UnmovableViewException;
+import org.eclipse.papyrus.diagramdrawer.factories.DiagramFactory;
 import org.eclipse.papyrus.diagramdrawer.factories.PapyrusEditorFactory;
 import org.eclipse.papyrus.diagramdrawer.factories.ProjectFactory;
 import org.eclipse.papyrus.diagramdrawer.handlers.DefaultDiagramHandler;
+import org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler;
 import org.eclipse.papyrus.diagramdrawer.utils.DiagramType;
 import org.eclipse.papyrus.diagramdrawer.utils.EclipseProject;
 import org.eclipse.papyrus.diagramdrawer.utils.ExecutionException;
@@ -29,6 +31,7 @@ import org.eclipse.papyrus.diagramdrawer.utils.PapyrusEditor;
 import org.eclipse.papyrus.infra.core.resource.ModelSet;
 import org.eclipse.papyrus.infra.core.resource.NotFoundException;
 import org.eclipse.papyrus.infra.core.services.ServiceException;
+import org.eclipse.papyrus.uml.tools.model.UmlModel;
 import org.eclipse.papyrus.uml.tools.model.UmlUtils;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.uml2.uml.AggregationKind;
@@ -47,7 +50,7 @@ import org.junit.Test;
  */
 public class DefaultDiagramHandlerTestBasicsMethods {
 	
-	private static DefaultDiagramHandler handler;
+	private static IDiagramHandler handler;
 	
 	private static View drawn_element;
 	
@@ -66,15 +69,10 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 	
 		EclipseProject eclipseProject = ProjectFactory.instance.build("test project");
 		PapyrusEditor papyrusEditor = PapyrusEditorFactory.instance.create(eclipseProject, "test model");
-		
 		ModelSet modelSet = papyrusEditor.getModelSet();
+		UmlModel umlModel = UmlUtils.getUmlModel(modelSet);
 		TransactionalEditingDomain ted = papyrusEditor.getTransactionalEditingDomain();
-		
-		ICreationCommand creationCommand = DiagramType.Class.getCreationCommand();
-		creationCommand.createDiagram(modelSet, null, "test diagram");
-		IEditorPart activeEditor = papyrusEditor.getEditor().getActiveEditor();		
-		DiagramEditor diagramEditor = (DiagramEditor) activeEditor;
-		handler =  new DefaultDiagramHandler(UmlUtils.getUmlModel(modelSet),diagramEditor.getDiagramEditPart());	
+		handler = DiagramFactory.instance.create("test diagram", DiagramType.Class, papyrusEditor);	
 		
 		
 		final Package model = (Package)handler.getModel().lookupRoot();

@@ -198,5 +198,12 @@ public interface IDiagramHandler {
 		 * @return the location
 		 */
 		public Point getDefaultLocation();
+		
+		/**
+		 * Check if an element is drawn on the diagram.
+		 * @param element the element
+		 * @return True or False if the element is drawn
+		 */
+		public boolean isDrawn(Element element);
 
 }
