@@ -12,9 +12,9 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.papyrus.diagramdrawer.factories.PapyrusEditorFactory;
 import org.eclipse.papyrus.diagramdrawer.factories.ProjectFactory;
 import org.eclipse.papyrus.diagramdrawer.helpers.UmlModelHelper;
-import org.eclipse.papyrus.diagramdrawer.othersources.EclipseProject;
-import org.eclipse.papyrus.diagramdrawer.othersources.ExecutionException;
-import org.eclipse.papyrus.diagramdrawer.othersources.PapyrusEditor;
+import org.eclipse.papyrus.diagramdrawer.utils.EclipseProject;
+import org.eclipse.papyrus.diagramdrawer.utils.ExecutionException;
+import org.eclipse.papyrus.diagramdrawer.utils.PapyrusEditor;
 import org.eclipse.papyrus.infra.core.resource.ModelSet;
 import org.eclipse.papyrus.infra.core.resource.NotFoundException;
 import org.eclipse.papyrus.infra.core.services.ServiceException;
@@ -26,6 +26,7 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Package;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -38,24 +39,23 @@ import org.junit.Test;
  */
 public class UmlModelHelperTest {
 	
-	private UmlModel umlModel;
+	private static UmlModel umlModel;
 	
-	private UmlModelHelper helper;
+	private static UmlModelHelper helper;
 	
-	private Class tested_element;
+	private static Class tested_element;
 	
-	private Association tested_association;
+	private static Association tested_association;
 	
-	private Class tested_element2;
+	private static Class tested_element2;
 	
 	@BeforeClass
-	public void setUp() throws ExecutionException, NotFoundException, ServiceException {
-		// -> Impossible d'executer les tests avec les versions actuelles des factories.
-		EclipseProject eclipseProject = ProjectFactory.instance.build("test");
-		final PapyrusEditor papyrusEditor = PapyrusEditorFactory.instance.create(eclipseProject, "model test");
-		final ModelSet modelSet = papyrusEditor.getModelSet();
-		final UmlModel umlModel = UmlUtils.getUmlModel(modelSet);
-		// UMLModelHelper umlModelHelper = new UMLModelHelper(umlModel);
+	public static void setUp() throws ExecutionException, NotFoundException, ServiceException {
+		
+		EclipseProject eclipseProject = ProjectFactory.instance.build("test project");
+		PapyrusEditor papyrusEditor = PapyrusEditorFactory.instance.create(eclipseProject, "test model");
+		ModelSet modelSet = papyrusEditor.getModelSet();
+		umlModel = UmlUtils.getUmlModel(modelSet);
 		TransactionalEditingDomain ted = papyrusEditor.getTransactionalEditingDomain();
 		
 		final Package model = (Package)umlModel.lookupRoot();
@@ -72,7 +72,7 @@ public class UmlModelHelperTest {
 	}
 	
 	
-	@Test
+	@Before
 	public void elementsInModel() {		
 		// Normally, ClassTest, ClassTest2 and the association are in the model.
 		List<Element> elements = getElementByName("ClassTest");

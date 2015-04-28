@@ -12,16 +12,15 @@
  *
  *****************************************************************************/
 
-package org.eclipse.papyrus.diagramdrawer.othersources;
+package org.eclipse.papyrus.diagramdrawer.utils;
+
 
 
 /**
- * Root exception of the package.
- *
  * @author cedric dumoulin
  *
  */
-public class ExecutionException extends Exception {
+public class EditorCreationException extends ExecutionException {
 
 	/**
 	 *
@@ -32,38 +31,38 @@ public class ExecutionException extends Exception {
 	 * Constructor.
 	 *
 	 */
-	public ExecutionException() {
+	public EditorCreationException() {
 		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * Constructor.
 	 *
-	 * @param message
+	 * @param arg0
 	 */
-	public ExecutionException(String message) {
-		super(message);
+	public EditorCreationException(String arg0) {
+		super(arg0);
 		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * Constructor.
 	 *
-	 * @param cause
+	 * @param arg0
 	 */
-	public ExecutionException(Throwable cause) {
-		super(cause);
+	public EditorCreationException(Throwable arg0) {
+		super(arg0);
 		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * Constructor.
 	 *
-	 * @param message
-	 * @param cause
+	 * @param arg0
+	 * @param arg1
 	 */
-	public ExecutionException(String message, Throwable cause) {
-		super(message, cause);
+	public EditorCreationException(String arg0, Throwable arg1) {
+		super(arg0, arg1);
 		// TODO Auto-generated constructor stub
 	}
 

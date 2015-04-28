@@ -16,10 +16,10 @@ import org.eclipse.papyrus.diagramdrawer.factories.DiagramFactory;
 import org.eclipse.papyrus.diagramdrawer.factories.PapyrusEditorFactory;
 import org.eclipse.papyrus.diagramdrawer.factories.ProjectFactory;
 import org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler;
-import org.eclipse.papyrus.diagramdrawer.othersources.EclipseProject;
-import org.eclipse.papyrus.diagramdrawer.othersources.ExecutionException;
-import org.eclipse.papyrus.diagramdrawer.othersources.PapyrusEditor;
 import org.eclipse.papyrus.diagramdrawer.utils.DiagramType;
+import org.eclipse.papyrus.diagramdrawer.utils.EclipseProject;
+import org.eclipse.papyrus.diagramdrawer.utils.ExecutionException;
+import org.eclipse.papyrus.diagramdrawer.utils.PapyrusEditor;
 import org.eclipse.papyrus.infra.core.resource.ModelSet;
 import org.eclipse.papyrus.infra.core.resource.NotFoundException;
 import org.eclipse.papyrus.infra.core.services.ServiceException;
@@ -36,12 +36,9 @@ public class IntegrationTest {
 	public static final String MODEL_NAME = "integration test model";
 
 	@Test
-	public void testApi() throws ExecutionException,
-			CreationCommandNotFoundException, NotFoundException,
-			TargetOrSourceNotDrawnException, InvalidContainerException,
-			LocationNotFoundException, NotAValidLocationException, ServiceException {
-		final EclipseProject eclipseProject = ProjectFactory.instance
-				.build(PROJECT_NAME);
+	public void testApi() throws ExecutionException,CreationCommandNotFoundException, NotFoundException,TargetOrSourceNotDrawnException, InvalidContainerException,LocationNotFoundException, NotAValidLocationException, ServiceException {
+		
+		final EclipseProject eclipseProject = ProjectFactory.instance.build(PROJECT_NAME);
 		final PapyrusEditor papyrusEditor = PapyrusEditorFactory.instance.create(eclipseProject, MODEL_NAME);
 		final ModelSet modelSet = papyrusEditor.getModelSet();
 		final UmlModel umlModel = UmlUtils.getUmlModel(modelSet);

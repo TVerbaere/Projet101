@@ -6,14 +6,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.papyrus.commands.ICreationCommand;
+import org.eclipse.papyrus.diagramdrawer.exceptions.CreationCommandNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.InvalidContainerException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NonExistantViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotAValidLocationException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.TargetOrSourceNotDrawnException;
+import org.eclipse.papyrus.diagramdrawer.factories.PapyrusEditorFactory;
+import org.eclipse.papyrus.diagramdrawer.factories.ProjectFactory;
 import org.eclipse.papyrus.diagramdrawer.handlers.DefaultDiagramHandler;
-import org.eclipse.papyrus.diagramdrawer.othersources.ExecutionException;
+import org.eclipse.papyrus.diagramdrawer.utils.DiagramType;
+import org.eclipse.papyrus.diagramdrawer.utils.EclipseProject;
+import org.eclipse.papyrus.diagramdrawer.utils.ExecutionException;
+import org.eclipse.papyrus.diagramdrawer.utils.PapyrusEditor;
+import org.eclipse.papyrus.infra.core.resource.ModelSet;
+import org.eclipse.papyrus.infra.core.resource.NotFoundException;
+import org.eclipse.papyrus.infra.core.services.ServiceException;
+import org.eclipse.papyrus.uml.tools.model.UmlUtils;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.uml2.uml.AggregationKind;
 import org.eclipse.uml2.uml.Association;
 import org.eclipse.uml2.uml.Class;
@@ -58,28 +73,39 @@ public class DefaultDiagramHandlerTestDraws {
 	
 	
 	@BeforeClass
-	public void setUp() throws ExecutionException {
+	public void setUp() throws ExecutionException, ServiceException, CreationCommandNotFoundException, NotFoundException {
 	
-		//TODO : Creer un model avec les factories + creer des classes/associations/propriétés.
-		// -> Quand les factories seront créées !
+		EclipseProject eclipseProject = ProjectFactory.instance.build("test project");
+		PapyrusEditor papyrusEditor = PapyrusEditorFactory.instance.create(eclipseProject, "test model");
 		
-		Package model = null;
-		handler = null;
+		ModelSet modelSet = papyrusEditor.getModelSet();
+		TransactionalEditingDomain ted = papyrusEditor.getTransactionalEditingDomain();
 		
-		// Dans la transaction :
-		element = model.createOwnedClass("Class1", false);
-		element2 = model.createOwnedClass("Class2", false);
-		element3 = model.createOwnedClass("Class3", false);
-		attribute = element.createOwnedAttribute("att1", null);
-		attribute2 = element2.createOwnedAttribute("att2", null);
-		attribute3 = element3.createOwnedAttribute("att3", null);
-		method = element.createOwnedOperation("meth1", null, null);
-		method2 = element2.createOwnedOperation("meth2", null, null);
-		method3 = element3.createOwnedOperation("meth3", null, null);
-		association = element.createAssociation(false, AggregationKind.COMPOSITE_LITERAL, "name1", 1, 1, element2, false, AggregationKind.SHARED_LITERAL, "name2", 0, 1);
-		association.setName("asso1");
-		association2 = element.createAssociation(false, AggregationKind.COMPOSITE_LITERAL, "name3", 1, 1, element3, false, AggregationKind.SHARED_LITERAL, "name4", 0, 1);
-		association2.setName("asso2");
+		ICreationCommand creationCommand = DiagramType.Class.getCreationCommand();
+		creationCommand.createDiagram(modelSet, null, "test diagram");
+		IEditorPart activeEditor = papyrusEditor.getEditor().getActiveEditor();		
+		DiagramEditor diagramEditor = (DiagramEditor) activeEditor;
+		handler =  new DefaultDiagramHandler(UmlUtils.getUmlModel(modelSet),diagramEditor.getDiagramEditPart());	
+		
+		
+		final Package model = (Package)handler.getModel().lookupRoot();
+		
+		ted.getCommandStack().execute(new RecordingCommand(ted) {
+			protected void doExecute() {	
+				element = model.createOwnedClass("Class1", false);
+				element2 = model.createOwnedClass("Class2", false);
+				element3 = model.createOwnedClass("Class3", false);
+				attribute = element.createOwnedAttribute("att1", null);
+				attribute2 = element2.createOwnedAttribute("att2", null);
+				attribute3 = element3.createOwnedAttribute("att3", null);
+				method = element.createOwnedOperation("meth1", null, null);
+				method2 = element2.createOwnedOperation("meth2", null, null);
+				method3 = element3.createOwnedOperation("meth3", null, null);
+				association = element.createAssociation(false, AggregationKind.COMPOSITE_LITERAL, "name1", 1, 1, element2, false, AggregationKind.SHARED_LITERAL, "name2", 0, 1);
+				association.setName("asso1");
+				association2 = element.createAssociation(false, AggregationKind.COMPOSITE_LITERAL, "name3", 1, 1, element3, false, AggregationKind.SHARED_LITERAL, "name4", 0, 1);
+				association2.setName("asso2");
+			}});
 
 	}
 	
@@ -597,6 +623,6 @@ public class DefaultDiagramHandlerTestDraws {
 			// Normally it's impossible !
 			assertTrue(false);
 		}
-	}
+	}	
 
 }

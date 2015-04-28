@@ -5,7 +5,12 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.papyrus.commands.ICreationCommand;
+import org.eclipse.papyrus.diagramdrawer.exceptions.CreationCommandNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NonExistantViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotAValidLocationException;
@@ -14,8 +19,18 @@ import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.TargetOrSourceNotDrawnException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.UnmovableViewException;
+import org.eclipse.papyrus.diagramdrawer.factories.PapyrusEditorFactory;
+import org.eclipse.papyrus.diagramdrawer.factories.ProjectFactory;
 import org.eclipse.papyrus.diagramdrawer.handlers.DefaultDiagramHandler;
-import org.eclipse.papyrus.diagramdrawer.othersources.ExecutionException;
+import org.eclipse.papyrus.diagramdrawer.utils.DiagramType;
+import org.eclipse.papyrus.diagramdrawer.utils.EclipseProject;
+import org.eclipse.papyrus.diagramdrawer.utils.ExecutionException;
+import org.eclipse.papyrus.diagramdrawer.utils.PapyrusEditor;
+import org.eclipse.papyrus.infra.core.resource.ModelSet;
+import org.eclipse.papyrus.infra.core.resource.NotFoundException;
+import org.eclipse.papyrus.infra.core.services.ServiceException;
+import org.eclipse.papyrus.uml.tools.model.UmlUtils;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.uml2.uml.AggregationKind;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Association;
@@ -32,44 +47,55 @@ import org.junit.Test;
  */
 public class DefaultDiagramHandlerTestBasicsMethods {
 	
-	private DefaultDiagramHandler handler;
+	private static DefaultDiagramHandler handler;
 	
-	private View drawn_element;
+	private static View drawn_element;
 	
-	private View drawn_element2;
+	private static View drawn_element2;
 	
-	private View drawn_association;
+	private static View drawn_association;
 	
-	private Class element;
+	private static Class element;
 	
-	private Class element2;
+	private static Class element2;
 	
-	private Association association;
+	private static Association association;
 	
 	@BeforeClass
-	public void setUp() throws ExecutionException {
+	public static void setUp() throws ExecutionException, NotFoundException, ServiceException, CreationCommandNotFoundException {
 	
-		//TODO : Creer un model avec les factories + creer une classe : Class1.
-		// + creer une association.
-		// -> Quand les factories seront créées !
+		EclipseProject eclipseProject = ProjectFactory.instance.build("test project");
+		PapyrusEditor papyrusEditor = PapyrusEditorFactory.instance.create(eclipseProject, "test model");
 		
-		Package model = null;
-		handler = null;
+		ModelSet modelSet = papyrusEditor.getModelSet();
+		TransactionalEditingDomain ted = papyrusEditor.getTransactionalEditingDomain();
 		
-		// Dans la transaction :
-		element = model.createOwnedClass("Class1", false);
-		element2 = model.createOwnedClass("Class2", false);
-		association = element.createAssociation(true, AggregationKind.COMPOSITE_LITERAL, "name1", 1, 1, element2, true, AggregationKind.SHARED_LITERAL, "name2", 0, 1);
-		association.setName("asso");
-		try {
-			drawn_element = handler.draw(element, false);
-			drawn_element2 = handler.draw(element2, false);
-			drawn_association = handler.draw(association, false);
-		} catch (TargetOrSourceNotDrawnException e) {
-			// Normally it's impossible !
-			assertTrue(false);
-		}
-
+		ICreationCommand creationCommand = DiagramType.Class.getCreationCommand();
+		creationCommand.createDiagram(modelSet, null, "test diagram");
+		IEditorPart activeEditor = papyrusEditor.getEditor().getActiveEditor();		
+		DiagramEditor diagramEditor = (DiagramEditor) activeEditor;
+		handler =  new DefaultDiagramHandler(UmlUtils.getUmlModel(modelSet),diagramEditor.getDiagramEditPart());	
+		
+		
+		final Package model = (Package)handler.getModel().lookupRoot();
+		
+		ted.getCommandStack().execute(new RecordingCommand(ted) {
+			protected void doExecute() {	
+				// Dans la transaction :
+				element = model.createOwnedClass("Class1", false);
+				element2 = model.createOwnedClass("Class2", false);
+				association = element.createAssociation(true, AggregationKind.COMPOSITE_LITERAL, "name1", 1, 1, element2, true, AggregationKind.SHARED_LITERAL, "name2", 0, 1);
+				association.setName("asso");
+				try {
+					drawn_element = handler.draw(element, false);
+					drawn_element2 = handler.draw(element2, false);
+					drawn_association = handler.draw(association, false);
+				} catch (TargetOrSourceNotDrawnException e) {
+					// Normally it's impossible !
+					assertTrue(false);
+				}
+			}});
+		
 	}
 	
 	
