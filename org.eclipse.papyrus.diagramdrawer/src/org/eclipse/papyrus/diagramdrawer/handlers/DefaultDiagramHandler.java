@@ -391,7 +391,6 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	}
 
 	
-	@SuppressWarnings("unchecked")
 	/**
 	 * 
 	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getViewByElement(org.eclipse.uml2.uml.Element)
@@ -715,7 +714,6 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	 * @param elem the element father
 	 * @return a list of element named "name"
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private List<View> getElementViewByName(String name,Element elem) {
 		List<Element> list = new ArrayList<Element>();
 		Set<View> views = new HashSet<View>();
@@ -754,7 +752,6 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	 * @return EditParts associated to the view
 	 * @throws NonExistantViewException if the view doesn't exist
 	 */
-	@SuppressWarnings("unchecked")
 	private List<EditPart> viewToEditParts(View view) throws NonExistantViewException {
 		// Find the diagramGraphicalViewer of the diagram.
 		IDiagramGraphicalViewer viewer=(IDiagramGraphicalViewer)this.diagrameditPart.getViewer();
