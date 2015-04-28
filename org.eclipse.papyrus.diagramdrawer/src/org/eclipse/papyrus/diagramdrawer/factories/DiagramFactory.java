@@ -9,7 +9,7 @@ import org.eclipse.papyrus.diagramdrawer.handlers.DefaultDiagramHandler;
 import org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler;
 import org.eclipse.papyrus.diagramdrawer.othersources.EclipseProject;
 import org.eclipse.papyrus.diagramdrawer.othersources.ExecutionException;
-import org.eclipse.papyrus.diagramdrawer.othersources.ProgramaticPapyrusEditor;
+import org.eclipse.papyrus.diagramdrawer.othersources.PapyrusEditor;
 import org.eclipse.papyrus.diagramdrawer.utils.DiagramType;
 import org.eclipse.papyrus.infra.core.resource.ModelSet;
 import org.eclipse.papyrus.infra.core.services.ServiceException;
@@ -30,53 +30,40 @@ public class DiagramFactory {
 	private DiagramFactory(){}
 	
 	/**
-	 * creates a new diagram inside the model modelname inside the project
+	 * Creates a new diagram inside the model modelname inside the project.
 	 * @param diagramName
 	 * @param diagramType
-	 * @param project
-	 * @param modelName
+	 * @param papyrusEditor the editor in which the diagram will be created
 	 * @return
 	 * @throws CreationCommandNotFoundException
 	 * @throws ServiceException
 	 * @throws ExecutionException
 	 */
-	public IDiagramHandler create(String diagramName,DiagramType diagramType,EclipseProject project,String modelName) throws CreationCommandNotFoundException, ServiceException, ExecutionException{
-		ProgramaticPapyrusEditor papyrusEditor = new ProgramaticPapyrusEditor(project, modelName);
+	public IDiagramHandler create(String diagramName,DiagramType diagramType,PapyrusEditor papyrusEditor) throws CreationCommandNotFoundException, ServiceException, ExecutionException{
 		ModelSet modelSet = papyrusEditor.getModelSet();
 		ICreationCommand creationCommand = diagramType.getCreationCommand();
 		creationCommand.createDiagram(modelSet, null, diagramName);
-		IEditorPart activeEditor = papyrusEditor.getEditor().getActiveEditor();
-		if(activeEditor instanceof DiagramEditor){
-			DiagramEditor diagramEditor = (DiagramEditor) activeEditor;
-			return new DefaultDiagramHandler(UmlUtils.getUmlModel(modelSet),diagramEditor.getDiagramEditPart());
-		}
-		return null;		
+		IEditorPart activeEditor = papyrusEditor.getEditor().getActiveEditor();		
+		DiagramEditor diagramEditor = (DiagramEditor) activeEditor; //if there is a cast exception, there is a grave error?
+		return new DefaultDiagramHandler(UmlUtils.getUmlModel(modelSet),diagramEditor.getDiagramEditPart());			
 	}
 	
 	/**
-	 * Creates a new project with the new projectname, the model name for the model
-	 * and a new diagram inside the model
-	 * @param diagramName
-	 * @param diagramType
-	 * @param projectname
-	 * @param modelName
-	 * @return
+	 * Loads a diagram inside a papyrus editor
+	 * @param diagramName the name of the diagram
+	 * @return the diagram handler of the asked diagram
 	 * @throws CreationCommandNotFoundException
 	 * @throws ServiceException
 	 * @throws ExecutionException
 	 */
-	public IDiagramHandler create(String diagramName,DiagramType diagramType,String projectname,String modelName) throws CreationCommandNotFoundException, ServiceException, ExecutionException{
-		ProgramaticPapyrusEditor papyrusEditor = new ProgramaticPapyrusEditor(projectname, modelName);
-		ModelSet modelSet = papyrusEditor.getModelSet();
-		ICreationCommand creationCommand = diagramType.getCreationCommand();
-		creationCommand.createDiagram(modelSet, null, diagramName);
-		IEditorPart activeEditor = papyrusEditor.getEditor().getActiveEditor();
-		if(activeEditor instanceof DiagramEditor){
-			DiagramEditor diagramEditor = (DiagramEditor) activeEditor;
-			return new DefaultDiagramHandler(UmlUtils.getUmlModel(modelSet),diagramEditor.getDiagramEditPart());
-		}
-		return null;		
-	}
+//	public IDiagramHandler load(String diagramName,PapyrusEditor papyrusEditor) throws CreationCommandNotFoundException, ServiceException, ExecutionException{
+//		ModelSet modelSet = papyrusEditor.getModelSet();
+//		IEditorPart activeEditor = papyrusEditor.getEditor().getActiveEditor();		
+//		DiagramEditor diagramEditor = (DiagramEditor) activeEditor; //if there is a cast exception, there is a grave error?
+//		return new DefaultDiagramHandler(UmlUtils.getUmlModel(modelSet),diagramEditor.getDiagramEditPart());			
+//	}
+	
+
 
 
 }

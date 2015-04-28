@@ -44,7 +44,7 @@ import org.eclipse.ui.part.FileEditorInput;
  * @author cedric dumoulin
  *
  */
-public class ProgramaticPapyrusEditor {
+public class PapyrusEditor {
 
 	protected static final String DEFAULT_PROJECT_NAME = "org.eclipse.papyrus.integrationtests.editor";
 	protected static final String DEFAULT_MODEL_NAME = "papyrusModelForIntegration";
@@ -92,7 +92,7 @@ public class ProgramaticPapyrusEditor {
 	 * @throws EditorCreationException
 	 *             If the creation fails.
 	 */
-	public ProgramaticPapyrusEditor(String projectName, String modelName) throws ExecutionException {
+	public PapyrusEditor(String projectName, String modelName) throws ExecutionException {
 		this.modelName = modelName;
 
 		// Create an Eclipse project
@@ -112,7 +112,7 @@ public class ProgramaticPapyrusEditor {
 	 * @throws EditorCreationException
 	 *             If the creation fails.
 	 */
-	public ProgramaticPapyrusEditor(EclipseProject eclipseProject, String modelName) throws ExecutionException {
+	public PapyrusEditor(EclipseProject eclipseProject, String modelName) throws ExecutionException {
 		this.modelName = modelName;
 
 		if (eclipseProject == null) {
@@ -135,7 +135,7 @@ public class ProgramaticPapyrusEditor {
 	 *             If the creation fails.
 	 *
 	 */
-	public ProgramaticPapyrusEditor() throws ExecutionException {
+	public PapyrusEditor() throws ExecutionException {
 
 		// Create an Eclipse project
 		eclipseProject = new EclipseProject(DEFAULT_PROJECT_NAME);
@@ -184,7 +184,6 @@ public class ProgramaticPapyrusEditor {
 	 * @throws CoreException
 	 * @throws IOException
 	 */
-	@SuppressWarnings("deprecation")
 	protected void createModel(IFile file) throws CoreException, IOException {
 
 		// Create ModelSet and initialize it with models declared in eclipse extensions
@@ -325,4 +324,10 @@ public class ProgramaticPapyrusEditor {
 	public IOperationHistory getIOperationHistory() {
 		return papyrusEditor.getSite().getWorkbenchWindow().getWorkbench().getOperationSupport().getOperationHistory();
 	}
+	
+	public TransactionalEditingDomain getTransactionalEditingDomain() throws ServiceException{
+		TransactionalEditingDomain domain = getServiceRegistry().getService(TransactionalEditingDomain.class);
+		return domain;
+	}
+	
 }

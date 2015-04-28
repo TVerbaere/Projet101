@@ -1,6 +1,6 @@
 package org.eclipse.papyrus.diagramdrawer.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -9,22 +9,23 @@ import java.util.Set;
 
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.emf.transaction.util.TransactionUtil;
-import org.eclipse.papyrus.diagramdrawer.factories.ModelSetFactory;
+import org.eclipse.papyrus.diagramdrawer.factories.PapyrusEditorFactory;
 import org.eclipse.papyrus.diagramdrawer.factories.ProjectFactory;
 import org.eclipse.papyrus.diagramdrawer.helpers.UmlModelHelper;
 import org.eclipse.papyrus.diagramdrawer.othersources.EclipseProject;
 import org.eclipse.papyrus.diagramdrawer.othersources.ExecutionException;
+import org.eclipse.papyrus.diagramdrawer.othersources.PapyrusEditor;
 import org.eclipse.papyrus.infra.core.resource.ModelSet;
 import org.eclipse.papyrus.infra.core.resource.NotFoundException;
+import org.eclipse.papyrus.infra.core.services.ServiceException;
 import org.eclipse.papyrus.uml.tools.model.UmlModel;
 import org.eclipse.papyrus.uml.tools.model.UmlUtils;
 import org.eclipse.uml2.uml.AggregationKind;
 import org.eclipse.uml2.uml.Association;
+import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Package;
-import org.eclipse.uml2.uml.Class;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -48,13 +49,15 @@ public class UmlModelHelperTest {
 	private Class tested_element2;
 	
 	@BeforeClass
-	public void setUp() throws ExecutionException, NotFoundException {
+	public void setUp() throws ExecutionException, NotFoundException, ServiceException {
 		// -> Impossible d'executer les tests avec les versions actuelles des factories.
 		EclipseProject eclipseProject = ProjectFactory.instance.build("test");
-		ModelSet modelSet = ModelSetFactory.instance.createIn(eclipseProject, "test", true);
-		UmlModel umlModel = UmlUtils.getUmlModel(modelSet);
+		final PapyrusEditor papyrusEditor = PapyrusEditorFactory.instance.create(eclipseProject, "model test");
+		final ModelSet modelSet = papyrusEditor.getModelSet();
+		final UmlModel umlModel = UmlUtils.getUmlModel(modelSet);
+		// UMLModelHelper umlModelHelper = new UMLModelHelper(umlModel);
+		TransactionalEditingDomain ted = papyrusEditor.getTransactionalEditingDomain();
 		
-		TransactionalEditingDomain ted = TransactionUtil.getEditingDomain(umlModel.lookupRoot());
 		final Package model = (Package)umlModel.lookupRoot();
 		helper = new UmlModelHelper(umlModel);
 
