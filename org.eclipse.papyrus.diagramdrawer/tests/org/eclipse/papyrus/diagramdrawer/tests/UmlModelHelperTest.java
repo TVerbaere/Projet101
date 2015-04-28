@@ -7,13 +7,24 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.transaction.util.TransactionUtil;
+import org.eclipse.papyrus.diagramdrawer.factories.ModelSetFactory;
+import org.eclipse.papyrus.diagramdrawer.factories.ProjectFactory;
 import org.eclipse.papyrus.diagramdrawer.helpers.UmlModelHelper;
+import org.eclipse.papyrus.diagramdrawer.othersources.EclipseProject;
 import org.eclipse.papyrus.diagramdrawer.othersources.ExecutionException;
+import org.eclipse.papyrus.infra.core.resource.ModelSet;
 import org.eclipse.papyrus.infra.core.resource.NotFoundException;
 import org.eclipse.papyrus.uml.tools.model.UmlModel;
+import org.eclipse.papyrus.uml.tools.model.UmlUtils;
+import org.eclipse.uml2.uml.AggregationKind;
+import org.eclipse.uml2.uml.Association;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Package;
+import org.eclipse.uml2.uml.Class;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -30,39 +41,57 @@ public class UmlModelHelperTest {
 	
 	private UmlModelHelper helper;
 	
-	private Element added_element;
+	private Class tested_element;
+	
+	private Association tested_association;
+	
+	private Class tested_element2;
 	
 	@BeforeClass
-	public void setUp() throws ExecutionException {
-	
-		//TODO : Creer un model avec les factories et ajouter une classe dedans : ClassTest.
-		// -> Quand les factories seront créées !
-		umlModel = null;
-		Package model = null;
-		// Dans la transaction :
-		added_element = model.createOwnedClass("ClassTest", false);
+	public void setUp() throws ExecutionException, NotFoundException {
+		// -> Impossible d'executer les tests avec les versions actuelles des factories.
+		EclipseProject eclipseProject = ProjectFactory.instance.build("test");
+		ModelSet modelSet = ModelSetFactory.instance.createIn(eclipseProject, "test", true);
+		UmlModel umlModel = UmlUtils.getUmlModel(modelSet);
 		
+		TransactionalEditingDomain ted = TransactionUtil.getEditingDomain(umlModel.lookupRoot());
+		final Package model = (Package)umlModel.lookupRoot();
 		helper = new UmlModelHelper(umlModel);
+
+		ted.getCommandStack().execute(new RecordingCommand(ted) {
+			protected void doExecute() {	
+				tested_element = model.createOwnedClass("ClassTest", false);
+				tested_element2 = model.createOwnedClass("ClassTest2", false);
+				tested_association = tested_element.createAssociation(true, AggregationKind.COMPOSITE_LITERAL, "name1", 1, 1, tested_element2, true, AggregationKind.SHARED_LITERAL, "name2", 0, 1);
+				tested_association.setName("asso1");
+			}
+		});
 	}
 	
 	
 	@Test
-	public void elementInModel() {
+	public void elementsInModel() {		
+		// Normally, ClassTest, ClassTest2 and the association are in the model.
 		List<Element> elements = getElementByName("ClassTest");
-		
-		// Normally, one element in the model : ClassTest.
-		assertTrue(elements.size() == 1 && elements.get(0) == added_element);
+		assertTrue(elements.size() == 1 && elements.get(0) == tested_element);
+		elements = getElementByName("ClassTest2");
+		assertTrue(elements.size() == 1 && elements.get(0) == tested_element2);
+		elements = getElementByName("asso1");
+		assertTrue(elements.size() == 1 && elements.get(0) == tested_association);
 	}
 	
 	
 	@Test
 	public void deleteTest() throws NotFoundException {
-		// Delete element.
-		helper.delete(added_element);
-		
+		// Delete element ClassTest1 (-> and the association in cascade).
+		helper.delete(tested_element);
+				
+		// Normally, just ClassTes2 in the model.
 		List<Element> elements = getElementByName("ClassTest");
-		
-		// Normally, no elements in the model.
+		assertTrue(elements.size() == 0);
+		elements = getElementByName("ClassTest2");
+		assertTrue(elements.size() == 1);
+		elements = getElementByName("asso1");
 		assertTrue(elements.size() == 0);
 	}
 	

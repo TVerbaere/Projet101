@@ -23,7 +23,7 @@ import org.eclipse.uml2.uml.Element;
  * @author Allan RAKOTOARIVONY
  * @author Thibaud VERBAERE
  * 
- * @version 1.5
+ * @version 1.6
  *
  */
 public interface IDiagramHandler {
@@ -76,6 +76,19 @@ public interface IDiagramHandler {
 		public View drawElementInside(View container, Element element, boolean cascade) throws InvalidContainerException;
 		
 		/**
+		 * Draws the view of the element inside a view at a given location.
+		 * The view must be a valid location for the element which means that the view must be a parent representation of the element.
+		 * Otherwise, an exception is thrown.
+		 * @param container The view n which the element will be drawn
+		 * @param element The element to be drawn in the view
+		 * @param location the location in the container
+		 * @param cascade True if all contents in the element must be drawn in the same time, False in the other case
+		 * @throws InvalidContainerException if the element cannot be placed inside the container or the container does not exists
+		 * @return A view representing the drawn element
+		 */
+		public View drawElementInsideAtLocation(View container, Element element, Point location, boolean cascade) throws InvalidContainerException;
+		
+		/**
 		 * Draws all elements at their locations.
 		 * If an view of an element overlaps the location of another view, it will not be drawn.
 		 * @param elements A list of elements to be drawn
@@ -86,18 +99,6 @@ public interface IDiagramHandler {
 		 * @return A list of the drawn views
 		 */
 		public List<View> drawAll(List<Element> elements,List<Point>locations, boolean cascade) throws IllegalArgumentException, NotAValidLocationException;
-		
-//		/**
-//		 * 
-//		 * @param element
-//		 * @param position
-//		 * @param base
-//		 * @param interval
-//		 * @param cascade
-//		 * @return
-//		 * @throws LocationNotFoundException 
-//		 */
-//		public View drawAtPosition(Element element, Position position, View base, int interval, boolean cascade) throws LocationNotFoundException;
 		
 		/**
 		 * Deletes the view in the handled diagram.

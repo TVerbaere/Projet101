@@ -74,11 +74,11 @@ public class DefaultDiagramHandlerTestDraws {
 		attribute2 = element2.createOwnedAttribute("att2", null);
 		attribute3 = element3.createOwnedAttribute("att3", null);
 		method = element.createOwnedOperation("meth1", null, null);
-		method2 = element.createOwnedOperation("meth2", null, null);
-		method3 = element.createOwnedOperation("meth3", null, null);
-		association = element.createAssociation(true, AggregationKind.COMPOSITE_LITERAL, "name1", 1, 1, element2, true, AggregationKind.SHARED_LITERAL, "name2", 0, 1);
+		method2 = element2.createOwnedOperation("meth2", null, null);
+		method3 = element3.createOwnedOperation("meth3", null, null);
+		association = element.createAssociation(false, AggregationKind.COMPOSITE_LITERAL, "name1", 1, 1, element2, false, AggregationKind.SHARED_LITERAL, "name2", 0, 1);
 		association.setName("asso1");
-		association2 = element.createAssociation(true, AggregationKind.COMPOSITE_LITERAL, "name3", 1, 1, element3, true, AggregationKind.SHARED_LITERAL, "name4", 0, 1);
+		association2 = element.createAssociation(false, AggregationKind.COMPOSITE_LITERAL, "name3", 1, 1, element3, false, AggregationKind.SHARED_LITERAL, "name4", 0, 1);
 		association2.setName("asso2");
 
 	}
@@ -270,7 +270,7 @@ public class DefaultDiagramHandlerTestDraws {
 		}
 		
 		assertTrue(exception_ok);
-		assertTrue(result.size() == 1);
+		assertTrue(result == null);
 		
 		// Check Class1 is drawn and Class2 not drawn.
 		assertTrue(handler.isDrawn(element));
@@ -278,7 +278,7 @@ public class DefaultDiagramHandlerTestDraws {
 		
 		// Reset :
 		try {
-			handler.delete(result.get(0));
+			handler.delete(handler.getViewByElement(element).get(0));
 		} catch (NonExistantViewException e) {
 			// Normally it's impossible !
 			assertTrue(false);
@@ -307,7 +307,7 @@ public class DefaultDiagramHandlerTestDraws {
 		}
 		
 		assertTrue(exception_ok);
-		assertTrue(result.size() == 0);
+		assertTrue(result == null);
 		
 		// Check Class1 and Class2 are not drawn.
 		assertFalse(handler.isDrawn(element));
