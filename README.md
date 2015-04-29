@@ -10,8 +10,8 @@ Implémentation :
 ----------------
 
 + UMLModelHelper		[Tests OK : TV]
-+ DafaultDiagramHandler		[Tests OK : TV] - diagrammes de profondeur >3 semblent OK
-+ ProjectFactory  		[?? : AR] <- Impossible d'appeler les méthodes depuis un main java : WorkSpace closed !!!!!
++ DafaultDiagramHandler		[Tests OK : TV] 
++ ProjectFactory  		[?? : AR] .... aucun changement après appel, pas de projet créé ?
 + PapyrusEditorFactory 		[?? : AR]
 + DiagramFactory 		[?? : AR]
 
