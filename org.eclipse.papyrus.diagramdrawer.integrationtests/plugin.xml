@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            label="Sample Action Set"
+            visible="true"
+            id="org.eclipse.papyrus.diagramdrawer.integrationtests.actionSet">
+         <menu
+               label="Diagram &amp;Drawer"
+               id="diagramDrawer">
+            <separator
+                  name="sampleGroup">
+            </separator>
+         </menu>
+         <action
+               label="&amp;ClassDiagram"
+               icon="icons/sample.gif"
+               class="org.eclipse.papyrus.diagramdrawer.integrationtests.actions.ClassDiagram"
+               menubarPath="diagramDrawer/sampleGroup"
+               toolbarPath="sampleGroup"
+               id="org.eclipse.papyrus.diagramdrawer.integrationtests.actions.SampleAction">
+         </action>
+         <action
+               label="&amp;SequenceDiagram"
+               icon="icons/sample.gif"
+               class="org.eclipse.papyrus.diagramdrawer.integrationtests.actions.SequenceDiagram"
+               menubarPath="diagramDrawer/sampleGroup"
+               toolbarPath="sampleGroup"
+               id="org.eclipse.papyrus.diagramdrawer.integrationtests.actions.SampleAction">
+         </action>
+         <action
+               label="&amp;UseCaseDiagram"
+               icon="icons/sample.gif"
+               class="org.eclipse.papyrus.diagramdrawer.integrationtests.actions.UseCaseDiagram"
+               menubarPath="diagramDrawer/sampleGroup"
+               toolbarPath="sampleGroup"
+               id="org.eclipse.papyrus.diagramdrawer.integrationtests.actions.SampleAction">
+         </action>
+      </actionSet>
+   </extension>
+
+</plugin>
