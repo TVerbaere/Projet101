@@ -741,8 +741,10 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 		// Remove before-elements to find the view created.
 		views_after.removeAll(views_before);
 
-		
-		return views_after.get(0);
+		if (!views_after.isEmpty())
+			return views_after.get(0);
+		else
+			return null;
 
 	}
 	

@@ -49,6 +49,8 @@ public class UmlModelHelperTest {
 	
 	private static Class tested_element2;
 	
+	private static TransactionalEditingDomain ted;
+	
 	@BeforeClass
 	public static void setUp() throws ExecutionException, NotFoundException, ServiceException {
 		
@@ -56,7 +58,7 @@ public class UmlModelHelperTest {
 		PapyrusEditor papyrusEditor = PapyrusEditorFactory.instance.create(eclipseProject, "test model");
 		ModelSet modelSet = papyrusEditor.getModelSet();
 		umlModel = UmlUtils.getUmlModel(modelSet);
-		TransactionalEditingDomain ted = papyrusEditor.getTransactionalEditingDomain();
+		ted = papyrusEditor.getTransactionalEditingDomain();
 		
 		final Package model = (Package)umlModel.lookupRoot();
 		helper = new UmlModelHelper(umlModel);
@@ -73,29 +75,44 @@ public class UmlModelHelperTest {
 	
 	
 	@Before
-	public void elementsInModel() {		
-		// Normally, ClassTest, ClassTest2 and the association are in the model.
-		List<Element> elements = getElementByName("ClassTest");
-		assertTrue(elements.size() == 1 && elements.get(0) == tested_element);
-		elements = getElementByName("ClassTest2");
-		assertTrue(elements.size() == 1 && elements.get(0) == tested_element2);
-		elements = getElementByName("asso1");
-		assertTrue(elements.size() == 1 && elements.get(0) == tested_association);
+	public void elementsInModel() {
+		ted.getCommandStack().execute(new RecordingCommand(ted) {
+			protected void doExecute() {
+				// Normally, ClassTest, ClassTest2 and the association are in the model.
+				List<Element> elements = getElementByName("ClassTest");
+				assertTrue(elements.size() == 1 && elements.get(0) == tested_element);
+				elements = getElementByName("ClassTest2");
+				assertTrue(elements.size() == 1 && elements.get(0) == tested_element2);
+				elements = getElementByName("asso1");
+				assertTrue(elements.size() == 1 && elements.get(0) == tested_association);
+			}
+		});
+		
 	}
 	
 	
 	@Test
-	public void deleteTest() throws NotFoundException {
-		// Delete element ClassTest1 (-> and the association in cascade).
-		helper.delete(tested_element);
-				
-		// Normally, just ClassTes2 in the model.
-		List<Element> elements = getElementByName("ClassTest");
-		assertTrue(elements.size() == 0);
-		elements = getElementByName("ClassTest2");
-		assertTrue(elements.size() == 1);
-		elements = getElementByName("asso1");
-		assertTrue(elements.size() == 0);
+	public void deleteTest() {
+		ted.getCommandStack().execute(new RecordingCommand(ted) {
+			protected void doExecute() {
+				// Delete element ClassTest1 (-> and the association in cascade).
+				try {
+					helper.delete(tested_element);
+				} catch (NotFoundException e) {
+					// Impossible !
+					assertTrue(false);
+				}
+						
+				// Normally, just ClassTes2 in the model.
+				List<Element> elements = getElementByName("ClassTest");
+				assertTrue(elements.size() == 0);
+				elements = getElementByName("ClassTest2");
+				assertTrue(elements.size() == 1);
+				elements = getElementByName("asso1");
+				assertTrue(elements.size() == 0);
+			}
+		});
+		
 	}
 	
 	/* ----------------------------Useful methods----------------------------------------------- */

@@ -8,9 +8,7 @@ import java.util.List;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.papyrus.commands.ICreationCommand;
 import org.eclipse.papyrus.diagramdrawer.exceptions.CreationCommandNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.InvalidContainerException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
@@ -20,18 +18,13 @@ import org.eclipse.papyrus.diagramdrawer.exceptions.TargetOrSourceNotDrawnExcept
 import org.eclipse.papyrus.diagramdrawer.factories.DiagramFactory;
 import org.eclipse.papyrus.diagramdrawer.factories.PapyrusEditorFactory;
 import org.eclipse.papyrus.diagramdrawer.factories.ProjectFactory;
-import org.eclipse.papyrus.diagramdrawer.handlers.DefaultDiagramHandler;
 import org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler;
 import org.eclipse.papyrus.diagramdrawer.utils.DiagramType;
 import org.eclipse.papyrus.diagramdrawer.utils.EclipseProject;
 import org.eclipse.papyrus.diagramdrawer.utils.ExecutionException;
 import org.eclipse.papyrus.diagramdrawer.utils.PapyrusEditor;
-import org.eclipse.papyrus.infra.core.resource.ModelSet;
 import org.eclipse.papyrus.infra.core.resource.NotFoundException;
 import org.eclipse.papyrus.infra.core.services.ServiceException;
-import org.eclipse.papyrus.uml.tools.model.UmlModel;
-import org.eclipse.papyrus.uml.tools.model.UmlUtils;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.uml2.uml.AggregationKind;
 import org.eclipse.uml2.uml.Association;
 import org.eclipse.uml2.uml.Class;
@@ -50,38 +43,36 @@ import org.junit.Test;
  */
 public class DefaultDiagramHandlerTestDraws {
 	
-	private IDiagramHandler handler;
+	private static IDiagramHandler handler;
 	
-	private Class element;
+	private static Class element;
 	
-	private Class element2;
+	private static Class element2;
 	
-	private Class element3;
+	private static Class element3;
 	
-	private Association association;
+	private static Association association;
 	
-	private Association association2;
+	private static Association association2;
 	
-	private Property attribute;
+	private static Property attribute;
 	
-	private Property attribute2;
+	private static Property attribute2;
 	
-	private Property attribute3;
+	private static Property attribute3;
 	
-	private Operation method;
+	private static Operation method;
 	
-	private Operation method2;
+	private static Operation method2;
 	
-	private Operation method3;
+	private static Operation method3;
 	
 	
 	@BeforeClass
-	public void setUp() throws ExecutionException, ServiceException, CreationCommandNotFoundException, NotFoundException {
+	public static void setUp() throws ExecutionException, ServiceException, CreationCommandNotFoundException, NotFoundException {
 	
 		EclipseProject eclipseProject = ProjectFactory.instance.build("test project");
 		PapyrusEditor papyrusEditor = PapyrusEditorFactory.instance.create(eclipseProject, "test model");
-		ModelSet modelSet = papyrusEditor.getModelSet();
-		UmlModel umlModel = UmlUtils.getUmlModel(modelSet);
 		TransactionalEditingDomain ted = papyrusEditor.getTransactionalEditingDomain();
 		handler = DiagramFactory.instance.create("test diagram", DiagramType.Class, papyrusEditor);
 		

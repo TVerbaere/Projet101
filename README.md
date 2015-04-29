@@ -19,8 +19,8 @@ Implémentation :
 Tests unitaires :
 -----------------
 -----------------
-+ Tests unitaires Helper	[en cours(98%) : TV] - Problème, impossible de runner les tests (problemes dépendances ?) : No runnable methods !!!!!
-+ Tests unitaires Handlers	[en cours(98%) : TV] - """"" idem
++ Tests unitaires Helper	[OK : TV]
++ Tests unitaires Handlers	[OK : TV]
 + Tests unitaires Factories	[non affecté]
 
 + Tests d'intégrations		[en cours(50%) : AR]
