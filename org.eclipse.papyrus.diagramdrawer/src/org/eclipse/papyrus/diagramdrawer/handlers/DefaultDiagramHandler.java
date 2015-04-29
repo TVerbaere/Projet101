@@ -110,15 +110,14 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 			if (cascade) {
 				// If the mode cascade is active then draw source and target element.
 				for (Element e : related) {
-					if (!this.isDrawn(e)) {
-						try {
+					try {
+						if (!this.isDrawn(e))
 							this.draw(e,DEFAULT_LOCATION,cascade);
-						}
-						catch (NotAValidLocationException e1) {
-							// Ignore : Impossible because it's the default location.
-						}
 					}
-					
+					catch (NotAValidLocationException e1) {
+						// Ignore : Impossible because it's the default location.
+					}
+				
 				}
 				// Finally draw the relationship.
 				try {
@@ -193,7 +192,8 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 			
 			for (Element elem : element.getOwnedElements()) {
 				try {
-					this.drawElementInside(view, elem, cascade);
+					if (!(elem instanceof Relationship))
+						this.drawElementInside(view, elem, cascade);
 				}
 				catch (InvalidContainerException e) {
 					// Ignore
@@ -283,7 +283,8 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 			for (Element elem : element.getOwnedElements()) {
 
 				try {
-					this.drawElementInside(view, elem, cascade);
+					if (!(elem instanceof Relationship))
+						this.drawElementInside(view, elem, cascade);
 				}
 				catch (InvalidContainerException e) {
 					// Ignore
