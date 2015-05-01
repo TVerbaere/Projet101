@@ -26,8 +26,8 @@ Tests unitaires :
 Scénarios concrets :
 -------------
 -------------
-+ Diagramme de Classe [OK : TV]
-+ Diagramme de Séquence [en cours : TV]
++ Guerres Mediques - Diagramme de Classe [OK : TV]
++ Le Restaurant - Diagramme de Séquence [en cours : TV]
 + Diagramme de UseCase [??]
 
 Autre :
