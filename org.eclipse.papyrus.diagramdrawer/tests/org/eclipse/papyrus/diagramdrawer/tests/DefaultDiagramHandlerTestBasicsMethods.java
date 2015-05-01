@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.PrecisionPoint;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.notation.View;
@@ -13,6 +14,7 @@ import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NonExistantViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotAValidLocationException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotAValidSizeException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.NotAnEdgeException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.TargetOrSourceNotDrawnException;
@@ -382,6 +384,80 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 				
 				assertEquals(1,asso.size());
 				assertEquals(drawn_association,asso.get(0));
+			}
+		});
+				
+	}
+	
+	@Test
+	public void setEdgeLocationSuccessfulTest() {
+		ted.getCommandStack().execute(new RecordingCommand(ted) {
+			protected void doExecute() {
+				PrecisionPoint pp = new PrecisionPoint(0.0,0.2);
+				try {
+					handler.setEdgeLocation(drawn_association, pp, pp);
+					
+					//Check :
+					assertEquals((int)(pp.preciseX()*1000),(int)(handler.getSourceEdgeLocation(drawn_association).preciseX()*1000));
+					assertEquals((int)(pp.preciseY()*1000),(int)(handler.getSourceEdgeLocation(drawn_association).preciseY()*1000));
+					assertEquals((int)(pp.preciseX()*1000),(int)(handler.getTargetEdgeLocation(drawn_association).preciseX()*1000));
+					assertEquals((int)(pp.preciseY()*1000),(int)(handler.getTargetEdgeLocation(drawn_association).preciseY()*1000));
+					
+				} catch (NotAnEdgeException e) {
+					// Normally it's impossible !
+					assertTrue(false);
+				} catch (NotAValidLocationException e) {
+					// Normally it's impossible !
+					assertTrue(false);
+				}
+			}
+		});
+				
+	}
+	
+	
+	@Test
+	public void setEdgeLocationUnSuccessfulTest() {
+		ted.getCommandStack().execute(new RecordingCommand(ted) {
+			protected void doExecute() {
+				PrecisionPoint pp = new PrecisionPoint(-0.5,1.5);
+				boolean result = false;
+				
+				try {
+					handler.setEdgeLocation(drawn_association, pp, pp);
+					
+				} catch (NotAnEdgeException e) {
+					// Normally it's impossible !
+					assertTrue(false);
+				} catch (NotAValidLocationException e) {
+					result = true;
+				}
+				
+				assertTrue(result);
+			}
+		});
+				
+	}
+	
+	
+	@Test
+	public void setEdgeLocationUnSuccessful2Test() {
+		ted.getCommandStack().execute(new RecordingCommand(ted) {
+			protected void doExecute() {
+				PrecisionPoint pp = new PrecisionPoint(0.0,0.2);
+				boolean result = false;
+				
+				try {
+					handler.setEdgeLocation(drawn_element, pp, pp);
+					
+				} catch (NotAnEdgeException e) {
+					result = true;
+				} catch (NotAValidLocationException e) {
+					// Normally it's impossible !
+					assertTrue(false);
+				}
+				
+				assertTrue(result);
 			}
 		});
 				

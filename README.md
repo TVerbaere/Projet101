@@ -20,7 +20,7 @@ Tests unitaires :
 -----------------
 -----------------
 + Tests unitaires Helper	[OK : TV]
-+ Tests unitaires Handlers	[OK : TV] - Tester les nouvelles méthodes !
++ Tests unitaires Handlers	[OK : TV]
 + Tests unitaires Factories	[non affecté]
 
 Scénarios concrets :
