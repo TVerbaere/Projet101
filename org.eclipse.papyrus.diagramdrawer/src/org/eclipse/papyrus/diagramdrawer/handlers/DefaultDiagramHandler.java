@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.PrecisionPoint;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
@@ -18,8 +19,11 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.requests.DropObjectsRequest;
 import org.eclipse.gmf.runtime.emf.core.util.EMFCoreUtil;
+import org.eclipse.gmf.runtime.notation.Edge;
+import org.eclipse.gmf.runtime.notation.IdentityAnchor;
 import org.eclipse.gmf.runtime.notation.LayoutConstraint;
 import org.eclipse.gmf.runtime.notation.Node;
+import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.gmf.runtime.notation.impl.BoundsImpl;
@@ -28,6 +32,7 @@ import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NonExistantViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotAValidLocationException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotAValidSizeException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.NotAnEdgeException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.TargetOrSourceNotDrawnException;
@@ -178,6 +183,17 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 		}
 		
 		if (cascade) {
+			// Draw inside elements.
+			for (Element elem : element.getOwnedElements()) {
+				try {
+					if (!(elem instanceof Relationship))
+						this.drawElementInside(view, elem, cascade);
+				}
+				catch (InvalidContainerException e) {
+					// Ignore
+				}
+			}
+			
 			// Draw all relationships.
 			List<Relationship> relations = element.getRelationships();
 			for (Relationship relation : relations) {
@@ -186,16 +202,6 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 						this.draw(relation,false);
 				} 
 				catch (TargetOrSourceNotDrawnException e) {
-					// Ignore
-				}
-			}
-			
-			for (Element elem : element.getOwnedElements()) {
-				try {
-					if (!(elem instanceof Relationship))
-						this.drawElementInside(view, elem, cascade);
-				}
-				catch (InvalidContainerException e) {
 					// Ignore
 				}
 			}
@@ -266,19 +272,7 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 			// Ignore : Impossible because it's the default location.
 		}
 
-		if (cascade) {
-			// Draw all relationships.
-			List<Relationship> relations = element.getRelationships();
-			for (Relationship relation : relations) {
-				try {
-					if (!this.isDrawn(relation))
-						this.draw(relation,false);
-				} 
-				catch (TargetOrSourceNotDrawnException e) {
-					// Ignore
-				}
-			}
-			
+		if (cascade) {		
 			// Draw inside elements.
 			for (Element elem : element.getOwnedElements()) {
 
@@ -287,6 +281,18 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 						this.drawElementInside(view, elem, cascade);
 				}
 				catch (InvalidContainerException e) {
+					// Ignore
+				}
+			}
+			
+			// Draw all relationships.
+			List<Relationship> relations = element.getRelationships();
+			for (Relationship relation : relations) {
+				try {
+					if (!this.isDrawn(relation))
+						this.draw(relation,false);
+				} 
+				catch (TargetOrSourceNotDrawnException e) {
 					// Ignore
 				}
 			}
@@ -593,6 +599,139 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 		else
 			throw new NotResizableViewException();
 		
+	}
+	
+	
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getSourceEdgeLocation(org.eclipse.gmf.runtime.notation.View)
+	 *
+	 * @param view
+	 * @return
+	 * @throws NotAnEdgeException
+	 */
+	public PrecisionPoint getSourceEdgeLocation(View view) throws NotAnEdgeException {
+		if (view instanceof Edge) {
+			// If the view is an instance of edge it's ok.
+			Edge edge = (Edge)view;
+			IdentityAnchor id = (IdentityAnchor) edge.getSourceAnchor();
+			// Get the source location :
+			if (id != null) {
+				String value = id.getId().substring(1, id.getId().length()-1);
+				String[] xy = value.split(",");
+				
+				return new PrecisionPoint(Float.valueOf(xy[0]),Float.valueOf(xy[1]));
+			}
+			else
+				//If not set, so return a point by default.
+				return new PrecisionPoint(-1.0,-1.0);
+		}
+		else
+			throw new NotAnEdgeException();
+	}
+	
+	
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getTargetEdgeLocation(org.eclipse.gmf.runtime.notation.View)
+	 *
+	 * @param view
+	 * @return
+	 * @throws NotAnEdgeException
+	 */
+	public PrecisionPoint getTargetEdgeLocation(View view) throws NotAnEdgeException {
+		if (view instanceof Edge) {
+			// If the view is an instance of edge it's ok.
+			Edge edge = (Edge)view;
+			IdentityAnchor id = (IdentityAnchor) edge.getTargetAnchor();
+			// Get the target location :
+			if (id != null) {
+				String value = id.getId().substring(1, id.getId().length()-1);
+				String[] xy = value.split(",");
+				
+				return new PrecisionPoint(Float.valueOf(xy[0]),Float.valueOf(xy[1]));
+			}
+			else
+				//If not set, so return a point by default.
+				return new PrecisionPoint(-1.0,-1.0);
+		}
+		else
+			throw new NotAnEdgeException();
+	}
+	
+	
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#setEdgeLocation(org.eclipse.gmf.runtime.notation.View, org.eclipse.draw2d.geometry.PrecisionPoint, org.eclipse.draw2d.geometry.PrecisionPoint)
+	 *
+	 * @param view
+	 * @param location_source
+	 * @param location_target
+	 * @throws NotAnEdgeException
+	 * @throws NotAValidLocationException
+	 */
+	public void setEdgeLocation(View view, PrecisionPoint location_source, PrecisionPoint location_target) throws NotAnEdgeException, NotAValidLocationException {
+		
+		// Check if the source is valid.
+		if (location_source != null) {
+			if (location_source.preciseX() > 1.0 && location_source.preciseX() < 0.0
+					&& location_source.preciseY() > 1.0 && location_source.preciseY() < 0.0)
+				throw new NotAValidLocationException();	
+			
+			if (location_source.preciseX() != 0.0 && location_source.preciseX() != 1.0)
+				if (location_source.preciseY() != 0.0 && location_source.preciseY() != 1.0)
+					throw new NotAValidLocationException();
+				
+		}
+		// Check if the target is valid.
+		if (location_target != null) {
+			if (location_target.preciseX() > 1.0 && location_target.preciseX() < 0.0
+					&& location_target.preciseY() > 1.0 && location_target.preciseY() < 0.0)
+				throw new NotAValidLocationException();	
+			
+			if (location_target.preciseX() != 0.0 && location_target.preciseX() != 1.0)
+				if (location_target.preciseY() != 0.0 && location_target.preciseY() != 1.0)
+					throw new NotAValidLocationException();
+			
+		}
+		
+		if (view instanceof Edge) {
+			// If the view is an instance of edge it's ok.
+			Edge edge = (Edge)view;
+			
+			if (location_source != null) {
+				IdentityAnchor ids = (IdentityAnchor) edge.getSourceAnchor();
+				// Create ID :
+				String n_ids = "("+location_source.preciseX()+","+location_source.preciseY()+")";
+				if (ids != null)
+					// Anchor already set.
+					ids.setId(n_ids);
+				else {
+					// Create Anchor.
+					final IdentityAnchor targetAnchor = NotationFactory.eINSTANCE.createIdentityAnchor();
+					targetAnchor.setId(n_ids);
+					edge.setSourceAnchor(targetAnchor);
+				}
+			}
+			
+			if (location_target != null) {
+				IdentityAnchor idt = (IdentityAnchor) edge.getTargetAnchor();
+				// Create ID :
+				String n_idt = "("+location_target.preciseX()+","+location_target.preciseY()+")";
+				if (idt != null)
+					// Anchor already set.
+					idt.setId(n_idt);
+				else {
+					// Create Anchor.
+					final IdentityAnchor targetAnchor = NotationFactory.eINSTANCE.createIdentityAnchor();
+					targetAnchor.setId(n_idt);
+					edge.setTargetAnchor(targetAnchor);
+				}
+			}
+			
+		}
+		else
+			throw new NotAnEdgeException();
 	}
 	
 	

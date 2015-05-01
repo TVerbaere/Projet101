@@ -9,21 +9,28 @@ Implémentation :
 ----------------
 ----------------
 
-+ UMLModelHelper		[Tests OK : TV]
-+ DafaultDiagramHandler		[Tests OK : TV] 
-+ ProjectFactory  		[?? : AR] .... aucun changement après appel, pas de projet créé ?
-+ PapyrusEditorFactory 		[?? : AR]
-+ DiagramFactory 		[?? : AR]
++ UMLModelHelper		[OK : TV]
++ DafaultDiagramHandler		[OK : TV] 
++ ProjectFactory  		[?? : AR] .... inutilisable ? + manque load
++ PapyrusEditorFactory 		[?? : AR] .... inutilisable ? + manque load
++ DiagramFactory 		[?? : AR] .... inutilisable ? + manque load
 
 
 Tests unitaires :
 -----------------
 -----------------
 + Tests unitaires Helper	[OK : TV]
-+ Tests unitaires Handlers	[OK : TV]
++ Tests unitaires Handlers	[OK : TV] - Tester les nouvelles méthodes !
 + Tests unitaires Factories	[non affecté]
 
-+ Tests d'intégrations		[en cours(50%) : AR]
--> Essayer de construire un diagramme de Sequence et un UseCase pour voir (Scenario avec une Class OK).
+Scénarios concrets :
+-------------
+-------------
++ Diagramme de Classe [OK : TV]
++ Diagramme de Séquence [en cours : TV]
++ Diagramme de UseCase [??]
 
+Autre :
+-------
+-------
 + Rapport (20%)

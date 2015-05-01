@@ -3,12 +3,14 @@ package org.eclipse.papyrus.diagramdrawer.handlers;
 import java.util.List;
 
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.PrecisionPoint;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.papyrus.diagramdrawer.exceptions.InvalidContainerException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NonExistantViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotAValidLocationException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotAValidSizeException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.NotAnEdgeException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.TargetOrSourceNotDrawnException;
@@ -23,7 +25,7 @@ import org.eclipse.uml2.uml.Element;
  * @author Allan RAKOTOARIVONY
  * @author Thibaud VERBAERE
  * 
- * @version 1.6
+ * @version 1.7
  *
  */
 public interface IDiagramHandler {
@@ -147,7 +149,7 @@ public interface IDiagramHandler {
 		public List<Element> getElementByName(String name);
 		
 		/**
-		 * Return the width of a view which name is given as parameter.
+		 * Returns the width of a view given as parameter.
 		 * @param view the view which we want to get his width
 		 * @return the width of the view
 		 * @throws NotDimensionedViewException if the view hasn't dimensions
@@ -155,7 +157,7 @@ public interface IDiagramHandler {
 		public int getWidth(View view) throws NotDimensionedViewException;
 		
 		/**
-		 * Return the height of a view which name is given as parameter.
+		 * Returns the height of a view given as parameter.
 		 * @param view the view which we want to get his height
 		 * @return the height of the view
 		 * @throws NotDimensionedViewException if the view hasn't dimensions
@@ -163,7 +165,7 @@ public interface IDiagramHandler {
 		public int getHeight(View view) throws NotDimensionedViewException;
 
 		/**
-		 * Change the height of a view which name is given as parameter.
+		 * Changes the height of a view given as parameter.
 		 * @param view the view which we want to change his height
 		 * @param newheight the newest value of the height
 		 * @throws NotResizableViewException if the view hasn't dimensions
@@ -172,7 +174,7 @@ public interface IDiagramHandler {
 		public void setHeight(View view, int newheight) throws NotResizableViewException, NotAValidSizeException;
 		
 		/**
-		 * Change the width of a view which name is given as parameter.
+		 * Changes the width of a view given as parameter.
 		 * @param view the view which we want to change his width
 		 * @param newheight the newest value of the width
 		 * @throws NotResizableViewException if the view hasn't dimensions
@@ -181,29 +183,55 @@ public interface IDiagramHandler {
 		public void setWidth(View view, int newwidth) throws NotResizableViewException, NotAValidSizeException;
 		
 		/**
-		 * Return the model of the diagram.
+		 * Returns the model of the diagram.
 		 * @return the model.
 		 */
 		public UmlModel getModel();
 
 		/**
-		 * Change the default location to display element.
+		 * Changes the default location to display element.
 		 * @param location the new default location
 		 * @throws NotAValidLocationException if the location is not valid
 		 */
 		public void setDefaultLocation(Point location) throws NotAValidLocationException;
 
 		/**
-		 * Return the default location to display element.
+		 * Returns the default location to display element.
 		 * @return the location
 		 */
 		public Point getDefaultLocation();
 		
 		/**
-		 * Check if an element is drawn on the diagram.
+		 * Checks if an element is drawn on the diagram.
 		 * @param element the element
 		 * @return True or False if the element is drawn
 		 */
 		public boolean isDrawn(Element element);
+		
+		/**
+		 * Moves an edge which name is given as parameter.
+		 * @param view the view of the edge
+		 * @param location_source null or the new location of the source
+		 * @param location_target null or the new location of the target
+		 * @throws NotAnEdgeException if the view given is not an edge
+		 * @throws NotAValidLocationException if locations are invalids
+		 */
+		public void setEdgeLocation(View view, PrecisionPoint location_source, PrecisionPoint location_target) throws NotAnEdgeException, NotAValidLocationException;
+		
+		/**
+		 * Returns the target location of the view given as parameter.
+		 * @param view the view of the edge
+		 * @return a precise location of the target
+		 * @throws NotAnEdgeException if the view given is not an edge
+		 */
+		public PrecisionPoint getTargetEdgeLocation(View view) throws NotAnEdgeException;
+		
+		/**
+		 * Returns the source location of the view given as parameter.
+		 * @param view the view of the edge
+		 * @return a precise location of the source
+		 * @throws NotAnEdgeException if the view given is not an edge
+		 */
+		public PrecisionPoint getSourceEdgeLocation(View view) throws NotAnEdgeException;
 
 }
