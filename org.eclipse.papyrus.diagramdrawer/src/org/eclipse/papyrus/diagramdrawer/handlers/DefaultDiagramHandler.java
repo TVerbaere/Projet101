@@ -37,6 +37,7 @@ import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.TargetOrSourceNotDrawnException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.UnmovableViewException;
+import org.eclipse.papyrus.diagramdrawer.utils.ExecutionException;
 import org.eclipse.papyrus.infra.core.resource.NotFoundException;
 import org.eclipse.papyrus.infra.gmfdiag.menu.utils.DeleteActionUtil;
 import org.eclipse.papyrus.uml.diagram.menu.actions.SizeAction;
@@ -501,6 +502,60 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 			throw new UnmovableViewException();
 		
 	}
+	
+	
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#setAbscisse(org.eclipse.gmf.runtime.notation.View, int)
+	 *
+	 * @param view
+	 * @param location
+	 * @throws UnmovableViewException
+	 * @throws NotAValidLocationException
+	 */
+	public void setAbscisse(View view, int location) throws UnmovableViewException, NotAValidLocationException {
+		if (location < 0)
+			throw new NotAValidLocationException();
+		// X can be set only if the view is an instance of Node. 
+		if (view instanceof Node) {
+			
+			LayoutConstraint sh = ((Node) view).getLayoutConstraint();
+			BoundsImpl bounds = ((BoundsImpl)sh);
+			// Change x :
+			bounds.setX(location);
+
+		}
+		else
+			throw new UnmovableViewException();
+		
+	}
+	
+	
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#setOrdonnee(org.eclipse.gmf.runtime.notation.View, int)
+	 *
+	 * @param view
+	 * @param location
+	 * @throws UnmovableViewException
+	 * @throws NotAValidLocationException
+	 */
+	public void setOrdonnee(View view, int location) throws UnmovableViewException, NotAValidLocationException {
+		if (location < 0)
+			throw new NotAValidLocationException();
+		// Y can be set only if the view is an instance of Node. 
+		if (view instanceof Node) {
+			
+			LayoutConstraint sh = ((Node) view).getLayoutConstraint();
+			BoundsImpl bounds = ((BoundsImpl)sh);
+			// Change y :
+			bounds.setY(location);
+
+		}
+		else
+			throw new UnmovableViewException();
+		
+	}
 
 	
 	/**
@@ -678,9 +733,6 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 					&& location_source.preciseY() > 1.0 && location_source.preciseY() < 0.0)
 				throw new NotAValidLocationException();	
 			
-			if (location_source.preciseX() != 0.0 && location_source.preciseX() != 1.0)
-				if (location_source.preciseY() != 0.0 && location_source.preciseY() != 1.0)
-					throw new NotAValidLocationException();
 				
 		}
 		// Check if the target is valid.
@@ -688,11 +740,7 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 			if (location_target.preciseX() > 1.0 && location_target.preciseX() < 0.0
 					&& location_target.preciseY() > 1.0 && location_target.preciseY() < 0.0)
 				throw new NotAValidLocationException();	
-			
-			if (location_target.preciseX() != 0.0 && location_target.preciseX() != 1.0)
-				if (location_target.preciseY() != 0.0 && location_target.preciseY() != 1.0)
-					throw new NotAValidLocationException();
-			
+
 		}
 		
 		if (view instanceof Edge) {
@@ -729,6 +777,34 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 				}
 			}
 			
+		}
+		else
+			throw new NotAnEdgeException();
+	}
+	
+	
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#reconnectEdge(org.eclipse.gmf.runtime.notation.View, org.eclipse.gmf.runtime.notation.View, org.eclipse.gmf.runtime.notation.View)
+	 *
+	 * @param Vedge
+	 * @param Vsource
+	 * @param Vtarget
+	 * @throws NotAnEdgeException
+	 * @throws ExecutionException
+	 */
+	public void reconnectEdge(View Vedge,View Vsource, View Vtarget) throws NotAnEdgeException, ExecutionException {
+		if (Vedge instanceof Edge) {
+			try {
+				Edge edge = (Edge)Vedge;
+				if (Vsource != null)
+					edge.setSource(Vsource);
+				if (Vtarget != null)
+					edge.setTarget(Vtarget);
+			}
+			catch (Exception e) {
+				throw new ExecutionException();
+			}
 		}
 		else
 			throw new NotAnEdgeException();
@@ -934,7 +1010,7 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	 * @return EditParts associated to the view
 	 * @throws NonExistantViewException if the view doesn't exist
 	 */
-	private List<EditPart> viewToEditParts(View view) throws NonExistantViewException {
+	public List<EditPart> viewToEditParts(View view) throws NonExistantViewException {
 		// Find the diagramGraphicalViewer of the diagram.
 		IDiagramGraphicalViewer viewer=(IDiagramGraphicalViewer)this.diagrameditPart.getViewer();
 		// Find the ID of the element.

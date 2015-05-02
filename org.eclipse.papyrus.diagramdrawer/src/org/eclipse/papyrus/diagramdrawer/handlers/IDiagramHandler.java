@@ -15,6 +15,7 @@ import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.TargetOrSourceNotDrawnException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.UnmovableViewException;
+import org.eclipse.papyrus.diagramdrawer.utils.ExecutionException;
 import org.eclipse.papyrus.uml.tools.model.UmlModel;
 import org.eclipse.uml2.uml.Element;
 
@@ -25,7 +26,7 @@ import org.eclipse.uml2.uml.Element;
  * @author Allan RAKOTOARIVONY
  * @author Thibaud VERBAERE
  * 
- * @version 1.7
+ * @version 1.8
  *
  */
 public interface IDiagramHandler {
@@ -135,6 +136,25 @@ public interface IDiagramHandler {
 		public void setLocation(View view,Point location) throws UnmovableViewException, NotAValidLocationException;
 		
 		/**
+		 * Change the ordonnee of the view given in parameter.
+		 * @param view The view to move
+		 * @param location the new ordonnee
+		 * @throws UnmovableViewException If the view cannot be moved
+		 * @throws NotAValidLocationException If the location is not valid 
+		 */
+		public void setOrdonnee(View view, int location) throws UnmovableViewException, NotAValidLocationException;
+		
+		/**
+		 * 
+		 * Change the abscisse of the view given in parameter.
+		 * @param view The view to move
+		 * @param location the new abscisse
+		 * @throws UnmovableViewException If the view cannot be moved
+		 * @throws NotAValidLocationException If the location is not valid 
+		 */
+		public void setAbscisse(View view, int location) throws UnmovableViewException, NotAValidLocationException;
+		
+		/**
 		 * Returns a list of all views representing the element which name is given as parameter.
 		 * @param name The name of the element which we want to get the views
 		 * @return A list of views.
@@ -234,4 +254,13 @@ public interface IDiagramHandler {
 		 */
 		public PrecisionPoint getSourceEdgeLocation(View view) throws NotAnEdgeException;
 
+		/**
+		 * Changes the source and/or the target of an edge whose the view is given as parameter.
+		 * @param Vedge the view of the edge
+		 * @param Vsource null or the view of the source
+		 * @param Vtarget null or the view of the target
+		 * @throws NotAnEdgeException  if the view given is not an edge
+		 * @throws ExecutionException if the operation is forbidden
+		 */
+		public void reconnectEdge(View Vedge,View Vsource, View Vtarget) throws NotAnEdgeException, ExecutionException;
 }
