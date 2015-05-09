@@ -246,9 +246,9 @@ public class Diagrams {
 					
 					// Draw messages :
 					View message_view = handler.draw(message, true);
-					View message1_view = handler.drawElementInside(interaction_view, message1, true);
-					View message11_view = handler.drawElementInside(interaction_view, message11, true);
-					View message111_view = handler.drawElementInside(interaction_view, message111, true);
+					View message1_view = handler.draw(message1, true);
+					View message11_view = handler.draw(message11, true);
+					View message111_view = handler.draw(message111, true);
 					
 					// Connect edges with good views :
 					handler.reconnectEdge(message_view, null, behavior);

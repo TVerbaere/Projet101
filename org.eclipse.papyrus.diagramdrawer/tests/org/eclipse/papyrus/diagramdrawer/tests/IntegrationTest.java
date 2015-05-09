@@ -1,22 +1,13 @@
 package org.eclipse.papyrus.diagramdrawer.tests;
 
-import static org.junit.Assert.assertEquals;
-
-import org.eclipse.draw2d.geometry.Point;
-import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.emf.transaction.util.TransactionUtil;
-import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.papyrus.diagramdrawer.exceptions.CreationCommandNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.InvalidContainerException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotAValidLocationException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.TargetOrSourceNotDrawnException;
-import org.eclipse.papyrus.diagramdrawer.factories.DiagramFactory;
 import org.eclipse.papyrus.diagramdrawer.factories.PapyrusEditorFactory;
 import org.eclipse.papyrus.diagramdrawer.factories.ProjectFactory;
-import org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler;
-import org.eclipse.papyrus.diagramdrawer.utils.DiagramType;
 import org.eclipse.papyrus.diagramdrawer.utils.EclipseProject;
 import org.eclipse.papyrus.diagramdrawer.utils.ExecutionException;
 import org.eclipse.papyrus.diagramdrawer.utils.PapyrusEditor;
@@ -25,9 +16,6 @@ import org.eclipse.papyrus.infra.core.resource.NotFoundException;
 import org.eclipse.papyrus.infra.core.services.ServiceException;
 import org.eclipse.papyrus.uml.tools.model.UmlModel;
 import org.eclipse.papyrus.uml.tools.model.UmlUtils;
-import org.eclipse.uml2.uml.Class;
-import org.eclipse.uml2.uml.Model;
-import org.eclipse.uml2.uml.Property;
 import org.junit.Test;
 
 public class IntegrationTest {

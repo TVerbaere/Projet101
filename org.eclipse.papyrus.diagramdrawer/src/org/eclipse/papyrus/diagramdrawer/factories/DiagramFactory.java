@@ -1,14 +1,11 @@
 package org.eclipse.papyrus.diagramdrawer.factories;
 
-import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
-import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.papyrus.commands.ICreationCommand;
 import org.eclipse.papyrus.diagramdrawer.exceptions.CreationCommandNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.handlers.DefaultDiagramHandler;
 import org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler;
 import org.eclipse.papyrus.diagramdrawer.utils.DiagramType;
-import org.eclipse.papyrus.diagramdrawer.utils.EclipseProject;
 import org.eclipse.papyrus.diagramdrawer.utils.ExecutionException;
 import org.eclipse.papyrus.diagramdrawer.utils.PapyrusEditor;
 import org.eclipse.papyrus.infra.core.resource.ModelSet;

@@ -729,16 +729,16 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 		
 		// Check if the source is valid.
 		if (location_source != null) {
-			if (location_source.preciseX() > 1.0 && location_source.preciseX() < 0.0
-					&& location_source.preciseY() > 1.0 && location_source.preciseY() < 0.0)
+			if (location_source.preciseX() > 1.0 || location_source.preciseX() < 0.0
+					&& location_source.preciseY() > 1.0 || location_source.preciseY() < 0.0)
 				throw new NotAValidLocationException();	
 			
 				
 		}
 		// Check if the target is valid.
 		if (location_target != null) {
-			if (location_target.preciseX() > 1.0 && location_target.preciseX() < 0.0
-					&& location_target.preciseY() > 1.0 && location_target.preciseY() < 0.0)
+			if (location_target.preciseX() > 1.0 || location_target.preciseX() < 0.0
+					&& location_target.preciseY() > 1.0 || location_target.preciseY() < 0.0)
 				throw new NotAValidLocationException();	
 
 		}

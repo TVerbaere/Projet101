@@ -10,10 +10,16 @@ Implémentation :
 ----------------
 
 + UMLModelHelper		[OK : TV]
-+ DafaultDiagramHandler		[OK : TV] 
-+ ProjectFactory  		[?? : AR] .... inutilisable ? + manque load
-+ PapyrusEditorFactory 		[?? : AR] .... inutilisable ? + manque load
-+ DiagramFactory 		[?? : AR] .... inutilisable ? + manque load
++ DefaultDiagramHandler		[OK : TV] 
++ ProjectFactory  		[?? : AR] -> manque load
++ PapyrusEditorFactory 		[?? : AR] -> manque load
++ DiagramFactory 		[?? : AR] -> manque load
+
+Problèmes à résoudre :
+---------------------
+---------------------
++ Cycle dans les dépendances lors de l'export du plugin
++ Impossible pour l'instance d'utiliser le plugin (WorkSpace is closed) -> Fichiers de conf pour lancer un eclipse headless ??
 
 
 Tests unitaires :
@@ -33,4 +39,4 @@ Scénarios concrets :
 Autre :
 -------
 -------
-+ Rapport (20%)
++ Rapport (70%)

@@ -1,6 +1,9 @@
 package org.eclipse.papyrus.diagramdrawer.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -30,8 +33,8 @@ import org.eclipse.papyrus.diagramdrawer.utils.PapyrusEditor;
 import org.eclipse.papyrus.infra.core.resource.NotFoundException;
 import org.eclipse.papyrus.infra.core.services.ServiceException;
 import org.eclipse.uml2.uml.AggregationKind;
-import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Association;
+import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Package;
 import org.junit.AfterClass;
@@ -413,32 +416,7 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 			}
 		});
 				
-	}
-	
-	
-	@Test
-	public void setEdgeLocationUnSuccessfulTest() {
-		ted.getCommandStack().execute(new RecordingCommand(ted) {
-			protected void doExecute() {
-				PrecisionPoint pp = new PrecisionPoint(-0.5,1.5);
-				boolean result = false;
-				
-				try {
-					handler.setEdgeLocation(drawn_association, pp, pp);
-					
-				} catch (NotAnEdgeException e) {
-					// Normally it's impossible !
-					assertTrue(false);
-				} catch (NotAValidLocationException e) {
-					result = true;
-				}
-				
-				assertTrue(result);
-			}
-		});
-				
-	}
-	
+	}	
 	
 	@Test
 	public void setEdgeLocationUnSuccessful2Test() {
@@ -455,6 +433,29 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 				} catch (NotAValidLocationException e) {
 					// Normally it's impossible !
 					assertTrue(false);
+				}
+				
+				assertTrue(result);
+			}
+		});
+				
+	}
+	
+	@Test
+	public void setEdgeLocationUnSuccessfulTest() {
+		ted.getCommandStack().execute(new RecordingCommand(ted) {
+			protected void doExecute() {
+				PrecisionPoint pp = new PrecisionPoint(-0.5,1.5);
+				boolean result = false;
+				
+				try {
+					handler.setEdgeLocation(drawn_association, pp, pp);
+					
+				} catch (NotAnEdgeException e) {
+					// Normally it's impossible !
+					assertTrue(false);
+				} catch (NotAValidLocationException e) {
+					result = true;
 				}
 				
 				assertTrue(result);

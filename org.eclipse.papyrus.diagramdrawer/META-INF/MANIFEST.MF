@@ -7,6 +7,7 @@ Bundle-Activator: org.eclipse.papyrus.diagramdrawer.Activator
 Bundle-Vendor: Thibaud VERBAERE & Allan RAKOTOARIVONY
 Require-Bundle: org.eclipse.papyrus.uml.tools,
  org.eclipse.gmf.runtime.emf.core,
+ org.eclipse.papyrus.infra.core,
  org.eclipse.core.resources;bundle-version="3.9.100",
  org.eclipse.ui.views.properties.tabbed;bundle-version="3.6.0",
  org.eclipse.ui.ide;bundle-version="3.10.100",
@@ -18,11 +19,11 @@ Require-Bundle: org.eclipse.papyrus.uml.tools,
  org.eclipse.papyrus.uml.diagram.usecase;bundle-version="1.1.0",
  org.eclipse.papyrus.uml.diagram.statemachine;bundle-version="1.1.0",
  org.eclipse.gef,
- org.junit;bundle-version="4.11.0",
  org.eclipse.swt,
  org.eclipse.papyrus.uml.diagram.deployment;bundle-version="1.1.0",
  org.eclipse.papyrus.uml.diagram.timing;bundle-version="1.1.0",
- org.eclipse.papyrus.uml.diagram.sequence;bundle-version="1.1.0"
+ org.eclipse.papyrus.uml.diagram.sequence;bundle-version="1.1.0",
+ org.junit;bundle-version="4.11.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.draw2d.geometry,
@@ -36,9 +37,6 @@ Import-Package: org.eclipse.draw2d.geometry,
  org.eclipse.gmf.runtime.notation,
  org.eclipse.gmf.runtime.notation.impl,
  org.eclipse.papyrus.commands,
- org.eclipse.papyrus.infra.core.editor,
- org.eclipse.papyrus.infra.core.resource,
- org.eclipse.papyrus.infra.core.services,
  org.eclipse.papyrus.infra.gmfdiag.menu.utils,
  org.eclipse.papyrus.uml.diagram.menu.actions,
  org.eclipse.uml2.uml
