@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_0-pYEPTGEeSBBoW5mwOFzw" name="model">
-  <packagedElement xmi:type="uml:Model" xmi:id="_7J0g4PTGEeSBBoW5mwOFzw" name="generated"/>
-  <packagedElement xmi:type="uml:Model" xmi:id="_7KyxQPTGEeSBBoW5mwOFzw" name="diagramdrawer">
-    <packagedElement xmi:type="uml:Package" xmi:id="_7Kz_YPTGEeSBBoW5mwOFzw" name="org">
-      <packagedElement xmi:type="uml:Package" xmi:id="_7K0mcPTGEeSBBoW5mwOFzw" name="eclipse">
-        <packagedElement xmi:type="uml:Package" xmi:id="_7K1NgPTGEeSBBoW5mwOFzw" name="papyrus">
-          <packagedElement xmi:type="uml:Package" xmi:id="_7K1NgfTGEeSBBoW5mwOFzw" name="diagramdrawer">
-            <packagedElement xmi:type="uml:Package" xmi:id="_7K10kPTGEeSBBoW5mwOFzw" name="handlers">
-              <packagedElement xmi:type="uml:Class" xmi:id="_7LR5cPTGEeSBBoW5mwOFzw" name="DefaultDiagramHandler" visibility="public">
-                <ownedComment xmi:type="uml:Comment" xmi:id="_7LTHkPTGEeSBBoW5mwOFzw">
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_d9DocPZKEeS1bO4bMzbjfg" name="model">
+  <packagedElement xmi:type="uml:Model" xmi:id="_0fON0PZKEeS1bO4bMzbjfg" name="generated"/>
+  <packagedElement xmi:type="uml:Model" xmi:id="_0fiW4PZKEeS1bO4bMzbjfg" name="diagramdrawer">
+    <packagedElement xmi:type="uml:Package" xmi:id="_0fi98PZKEeS1bO4bMzbjfg" name="org">
+      <packagedElement xmi:type="uml:Package" xmi:id="_0fi98fZKEeS1bO4bMzbjfg" name="eclipse">
+        <packagedElement xmi:type="uml:Package" xmi:id="_0fi98vZKEeS1bO4bMzbjfg" name="papyrus">
+          <packagedElement xmi:type="uml:Package" xmi:id="_0fjlAPZKEeS1bO4bMzbjfg" name="diagramdrawer">
+            <packagedElement xmi:type="uml:Package" xmi:id="_0fjlAfZKEeS1bO4bMzbjfg" name="helpers">
+              <packagedElement xmi:type="uml:Class" xmi:id="_0fkMEPZKEeS1bO4bMzbjfg" name="UmlModelHelper" visibility="public">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_0fkzIPZKEeS1bO4bMzbjfg">
+                  <body>
+ * Provides methods useful to modify a model.
+ * 
+ * @author Thibaud VERBAERE
+ *
+ </body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_0fwZUPZKEeS1bO4bMzbjfg" name="model" visibility="private" type="_0fvyQPZKEeS1bO4bMzbjfg" isUnique="false">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_0fxAYPZKEeS1bO4bMzbjfg">
+                    <body>
+	 * The UML model.
+	 </body>
+                  </ownedComment>
+                </ownedAttribute>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_0f6xYPZKEeS1bO4bMzbjfg" name="delete" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_0f7YcPZKEeS1bO4bMzbjfg">
+                    <body>
+	 * Deletes an element on the model referenced of this helper.
+	 * 
+	 * @param element
+	 *            the element to delete
+	 * 
+	 * @throws NotFoundException
+	 *             if the element cannot be found
+	 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_0f7_gPZKEeS1bO4bMzbjfg" name="element" type="_0fzcofZKEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+              </packagedElement>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Package" xmi:id="_4sUgYPZKEeS1bO4bMzbjfg" name="handlers">
+              <packagedElement xmi:type="uml:Class" xmi:id="_4sW8oPZKEeS1bO4bMzbjfg" name="DefaultDiagramHandler" visibility="public">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_4sYKwPZKEeS1bO4bMzbjfg">
                   <body>
  * Drawer used to handle elements on a diagram.
  * 
@@ -16,37 +49,37 @@
  *
  </body>
                 </ownedComment>
-                <ownedAttribute xmi:type="uml:Property" xmi:id="_7L6yoPTGEeSBBoW5mwOFzw" name="DEFAULT_LOCATION" visibility="protected" type="_7L0E8fTGEeSBBoW5mwOFzw" isUnique="false">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7L7ZsPTGEeSBBoW5mwOFzw">
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_4tNRMfZKEeS1bO4bMzbjfg" name="DEFAULT_LOCATION" visibility="protected" type="_4tNRMPZKEeS1bO4bMzbjfg" isUnique="false">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4tN4QPZKEeS1bO4bMzbjfg">
                     <body>
 	 * Default location to display element without location.
 	 </body>
                   </ownedComment>
                 </ownedAttribute>
-                <ownedAttribute xmi:type="uml:Property" xmi:id="_7L_EEPTGEeSBBoW5mwOFzw" name="model" visibility="protected" type="_7L-dAPTGEeSBBoW5mwOFzw" isUnique="false">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7L_rIPTGEeSBBoW5mwOFzw">
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_4tOfUPZKEeS1bO4bMzbjfg" name="model" visibility="protected" type="_0fvyQPZKEeS1bO4bMzbjfg" isUnique="false">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4tOfUfZKEeS1bO4bMzbjfg">
                     <body>
 	 * The diagram model.
 	 </body>
                   </ownedComment>
                 </ownedAttribute>
-                <ownedAttribute xmi:type="uml:Property" xmi:id="_7MCucPTGEeSBBoW5mwOFzw" name="diagrameditPart" visibility="protected" type="_7MCHYfTGEeSBBoW5mwOFzw" isUnique="false">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7MD8kPTGEeSBBoW5mwOFzw">
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_4tQ7kfZKEeS1bO4bMzbjfg" name="diagrameditPart" visibility="protected" type="_4tQ7kPZKEeS1bO4bMzbjfg" isUnique="false">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4tRioPZKEeS1bO4bMzbjfg">
                     <body>
 	 * the Diagram Edit Part that is handled.
 	 </body>
                   </ownedComment>
                 </ownedAttribute>
-                <ownedAttribute xmi:type="uml:Property" xmi:id="_7MG_4PTGEeSBBoW5mwOFzw" name="ted" visibility="protected" type="_7MGY0PTGEeSBBoW5mwOFzw" isUnique="false">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7MHm8PTGEeSBBoW5mwOFzw">
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_4tTX0PZKEeS1bO4bMzbjfg" name="ted" visibility="protected" type="_4tSwwvZKEeS1bO4bMzbjfg" isUnique="false">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4tT-4PZKEeS1bO4bMzbjfg">
                     <body>
 	 * Transactional editing domain.
 	 </body>
                   </ownedComment>
                 </ownedAttribute>
-                <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_7LwakPTGEeSBBoW5mwOFzw" name="DefaultDiagramHandler implements IDiagramHandler" client="_7LR5cPTGEeSBBoW5mwOFzw" supplier="_7LWK4PTGEeSBBoW5mwOFzw" contract="_7LWK4PTGEeSBBoW5mwOFzw"/>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7MUbQPTGEeSBBoW5mwOFzw" name="draw" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7MVCUPTGEeSBBoW5mwOFzw">
+                <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_4tLcAPZKEeS1bO4bMzbjfg" name="DefaultDiagramHandler implements IDiagramHandler" client="_4sW8oPZKEeS1bO4bMzbjfg" supplier="_4sYx0PZKEeS1bO4bMzbjfg" contract="_4sYx0PZKEeS1bO4bMzbjfg"/>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4tVNAPZKEeS1bO4bMzbjfg" name="draw" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4tVNAfZKEeS1bO4bMzbjfg">
                     <body>
 	 * 
 	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#draw(org.eclipse.uml2.uml.Element, boolean)
@@ -57,12 +90,12 @@
 	 * @throws TargetOrSourceNotDrawnException
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7MbI8PTGEeSBBoW5mwOFzw" type="_7MWQcfTGEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7McXEPTGEeSBBoW5mwOFzw" name="element" type="_7MKqQPTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7Mc-IPTGEeSBBoW5mwOFzw" name="cascade" type="_7MO7sPTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tWbIPZKEeS1bO4bMzbjfg" type="_4tV0EPZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tWbIfZKEeS1bO4bMzbjfg" name="element" type="_0fzcofZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tXCMPZKEeS1bO4bMzbjfg" name="cascade" type="_4tUl8fZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7MdlMPTGEeSBBoW5mwOFzw" name="draw" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7MdlMfTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4tXpQPZKEeS1bO4bMzbjfg" name="draw" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4tXpQfZKEeS1bO4bMzbjfg">
                     <body>
 	 * 
 	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#draw(org.eclipse.uml2.uml.Element, org.eclipse.draw2d.geometry.Point, boolean)
@@ -74,13 +107,13 @@
 	 * @throws NotAValidLocationException
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7MeMQPTGEeSBBoW5mwOFzw" type="_7MWQcfTGEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7MezUPTGEeSBBoW5mwOFzw" name="element" type="_7MKqQPTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7MezUfTGEeSBBoW5mwOFzw" name="location" type="_7L0E8fTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7MfaYPTGEeSBBoW5mwOFzw" name="cascade" type="_7MO7sPTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tYQUPZKEeS1bO4bMzbjfg" type="_4tV0EPZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tY3YPZKEeS1bO4bMzbjfg" name="element" type="_0fzcofZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tY3YfZKEeS1bO4bMzbjfg" name="location" type="_4tNRMPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tZecPZKEeS1bO4bMzbjfg" name="cascade" type="_4tUl8fZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7MgBcPTGEeSBBoW5mwOFzw" name="drawElementInside" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7MgogPTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4taFgPZKEeS1bO4bMzbjfg" name="drawElementInside" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4taFgfZKEeS1bO4bMzbjfg">
                     <body>
 	 * 
 	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#drawElementInside(org.eclipse.gmf.runtime.notation.View, org.eclipse.uml2.uml.Element, boolean)
@@ -92,13 +125,13 @@
 	 * @throws InvalidContainerException
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7MgogfTGEeSBBoW5mwOFzw" type="_7MWQcfTGEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7MhPkPTGEeSBBoW5mwOFzw" name="container" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7Mh2oPTGEeSBBoW5mwOFzw" name="element" type="_7MKqQPTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7MidsPTGEeSBBoW5mwOFzw" name="cascade" type="_7MO7sPTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4taskPZKEeS1bO4bMzbjfg" type="_4tV0EPZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4taskfZKEeS1bO4bMzbjfg" name="container" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tbToPZKEeS1bO4bMzbjfg" name="element" type="_0fzcofZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tb6sPZKEeS1bO4bMzbjfg" name="cascade" type="_4tUl8fZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7MjEwPTGEeSBBoW5mwOFzw" name="drawElementInsideAtLocation" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7MjEwfTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4tchwPZKEeS1bO4bMzbjfg" name="drawElementInsideAtLocation" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4tchwfZKEeS1bO4bMzbjfg">
                     <body>
 	 * 
 	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#drawElementInsideAtLocation(org.eclipse.gmf.runtime.notation.View, org.eclipse.uml2.uml.Element, org.eclipse.draw2d.geometry.Point, boolean)
@@ -111,14 +144,14 @@
 	 * @throws InvalidContainerException
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7Mjr0PTGEeSBBoW5mwOFzw" type="_7MWQcfTGEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7MkS4PTGEeSBBoW5mwOFzw" name="container" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7MkS4fTGEeSBBoW5mwOFzw" name="element" type="_7MKqQPTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7Mk58PTGEeSBBoW5mwOFzw" name="location" type="_7L0E8fTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7MlhAPTGEeSBBoW5mwOFzw" name="cascade" type="_7MO7sPTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tchwvZKEeS1bO4bMzbjfg" type="_4tV0EPZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tdI0PZKEeS1bO4bMzbjfg" name="container" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tdv4PZKEeS1bO4bMzbjfg" name="element" type="_0fzcofZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tdv4fZKEeS1bO4bMzbjfg" name="location" type="_4tNRMPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4teW8PZKEeS1bO4bMzbjfg" name="cascade" type="_4tUl8fZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7MmIEPTGEeSBBoW5mwOFzw" name="drawElementInside" visibility="private">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7MmIEfTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4te-APZKEeS1bO4bMzbjfg" name="drawElementInside" visibility="private">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4te-AfZKEeS1bO4bMzbjfg">
                     <body>
 	 * Draws the view of the element inside a view at a given location.
 	 * The view must be a valid location for the element which means that the view must be a parent representation of the element.
@@ -131,14 +164,14 @@
 	 * @return A view representing the drawn element
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7MmvIPTGEeSBBoW5mwOFzw" type="_7MWQcfTGEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7MnWMPTGEeSBBoW5mwOFzw" name="container" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7Mn9QPTGEeSBBoW5mwOFzw" name="element" type="_7MKqQPTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7MokUPTGEeSBBoW5mwOFzw" name="location" type="_7L0E8fTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7MpycPTGEeSBBoW5mwOFzw" name="cascade" type="_7MO7sPTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tflEPZKEeS1bO4bMzbjfg" type="_4tV0EPZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tflEfZKEeS1bO4bMzbjfg" name="container" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tgMIPZKEeS1bO4bMzbjfg" name="element" type="_0fzcofZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tgzMPZKEeS1bO4bMzbjfg" name="location" type="_4tNRMPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4thaQPZKEeS1bO4bMzbjfg" name="cascade" type="_4tUl8fZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7MrAkPTGEeSBBoW5mwOFzw" name="drawAll" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7MrAkfTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4tiBUPZKEeS1bO4bMzbjfg" name="drawAll" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4tiBUfZKEeS1bO4bMzbjfg">
                     <body>
 	 * 
 	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#drawAll(java.util.List, java.util.List, boolean)
@@ -151,22 +184,22 @@
 	 * @throws NotAValidLocationException
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7MrnoPTGEeSBBoW5mwOFzw" type="_7MWQcfTGEeSBBoW5mwOFzw" direction="return">
-                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7Muq8PTGEeSBBoW5mwOFzw"/>
-                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7MwgIPTGEeSBBoW5mwOFzw" value="*"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tioYPZKEeS1bO4bMzbjfg" type="_4tV0EPZKEeS1bO4bMzbjfg" direction="return">
+                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4tioYfZKEeS1bO4bMzbjfg"/>
+                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4tjPcPZKEeS1bO4bMzbjfg" value="*"/>
                   </ownedParameter>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7MxHMPTGEeSBBoW5mwOFzw" name="elements" type="_7MKqQPTGEeSBBoW5mwOFzw">
-                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7MxHMfTGEeSBBoW5mwOFzw"/>
-                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7MxuQPTGEeSBBoW5mwOFzw" value="*"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tjPcfZKEeS1bO4bMzbjfg" name="elements" type="_0fzcofZKEeS1bO4bMzbjfg">
+                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4tkdkPZKEeS1bO4bMzbjfg"/>
+                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4tkdkfZKEeS1bO4bMzbjfg" value="*"/>
                   </ownedParameter>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7MxuQfTGEeSBBoW5mwOFzw" name="locations" type="_7L0E8fTGEeSBBoW5mwOFzw">
-                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7MyVUPTGEeSBBoW5mwOFzw"/>
-                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7My8YPTGEeSBBoW5mwOFzw" value="*"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tkdkvZKEeS1bO4bMzbjfg" name="locations" type="_4tNRMPZKEeS1bO4bMzbjfg">
+                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4tlEoPZKEeS1bO4bMzbjfg"/>
+                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4tlEofZKEeS1bO4bMzbjfg" value="*"/>
                   </ownedParameter>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7My8YfTGEeSBBoW5mwOFzw" name="cascade" type="_7MO7sPTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tlrsPZKEeS1bO4bMzbjfg" name="cascade" type="_4tUl8fZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7MzjcPTGEeSBBoW5mwOFzw" name="autoSize" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7MzjcfTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4tmSwPZKEeS1bO4bMzbjfg" name="autoSize" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4tmSwfZKEeS1bO4bMzbjfg">
                     <body>
 	 * 
 	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#autoSize(org.eclipse.gmf.runtime.notation.View)
@@ -174,10 +207,10 @@
 	 * @param view
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7M0KgPTGEeSBBoW5mwOFzw" name="view" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tmSwvZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7M0xkPTGEeSBBoW5mwOFzw" name="delete" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7M1YoPTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4tm50PZKEeS1bO4bMzbjfg" name="delete" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4tm50fZKEeS1bO4bMzbjfg">
                     <body>
 	 * 
 	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#delete(org.eclipse.gmf.runtime.notation.View)
@@ -186,10 +219,10 @@
 	 * @throws NonExistantViewException
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7M1_sPTGEeSBBoW5mwOFzw" name="view" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tng4PZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7M2mwPTGEeSBBoW5mwOFzw" name="getViewByElement" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7M3N0PTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4toH8PZKEeS1bO4bMzbjfg" name="getViewByElement" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4toH8fZKEeS1bO4bMzbjfg">
                     <body>
 	 * 
 	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getViewByElement(org.eclipse.uml2.uml.Element)
@@ -198,14 +231,14 @@
 	 * @return
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7M304PTGEeSBBoW5mwOFzw" type="_7MWQcfTGEeSBBoW5mwOFzw" direction="return">
-                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7M4b8PTGEeSBBoW5mwOFzw"/>
-                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7M5DAPTGEeSBBoW5mwOFzw" value="*"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tovAPZKEeS1bO4bMzbjfg" type="_4tV0EPZKEeS1bO4bMzbjfg" direction="return">
+                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4tovAfZKEeS1bO4bMzbjfg"/>
+                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4tovAvZKEeS1bO4bMzbjfg" value="*"/>
                   </ownedParameter>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7M5qEPTGEeSBBoW5mwOFzw" name="element" type="_7MKqQPTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tpWEPZKEeS1bO4bMzbjfg" name="element" type="_0fzcofZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7M8GUPTGEeSBBoW5mwOFzw" name="getElementViewByName" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7M8GUfTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4tqkMPZKEeS1bO4bMzbjfg" name="getElementViewByName" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4tqkMfZKEeS1bO4bMzbjfg">
                     <body>
 	 * 
 	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getElementViewByName(java.lang.String)
@@ -214,14 +247,14 @@
 	 * @return
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7M8tYPTGEeSBBoW5mwOFzw" type="_7MWQcfTGEeSBBoW5mwOFzw" direction="return">
-                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7M9UcPTGEeSBBoW5mwOFzw"/>
-                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7M9UcfTGEeSBBoW5mwOFzw" value="*"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4trLQPZKEeS1bO4bMzbjfg" type="_4tV0EPZKEeS1bO4bMzbjfg" direction="return">
+                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4trLQfZKEeS1bO4bMzbjfg"/>
+                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4tryUPZKEeS1bO4bMzbjfg" value="*"/>
                   </ownedParameter>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7M97gPTGEeSBBoW5mwOFzw" name="name" type="_7M7fQPTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tryUfZKEeS1bO4bMzbjfg" name="name" type="_4tp9IvZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7M-ikPTGEeSBBoW5mwOFzw" name="getElementByName" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7M-ikfTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4tsZYPZKEeS1bO4bMzbjfg" name="getElementByName" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4tsZYfZKEeS1bO4bMzbjfg">
                     <body>
 	 * 
 	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getElementByName(java.lang.String)
@@ -230,14 +263,14 @@
 	 * @return
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7M_JoPTGEeSBBoW5mwOFzw" type="_7MKqQPTGEeSBBoW5mwOFzw" direction="return">
-                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7M_JofTGEeSBBoW5mwOFzw"/>
-                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7M_wsPTGEeSBBoW5mwOFzw" value="*"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4ttAcPZKEeS1bO4bMzbjfg" type="_0fzcofZKEeS1bO4bMzbjfg" direction="return">
+                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4ttngPZKEeS1bO4bMzbjfg"/>
+                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4ttngfZKEeS1bO4bMzbjfg" value="*"/>
                   </ownedParameter>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NAXwPTGEeSBBoW5mwOFzw" name="name" type="_7M7fQPTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4ttngvZKEeS1bO4bMzbjfg" name="name" type="_4tp9IvZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7NAXwfTGEeSBBoW5mwOFzw" name="getLocation" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7NA-0PTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4tuOkPZKEeS1bO4bMzbjfg" name="getLocation" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4tuOkfZKEeS1bO4bMzbjfg">
                     <body>
 	 * 
 	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getLocation(org.eclipse.gmf.runtime.notation.View)
@@ -247,11 +280,11 @@
 	 * @throws LocationNotFoundException
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NBl4PTGEeSBBoW5mwOFzw" type="_7L0E8fTGEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NBl4fTGEeSBBoW5mwOFzw" name="view" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tu1oPZKEeS1bO4bMzbjfg" type="_4tNRMPZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tvcsPZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7NCM8PTGEeSBBoW5mwOFzw" name="setLocation" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7NC0APTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4tvcsfZKEeS1bO4bMzbjfg" name="setLocation" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4twDwPZKEeS1bO4bMzbjfg">
                     <body>
 	 * 
 	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#setLocation(org.eclipse.gmf.runtime.notation.View, org.eclipse.draw2d.geometry.Point)
@@ -262,11 +295,41 @@
 	 * @throws NotAValidLocationException
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NDbEPTGEeSBBoW5mwOFzw" name="view" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NDbEfTGEeSBBoW5mwOFzw" name="location" type="_7L0E8fTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4twDwfZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4twq0PZKEeS1bO4bMzbjfg" name="location" type="_4tNRMPZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7NECIPTGEeSBBoW5mwOFzw" name="getWidth" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7NEpMPTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4txR4fZKEeS1bO4bMzbjfg" name="setAbscisse" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4txR4vZKEeS1bO4bMzbjfg">
+                    <body>
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#setAbscisse(org.eclipse.gmf.runtime.notation.View, int)
+	 *
+	 * @param view
+	 * @param location
+	 * @throws UnmovableViewException
+	 * @throws NotAValidLocationException
+	 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tx48PZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tygAPZKEeS1bO4bMzbjfg" name="location" type="_4txR4PZKEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4tygAfZKEeS1bO4bMzbjfg" name="setOrdonnee" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4tygAvZKEeS1bO4bMzbjfg">
+                    <body>
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#setOrdonnee(org.eclipse.gmf.runtime.notation.View, int)
+	 *
+	 * @param view
+	 * @param location
+	 * @throws UnmovableViewException
+	 * @throws NotAValidLocationException
+	 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tzHEPZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4tzuIPZKEeS1bO4bMzbjfg" name="location" type="_4txR4PZKEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4tzuIfZKEeS1bO4bMzbjfg" name="getWidth" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4t0VMPZKEeS1bO4bMzbjfg">
                     <body>
 	 * 
 	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getWidth(org.eclipse.gmf.runtime.notation.View)
@@ -276,11 +339,11 @@
 	 * @throws NotDimensionedViewException
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NFQQPTGEeSBBoW5mwOFzw" type="_7NEpMfTGEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NF3UPTGEeSBBoW5mwOFzw" name="view" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4t0VMfZKEeS1bO4bMzbjfg" type="_4txR4PZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4t08QPZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7NGeYPTGEeSBBoW5mwOFzw" name="getHeight" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7NGeYfTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4t1jUPZKEeS1bO4bMzbjfg" name="getHeight" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4t1jUfZKEeS1bO4bMzbjfg">
                     <body>
 	 * 
 	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getHeight(org.eclipse.gmf.runtime.notation.View)
@@ -290,11 +353,11 @@
 	 * @throws NotDimensionedViewException
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NHFcPTGEeSBBoW5mwOFzw" type="_7NEpMfTGEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NHsgPTGEeSBBoW5mwOFzw" name="view" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4t2KYPZKEeS1bO4bMzbjfg" type="_4txR4PZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4t2xcPZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7NITkPTGEeSBBoW5mwOFzw" name="setHeight" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7NITkfTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4t3YgPZKEeS1bO4bMzbjfg" name="setHeight" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4t3YgfZKEeS1bO4bMzbjfg">
                     <body>
 	 * 
 	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#setHeight(org.eclipse.gmf.runtime.notation.View, int)
@@ -305,11 +368,11 @@
 	 * @throws NotAValidSizeException
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NI6oPTGEeSBBoW5mwOFzw" name="view" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NJhsPTGEeSBBoW5mwOFzw" name="newheight" type="_7NEpMfTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4t3_kPZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4t4moPZKEeS1bO4bMzbjfg" name="newheight" type="_4txR4PZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7NKIwPTGEeSBBoW5mwOFzw" name="setWidth" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7NKIwfTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4t5NsPZKEeS1bO4bMzbjfg" name="setWidth" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4t5NsfZKEeS1bO4bMzbjfg">
                     <body>
 	 * 
 	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#setWidth(org.eclipse.gmf.runtime.notation.View, int)
@@ -320,11 +383,73 @@
 	 * @throws NotAValidSizeException
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NKv0PTGEeSBBoW5mwOFzw" name="view" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NLW4PTGEeSBBoW5mwOFzw" name="newwidth" type="_7NEpMfTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4t50wPZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4t6b0PZKEeS1bO4bMzbjfg" name="newwidth" type="_4txR4PZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7NL98PTGEeSBBoW5mwOFzw" name="getModel" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7NL98fTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4t7C4PZKEeS1bO4bMzbjfg" name="getSourceEdgeLocation" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4t7C4fZKEeS1bO4bMzbjfg">
+                    <body>
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getSourceEdgeLocation(org.eclipse.gmf.runtime.notation.View)
+	 *
+	 * @param view
+	 * @return
+	 * @throws NotAnEdgeException
+	 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4t7p8fZKEeS1bO4bMzbjfg" type="_4t7p8PZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4t8RAPZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4t8RAfZKEeS1bO4bMzbjfg" name="getTargetEdgeLocation" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4t8RAvZKEeS1bO4bMzbjfg">
+                    <body>
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getTargetEdgeLocation(org.eclipse.gmf.runtime.notation.View)
+	 *
+	 * @param view
+	 * @return
+	 * @throws NotAnEdgeException
+	 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4t84EPZKEeS1bO4bMzbjfg" type="_4t7p8PZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4t9fIPZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4t9fIfZKEeS1bO4bMzbjfg" name="setEdgeLocation" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4t-GMPZKEeS1bO4bMzbjfg">
+                    <body>
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#setEdgeLocation(org.eclipse.gmf.runtime.notation.View, org.eclipse.draw2d.geometry.PrecisionPoint, org.eclipse.draw2d.geometry.PrecisionPoint)
+	 *
+	 * @param view
+	 * @param location_source
+	 * @param location_target
+	 * @throws NotAnEdgeException
+	 * @throws NotAValidLocationException
+	 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4t-GMfZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4t-tQPZKEeS1bO4bMzbjfg" name="location_source" type="_4t7p8PZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4t-tQfZKEeS1bO4bMzbjfg" name="location_target" type="_4t7p8PZKEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4t_UUPZKEeS1bO4bMzbjfg" name="reconnectEdge" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4t_UUfZKEeS1bO4bMzbjfg">
+                    <body>
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#reconnectEdge(org.eclipse.gmf.runtime.notation.View, org.eclipse.gmf.runtime.notation.View, org.eclipse.gmf.runtime.notation.View)
+	 *
+	 * @param Vedge
+	 * @param Vsource
+	 * @param Vtarget
+	 * @throws NotAnEdgeException
+	 * @throws ExecutionException
+	 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4t_7YPZKEeS1bO4bMzbjfg" name="Vedge" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4uAicPZKEeS1bO4bMzbjfg" name="Vsource" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4uAicfZKEeS1bO4bMzbjfg" name="Vtarget" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4uBJgPZKEeS1bO4bMzbjfg" name="getModel" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4uBJgfZKEeS1bO4bMzbjfg">
                     <body>
 	 * 
 	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getModel()
@@ -332,10 +457,10 @@
 	 * @return
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NMlAPTGEeSBBoW5mwOFzw" type="_7L-dAPTGEeSBBoW5mwOFzw" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4uBwkPZKEeS1bO4bMzbjfg" type="_0fvyQPZKEeS1bO4bMzbjfg" direction="return"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7NNMEPTGEeSBBoW5mwOFzw" name="getDefaultLocation" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7NNMEfTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4uBwkfZKEeS1bO4bMzbjfg" name="getDefaultLocation" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4uBwkvZKEeS1bO4bMzbjfg">
                     <body>
 	 * 
 	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getDefaultLocation()
@@ -343,10 +468,10 @@
 	 * @return
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NNzIPTGEeSBBoW5mwOFzw" type="_7L0E8fTGEeSBBoW5mwOFzw" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4uCXoPZKEeS1bO4bMzbjfg" type="_4tNRMPZKEeS1bO4bMzbjfg" direction="return"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7NOaMPTGEeSBBoW5mwOFzw" name="setDefaultLocation" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7NOaMfTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4uC-sPZKEeS1bO4bMzbjfg" name="setDefaultLocation" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4uC-sfZKEeS1bO4bMzbjfg">
                     <body>
 	 * 
 	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#setDefaultLocation(org.eclipse.draw2d.geometry.Point)
@@ -355,10 +480,23 @@
 	 * @throws NotAValidLocationException
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NPoUPTGEeSBBoW5mwOFzw" name="location" type="_7L0E8fTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4uDlwPZKEeS1bO4bMzbjfg" name="location" type="_4tNRMPZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7NQ2cPTGEeSBBoW5mwOFzw" name="getElementByName" visibility="private">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7NQ2cfTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4uDlwfZKEeS1bO4bMzbjfg" name="isDrawn" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4uEM0PZKEeS1bO4bMzbjfg">
+                    <body>
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#isDrawn(org.eclipse.uml2.uml.Element)
+	 *
+	 * @param element
+	 * @return
+	 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4uEM0fZKEeS1bO4bMzbjfg" type="_4tUl8fZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4uEz4PZKEeS1bO4bMzbjfg" name="element" type="_0fzcofZKEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4uFa8PZKEeS1bO4bMzbjfg" name="getElementByName" visibility="private">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4uFa8fZKEeS1bO4bMzbjfg">
                     <body>
 	 * Return all elements named by a specific name and contained in an element father.
 	 * 
@@ -367,15 +505,15 @@
 	 * @return a list of element named &quot;name&quot;
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NRdgPTGEeSBBoW5mwOFzw" type="_7MKqQPTGEeSBBoW5mwOFzw" direction="return">
-                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7NSEkPTGEeSBBoW5mwOFzw"/>
-                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7NSEkfTGEeSBBoW5mwOFzw" value="*"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4uGCAPZKEeS1bO4bMzbjfg" type="_0fzcofZKEeS1bO4bMzbjfg" direction="return">
+                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4uGCAfZKEeS1bO4bMzbjfg"/>
+                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4uGCAvZKEeS1bO4bMzbjfg" value="*"/>
                   </ownedParameter>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NSroPTGEeSBBoW5mwOFzw" name="name" type="_7M7fQPTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NTSsPTGEeSBBoW5mwOFzw" name="elem" type="_7MKqQPTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4uGpEPZKEeS1bO4bMzbjfg" name="name" type="_4tp9IvZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4uGpEfZKEeS1bO4bMzbjfg" name="elem" type="_0fzcofZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7NT5wPTGEeSBBoW5mwOFzw" name="simpleDraw" visibility="private">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7NT5wfTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4uHQIPZKEeS1bO4bMzbjfg" name="simpleDraw" visibility="private">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4uH3MPZKEeS1bO4bMzbjfg">
                     <body>
 	 * Draw an element at a specific location in a view father.
 	 * 
@@ -387,13 +525,13 @@
 	 * @throws NotAValidLocationException if the location is not valid
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NUg0PTGEeSBBoW5mwOFzw" type="_7MWQcfTGEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NVH4PTGEeSBBoW5mwOFzw" name="element" type="_7MKqQPTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NVH4fTGEeSBBoW5mwOFzw" name="location" type="_7L0E8fTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NVu8PTGEeSBBoW5mwOFzw" name="father" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4uH3MfZKEeS1bO4bMzbjfg" type="_4tV0EPZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4uIeQPZKEeS1bO4bMzbjfg" name="element" type="_0fzcofZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4uIeQfZKEeS1bO4bMzbjfg" name="location" type="_4tNRMPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4uJFUPZKEeS1bO4bMzbjfg" name="father" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7NWWAPTGEeSBBoW5mwOFzw" name="getElementViewByName" visibility="private">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7NW9EPTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4uJsYPZKEeS1bO4bMzbjfg" name="getElementViewByName" visibility="private">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4uJsYfZKEeS1bO4bMzbjfg">
                     <body>
 	 * Return all view which contains an element named by a specific name
 	 * and contained in an element father.
@@ -403,15 +541,15 @@
 	 * @return a list of element named &quot;name&quot;
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NW9EfTGEeSBBoW5mwOFzw" type="_7MWQcfTGEeSBBoW5mwOFzw" direction="return">
-                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7NXkIPTGEeSBBoW5mwOFzw"/>
-                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7NXkIfTGEeSBBoW5mwOFzw" value="*"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4uKTcPZKEeS1bO4bMzbjfg" type="_4tV0EPZKEeS1bO4bMzbjfg" direction="return">
+                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4uKTcfZKEeS1bO4bMzbjfg"/>
+                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4uKTcvZKEeS1bO4bMzbjfg" value="*"/>
                   </ownedParameter>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NYLMPTGEeSBBoW5mwOFzw" name="name" type="_7M7fQPTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NYyQPTGEeSBBoW5mwOFzw" name="elem" type="_7MKqQPTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4uK6gPZKEeS1bO4bMzbjfg" name="name" type="_4tp9IvZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4uK6gfZKEeS1bO4bMzbjfg" name="elem" type="_0fzcofZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7NZZUPTGEeSBBoW5mwOFzw" name="viewToEditParts" visibility="private">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7NZZUfTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4uLhkPZKEeS1bO4bMzbjfg" name="viewToEditParts" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4uMIoPZKEeS1bO4bMzbjfg">
                     <body>
 	 * Convert a view to their EditParts.
 	 * 
@@ -420,25 +558,14 @@
 	 * @throws NonExistantViewException if the view doesn't exist
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7Nb1kPTGEeSBBoW5mwOFzw" type="_7NbOgPTGEeSBBoW5mwOFzw" direction="return">
-                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7Nb1kfTGEeSBBoW5mwOFzw"/>
-                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7NccoPTGEeSBBoW5mwOFzw" value="*"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4uN90fZKEeS1bO4bMzbjfg" type="_4uN90PZKEeS1bO4bMzbjfg" direction="return">
+                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4uOk4PZKEeS1bO4bMzbjfg"/>
+                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4uOk4fZKEeS1bO4bMzbjfg" value="*"/>
                   </ownedParameter>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NdDsPTGEeSBBoW5mwOFzw" name="view" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4uPL8PZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7NdqwPTGEeSBBoW5mwOFzw" name="isDrawn" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7NdqwfTGEeSBBoW5mwOFzw">
-                    <body>
-	 * Check if an element is drawn on the diagram.
-	 * @param element the element
-	 * @return True or False if the element is drawn
-	 </body>
-                  </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7Ne44PTGEeSBBoW5mwOFzw" type="_7MO7sPTGEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7Nff8PTGEeSBBoW5mwOFzw" name="element" type="_7MKqQPTGEeSBBoW5mwOFzw"/>
-                </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7NgHAPTGEeSBBoW5mwOFzw" name="isValidLocation" visibility="private">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7NguEPTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4uPzAPZKEeS1bO4bMzbjfg" name="isValidLocation" visibility="private">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4uQaEPZKEeS1bO4bMzbjfg">
                     <body>
 	 * Check if the location is valid.
 	 * A location is valid if x and y are positives.
@@ -446,31 +573,31 @@
 	 * @return True | False
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7NhVIPTGEeSBBoW5mwOFzw" type="_7MO7sPTGEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7Nh8MPTGEeSBBoW5mwOFzw" name="location" type="_7L0E8fTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4uQaEfZKEeS1bO4bMzbjfg" type="_4tUl8fZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4uRBIPZKEeS1bO4bMzbjfg" name="location" type="_4tNRMPZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7OC5kPTGEeSBBoW5mwOFzw" name="autoSize"/>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7OrLsPTGEeSBBoW5mwOFzw" name="autoSize">
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7Otn8PTGEeSBBoW5mwOFzw">
-                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7OuPAPTGEeSBBoW5mwOFzw" value="1"/>
-                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7Ou2EPTGEeSBBoW5mwOFzw" value="1"/>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4u4sMPZKEeS1bO4bMzbjfg" name="autoSize"/>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4u-LwPZKEeS1bO4bMzbjfg" name="autoSize">
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4u-y0PZKEeS1bO4bMzbjfg">
+                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4u_Z4PZKEeS1bO4bMzbjfg" value="1"/>
+                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4u_Z4fZKEeS1bO4bMzbjfg" value="1"/>
                   </ownedParameter>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7OxSUPTGEeSBBoW5mwOFzw" name="autoSize">
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7OygcPTGEeSBBoW5mwOFzw" name="v">
-                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7OzHgPTGEeSBBoW5mwOFzw" value="1"/>
-                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7OzukPTGEeSBBoW5mwOFzw" value="1"/>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4vAoAPZKEeS1bO4bMzbjfg" name="autoSize">
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4vBPEPZKEeS1bO4bMzbjfg" name="v">
+                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4vB2IPZKEeS1bO4bMzbjfg" value="1"/>
+                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4vB2IfZKEeS1bO4bMzbjfg" value="1"/>
                   </ownedParameter>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7O2K0PTGEeSBBoW5mwOFzw" name="autoSize">
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7O3Y8PTGEeSBBoW5mwOFzw" name="v" type="_7MWQcfTGEeSBBoW5mwOFzw">
-                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7O4AAPTGEeSBBoW5mwOFzw" value="1"/>
-                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7O4nEPTGEeSBBoW5mwOFzw" value="1"/>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4vDEQPZKEeS1bO4bMzbjfg" name="autoSize">
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4vDrUPZKEeS1bO4bMzbjfg" name="v" type="_4tV0EPZKEeS1bO4bMzbjfg">
+                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4vESYPZKEeS1bO4bMzbjfg" value="1"/>
+                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4vESYfZKEeS1bO4bMzbjfg" value="1"/>
                   </ownedParameter>
                 </ownedOperation>
               </packagedElement>
-              <packagedElement xmi:type="uml:Interface" xmi:id="_7LWK4PTGEeSBBoW5mwOFzw" name="IDiagramHandler" visibility="public">
-                <ownedComment xmi:type="uml:Comment" xmi:id="_7NuJcPTGEeSBBoW5mwOFzw">
+              <packagedElement xmi:type="uml:Interface" xmi:id="_4sYx0PZKEeS1bO4bMzbjfg" name="IDiagramHandler" visibility="public">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_4uo0kPZKEeS1bO4bMzbjfg">
                   <body>
  * Provides methods to draw elements inside a diagram.
  * A diagram handler is meant to handle one diagram.
@@ -478,21 +605,21 @@
  * @author Allan RAKOTOARIVONY
  * @author Thibaud VERBAERE
  * 
- * @version 1.6
+ * @version 1.8
  *
  </body>
                 </ownedComment>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7NuwgPTGEeSBBoW5mwOFzw" name="autoSize" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7NvXkPTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4upboPZKEeS1bO4bMzbjfg" name="autoSize" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4upbofZKEeS1bO4bMzbjfg">
                     <body>
 		 * Sets the size of the view v to the maximum size of its contents.
 		 * @param v the view
 		 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7OqkoPTGEeSBBoW5mwOFzw" name="v" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4u9ksPZKEeS1bO4bMzbjfg" name="v" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7O6cQPTGEeSBBoW5mwOFzw" name="draw" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7O7DUPTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4vFggPZKEeS1bO4bMzbjfg" name="draw" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4vFggfZKEeS1bO4bMzbjfg">
                     <body>
 		 * Draws the requested element into the handled diagram.
 		 * If the element is an inner element (for example properties inside a class),
@@ -505,12 +632,12 @@
 		 * @throws TargetOrSourceNotDrawnException if the element to draw is a relationship and the source or the target element is not drawn
 		 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7O_UwPTGEeSBBoW5mwOFzw" type="_7MWQcfTGEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7PENQPTGEeSBBoW5mwOFzw" name="element" type="_7MKqQPTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7PJFwPTGEeSBBoW5mwOFzw" name="cascade" type="_7MO7sPTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4vH8wPZKEeS1bO4bMzbjfg" type="_4tV0EPZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4vLAEPZKEeS1bO4bMzbjfg" name="element" type="_0fzcofZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4vODYPZKEeS1bO4bMzbjfg" name="cascade" type="_4tUl8fZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7PN-QPTGEeSBBoW5mwOFzw" name="draw" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7POlUPTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4vRGsPZKEeS1bO4bMzbjfg" name="draw" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4vRGsfZKEeS1bO4bMzbjfg">
                     <body>
 		 * Draws the requested element into the handled diagram at the given position.
 		 * If the element is an inner element (for example properties inside a class),the location will be ignored and
@@ -525,13 +652,13 @@
 		 * @throws NotAValidLocationException 
 		 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7PRooPTGEeSBBoW5mwOFzw" type="_7MWQcfTGEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7PWhIPTGEeSBBoW5mwOFzw" name="element" type="_7MKqQPTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7PaykPTGEeSBBoW5mwOFzw" name="location" type="_7L0E8fTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7PfrEPTGEeSBBoW5mwOFzw" name="cascade" type="_7MO7sPTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4vTi8PZKEeS1bO4bMzbjfg" type="_4tV0EPZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4vXNUPZKEeS1bO4bMzbjfg" name="element" type="_0fzcofZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4vaQoPZKEeS1bO4bMzbjfg" name="location" type="_4tNRMPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4vd7APZKEeS1bO4bMzbjfg" name="cascade" type="_4tUl8fZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7PkjkPTGEeSBBoW5mwOFzw" name="drawElementInside" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7PlKoPTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4vizgPZKEeS1bO4bMzbjfg" name="drawElementInside" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4vizgfZKEeS1bO4bMzbjfg">
                     <body>
 		 * Draws the view of the element inside a view.
 		 * The view must be a valid location for the element which means that the view must be a parent representation of the element.
@@ -543,13 +670,13 @@
 		 * @return A view representing the drawn element
 		 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7Po1APTGEeSBBoW5mwOFzw" type="_7MWQcfTGEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7PttgPTGEeSBBoW5mwOFzw" name="container" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7PzNEPTGEeSBBoW5mwOFzw" name="element" type="_7MKqQPTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7c0VYPTGEeSBBoW5mwOFzw" name="cascade" type="_7MO7sPTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4vl20PZKEeS1bO4bMzbjfg" type="_4tV0EPZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4vphMPZKEeS1bO4bMzbjfg" name="container" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4vtLkPZKEeS1bO4bMzbjfg" name="element" type="_0fzcofZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4vw18PZKEeS1bO4bMzbjfg" name="cascade" type="_4tUl8fZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7c5N4PTGEeSBBoW5mwOFzw" name="drawElementInsideAtLocation" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7c508PTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4v0gUPZKEeS1bO4bMzbjfg" name="drawElementInsideAtLocation" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4v0gUfZKEeS1bO4bMzbjfg">
                     <body>
 		 * Draws the view of the element inside a view at a given location.
 		 * The view must be a valid location for the element which means that the view must be a parent representation of the element.
@@ -562,14 +689,14 @@
 		 * @return A view representing the drawn element
 		 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7c9fUPTGEeSBBoW5mwOFzw" type="_7MWQcfTGEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7dCX0PTGEeSBBoW5mwOFzw" name="container" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7dHQUPTGEeSBBoW5mwOFzw" name="element" type="_7MKqQPTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7dLhwPTGEeSBBoW5mwOFzw" name="location" type="_7L0E8fTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7dQaQPTGEeSBBoW5mwOFzw" name="cascade" type="_7MO7sPTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4v3joPZKEeS1bO4bMzbjfg" type="_4tV0EPZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4v6m8PZKEeS1bO4bMzbjfg" name="container" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4v-RUPZKEeS1bO4bMzbjfg" name="element" type="_0fzcofZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4wBUoPZKEeS1bO4bMzbjfg" name="location" type="_4tNRMPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4wE_APZKEeS1bO4bMzbjfg" name="cascade" type="_4tUl8fZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7dUrsPTGEeSBBoW5mwOFzw" name="drawAll" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7dVSwPTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4wJQcPZKEeS1bO4bMzbjfg" name="drawAll" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4wJ3gPZKEeS1bO4bMzbjfg">
                     <body>
 		 * Draws all elements at their locations.
 		 * If an view of an element overlaps the location of another view, it will not be drawn.
@@ -581,22 +708,22 @@
 		 * @return A list of the drawn views
 		 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7dY9IPTGEeSBBoW5mwOFzw" type="_7MWQcfTGEeSBBoW5mwOFzw" direction="return">
-                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7ddOkPTGEeSBBoW5mwOFzw"/>
-                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7dfDwPTGEeSBBoW5mwOFzw" value="*"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4wMTwPZKEeS1bO4bMzbjfg" type="_4tV0EPZKEeS1bO4bMzbjfg" direction="return">
+                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4wOwAPZKEeS1bO4bMzbjfg"/>
+                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4wP-IPZKEeS1bO4bMzbjfg" value="*"/>
                   </ownedParameter>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7dg48PTGEeSBBoW5mwOFzw" name="elements" type="_7MKqQPTGEeSBBoW5mwOFzw">
-                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7dlKYPTGEeSBBoW5mwOFzw"/>
-                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7dm_kPTGEeSBBoW5mwOFzw" value="*"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4wRMQPZKEeS1bO4bMzbjfg" name="elements" type="_0fzcofZKEeS1bO4bMzbjfg">
+                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4wTogPZKEeS1bO4bMzbjfg"/>
+                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4wU2oPZKEeS1bO4bMzbjfg" value="*"/>
                   </ownedParameter>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7do0wPTGEeSBBoW5mwOFzw" name="locations" type="_7L0E8fTGEeSBBoW5mwOFzw">
-                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7dtGMPTGEeSBBoW5mwOFzw"/>
-                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7du7YPTGEeSBBoW5mwOFzw" value="*"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4wWEwPZKEeS1bO4bMzbjfg" name="locations" type="_4tNRMPZKEeS1bO4bMzbjfg">
+                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4wYhAPZKEeS1bO4bMzbjfg"/>
+                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4wZvIPZKEeS1bO4bMzbjfg" value="*"/>
                   </ownedParameter>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7dwwkPTGEeSBBoW5mwOFzw" name="cascade" type="_7MO7sPTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4wa9QPZKEeS1bO4bMzbjfg" name="cascade" type="_4tUl8fZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7d1CAPTGEeSBBoW5mwOFzw" name="delete" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7d1pEPTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4wenoPZKEeS1bO4bMzbjfg" name="delete" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4wenofZKEeS1bO4bMzbjfg">
                     <body>
 		 * Deletes the view in the handled diagram.
 		 * An exception is thrown if the view does not exists or cannot be deleted.
@@ -604,24 +731,24 @@
 		 * @throws NonExistantViewException If the view does not exists
 		 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7d5TcPTGEeSBBoW5mwOFzw" name="view" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4whD4PZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7d9k4PTGEeSBBoW5mwOFzw" name="getViewByElement" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7d-L8PTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4wjgIPZKEeS1bO4bMzbjfg" name="getViewByElement" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4wjgIfZKEeS1bO4bMzbjfg">
                     <body>
 		 * Returns a list of all views representing the element given as parameter.
 		 * @param element The element which we want to get the views
 		 * @return A list of views.
 		 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7eAoMPTGEeSBBoW5mwOFzw" type="_7MWQcfTGEeSBBoW5mwOFzw" direction="return">
-                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7eGHwPTGEeSBBoW5mwOFzw"/>
-                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7eH88PTGEeSBBoW5mwOFzw" value="*"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4wlVUPZKEeS1bO4bMzbjfg" type="_4tV0EPZKEeS1bO4bMzbjfg" direction="return">
+                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4woYoPZKEeS1bO4bMzbjfg"/>
+                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4wpmwPZKEeS1bO4bMzbjfg" value="*"/>
                   </ownedParameter>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7eKZMPTGEeSBBoW5mwOFzw" name="element" type="_7MKqQPTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4wrb8PZKEeS1bO4bMzbjfg" name="element" type="_0fzcofZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7ePRsPTGEeSBBoW5mwOFzw" name="getLocation" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7eP4wPTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4wvtYPZKEeS1bO4bMzbjfg" name="getLocation" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4wvtYfZKEeS1bO4bMzbjfg">
                     <body>
 		 * Returns the location of a view inside the handled diagram.
 		 * @param view the view which we want to get the location
@@ -629,11 +756,11 @@
 		 * @throws LocationNotFoundException If the view has no location or doesn't exist.
 		 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7eS8EPTGEeSBBoW5mwOFzw" type="_7L0E8fTGEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7eYboPTGEeSBBoW5mwOFzw" name="view" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4wyJoPZKEeS1bO4bMzbjfg" type="_4tNRMPZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4w10APZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7edUIPTGEeSBBoW5mwOFzw" name="setLocation" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7edUIfTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4w6FcPZKEeS1bO4bMzbjfg" name="setLocation" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4w6FcfZKEeS1bO4bMzbjfg">
                     <body>
 		 * Moves the view to the given location. The upper left-most point of the view is placed to the location given in parameter.
 		 * @param view The view to move
@@ -642,396 +769,212 @@
 		 * @throws NotAValidLocationException If the location is not valid 
 		 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7eg-gPTGEeSBBoW5mwOFzw" name="view" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7el3APTGEeSBBoW5mwOFzw" name="location" type="_7L0E8fTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4w9v0PZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4xCBQPZKEeS1bO4bMzbjfg" name="location" type="_4tNRMPZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7eqvgPTGEeSBBoW5mwOFzw" name="getElementViewByName" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7eqvgfTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4xG5wPZKEeS1bO4bMzbjfg" name="setOrdonnee" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4xG5wfZKEeS1bO4bMzbjfg">
+                    <body>
+		 * Change the ordonnee of the view given in parameter.
+		 * @param view The view to move
+		 * @param location the new ordonnee
+		 * @throws UnmovableViewException If the view cannot be moved
+		 * @throws NotAValidLocationException If the location is not valid 
+		 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4xJ9EPZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4xO1kPZKEeS1bO4bMzbjfg" name="location" type="_4txR4PZKEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4xTuEPZKEeS1bO4bMzbjfg" name="setAbscisse" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4xTuEfZKEeS1bO4bMzbjfg">
+                    <body>
+		 * 
+		 * Change the abscisse of the view given in parameter.
+		 * @param view The view to move
+		 * @param location the new abscisse
+		 * @throws UnmovableViewException If the view cannot be moved
+		 * @throws NotAValidLocationException If the location is not valid 
+		 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4xWxYPZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4xbC0PZKEeS1bO4bMzbjfg" name="location" type="_4txR4PZKEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4xetMPZKEeS1bO4bMzbjfg" name="getElementViewByName" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4xetMfZKEeS1bO4bMzbjfg">
                     <body>
 		 * Returns a list of all views representing the element which name is given as parameter.
 		 * @param name The name of the element which we want to get the views
 		 * @return A list of views.
 		 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7euZ4PTGEeSBBoW5mwOFzw" type="_7MWQcfTGEeSBBoW5mwOFzw" direction="return">
-                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7ez5cPTGEeSBBoW5mwOFzw"/>
-                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7e2VsPTGEeSBBoW5mwOFzw" value="*"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4xhwgPZKEeS1bO4bMzbjfg" type="_4tV0EPZKEeS1bO4bMzbjfg" direction="return">
+                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4xkMwPZKEeS1bO4bMzbjfg"/>
+                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4xkz0PZKEeS1bO4bMzbjfg" value="*"/>
                   </ownedParameter>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7e4x8PTGEeSBBoW5mwOFzw" name="name" type="_7M7fQPTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4xla4PZKEeS1bO4bMzbjfg" name="name" type="_4tp9IvZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7e-RgPTGEeSBBoW5mwOFzw" name="getElementByName" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7e-4kPTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4xn3IPZKEeS1bO4bMzbjfg" name="getElementByName" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4xn3IfZKEeS1bO4bMzbjfg">
                     <body>
 		 * Returns a list of all elements representing in UML model the element which name is given as parameter.
 		 * @param name The name of the element which we want to get the UML representation.
 		 * @return A list of element.
 		 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7fDxEPTGEeSBBoW5mwOFzw" type="_7MKqQPTGEeSBBoW5mwOFzw" direction="return">
-                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7fJQoPTGEeSBBoW5mwOFzw"/>
-                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7fLs4PTGEeSBBoW5mwOFzw" value="*"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4xpsUPZKEeS1bO4bMzbjfg" type="_0fzcofZKEeS1bO4bMzbjfg" direction="return">
+                    <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4xsIkPZKEeS1bO4bMzbjfg"/>
+                    <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4xsvoPZKEeS1bO4bMzbjfg" value="*"/>
                   </ownedParameter>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7fNiEPTGEeSBBoW5mwOFzw" name="name" type="_7M7fQPTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4xt9wPZKEeS1bO4bMzbjfg" name="name" type="_4tp9IvZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7fTBoPTGEeSBBoW5mwOFzw" name="getWidth" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7fTosPTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4xvy8PZKEeS1bO4bMzbjfg" name="getWidth" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4xwaAPZKEeS1bO4bMzbjfg">
                     <body>
-		 * Return the width of a view which name is given as parameter.
+		 * Returns the width of a view given as parameter.
 		 * @param view the view which we want to get his width
 		 * @return the width of the view
 		 * @throws NotDimensionedViewException if the view hasn't dimensions
 		 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7fXTEPTGEeSBBoW5mwOFzw" type="_7NEpMfTGEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7fcyoPTGEeSBBoW5mwOFzw" name="view" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4xxoIPZKEeS1bO4bMzbjfg" type="_4txR4PZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4x0EYPZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7fiSMPTGEeSBBoW5mwOFzw" name="getHeight" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7fi5QPTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4x2goPZKEeS1bO4bMzbjfg" name="getHeight" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4x2gofZKEeS1bO4bMzbjfg">
                     <body>
-		 * Return the height of a view which name is given as parameter.
+		 * Returns the height of a view given as parameter.
 		 * @param view the view which we want to get his height
 		 * @return the height of the view
 		 * @throws NotDimensionedViewException if the view hasn't dimensions
 		 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7fmjoPTGEeSBBoW5mwOFzw" type="_7NEpMfTGEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7fsqQPTGEeSBBoW5mwOFzw" name="view" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4x4V0PZKEeS1bO4bMzbjfg" type="_4txR4PZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4x8AMPZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7fyw4PTGEeSBBoW5mwOFzw" name="setHeight" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7fzX8PTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4x_qkPZKEeS1bO4bMzbjfg" name="setHeight" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4yARoPZKEeS1bO4bMzbjfg">
                     <body>
-		 * Change the height of a view which name is given as parameter.
+		 * Changes the height of a view given as parameter.
 		 * @param view the view which we want to change his height
 		 * @param newheight the newest value of the height
 		 * @throws NotResizableViewException if the view hasn't dimensions
 		 * @throws NotAValidSizeException if the height is not valid
 		 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7f4QcPTGEeSBBoW5mwOFzw" name="view" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7f-XEPTGEeSBBoW5mwOFzw" name="newheight" type="_7NEpMfTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4yDU8PZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4yGYQPZKEeS1bO4bMzbjfg" name="newheight" type="_4txR4PZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7gFEwPTGEeSBBoW5mwOFzw" name="setWidth" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7gFr0PTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4yJbkPZKEeS1bO4bMzbjfg" name="setWidth" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4yJbkfZKEeS1bO4bMzbjfg">
                     <body>
-		 * Change the width of a view which name is given as parameter.
+		 * Changes the width of a view given as parameter.
 		 * @param view the view which we want to change his width
 		 * @param newheight the newest value of the width
 		 * @throws NotResizableViewException if the view hasn't dimensions
 		 * @throws NotAValidSizeException if the width is not valid
 		 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7gKkUPTGEeSBBoW5mwOFzw" name="view" type="_7MWQcfTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7gR5EPTGEeSBBoW5mwOFzw" name="newwidth" type="_7NEpMfTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4yLQwPZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4yOUEPZKEeS1bO4bMzbjfg" name="newwidth" type="_4txR4PZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7gZN0PTGEeSBBoW5mwOFzw" name="getModel" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7gZ04PTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4yRXYPZKEeS1bO4bMzbjfg" name="getModel" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4yRXYfZKEeS1bO4bMzbjfg">
                     <body>
-		 * Return the model of the diagram.
+		 * Returns the model of the diagram.
 		 * @return the model.
 		 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7getYPTGEeSBBoW5mwOFzw" type="_7L-dAPTGEeSBBoW5mwOFzw" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4yTMkPZKEeS1bO4bMzbjfg" type="_0fvyQPZKEeS1bO4bMzbjfg" direction="return"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7gmCIPTGEeSBBoW5mwOFzw" name="setDefaultLocation" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7gmpMPTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4yVo0PZKEeS1bO4bMzbjfg" name="setDefaultLocation" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4yWP4PZKEeS1bO4bMzbjfg">
                     <body>
-		 * Change the default location to display element.
+		 * Changes the default location to display element.
 		 * @param location the new default location
 		 * @throws NotAValidLocationException if the location is not valid
 		 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7grhsPTGEeSBBoW5mwOFzw" name="location" type="_7L0E8fTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4yYFEPZKEeS1bO4bMzbjfg" name="location" type="_4tNRMPZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_7gy2cPTGEeSBBoW5mwOFzw" name="getDefaultLocation" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_7gzdgPTGEeSBBoW5mwOFzw">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4yahUPZKEeS1bO4bMzbjfg" name="getDefaultLocation" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4yahUfZKEeS1bO4bMzbjfg">
                     <body>
-		 * Return the default location to display element.
+		 * Returns the default location to display element.
 		 * @return the location
 		 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_7g4WAPTGEeSBBoW5mwOFzw" type="_7L0E8fTGEeSBBoW5mwOFzw" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4ycWgPZKEeS1bO4bMzbjfg" type="_4tNRMPZKEeS1bO4bMzbjfg" direction="return"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4yeLsPZKEeS1bO4bMzbjfg" name="isDrawn" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4yeywPZKEeS1bO4bMzbjfg">
+                    <body>
+		 * Checks if an element is drawn on the diagram.
+		 * @param element the element
+		 * @return True or False if the element is drawn
+		 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4ygA4PZKEeS1bO4bMzbjfg" type="_4tUl8fZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4yidIPZKEeS1bO4bMzbjfg" name="element" type="_0fzcofZKEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4ypK0PZKEeS1bO4bMzbjfg" name="setEdgeLocation" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4ypx4PZKEeS1bO4bMzbjfg">
+                    <body>
+		 * Moves an edge which name is given as parameter.
+		 * @param view the view of the edge
+		 * @param location_source null or the new location of the source
+		 * @param location_target null or the new location of the target
+		 * @throws NotAnEdgeException if the view given is not an edge
+		 * @throws NotAValidLocationException if locations are invalids
+		 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4yrnEPZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4ytcQPZKEeS1bO4bMzbjfg" name="location_source" type="_4t7p8PZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4ywfkPZKEeS1bO4bMzbjfg" name="location_target" type="_4t7p8PZKEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4yy70PZKEeS1bO4bMzbjfg" name="getTargetEdgeLocation" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4yy70fZKEeS1bO4bMzbjfg">
+                    <body>
+		 * Returns the target location of the view given as parameter.
+		 * @param view the view of the edge
+		 * @return a precise location of the target
+		 * @throws NotAnEdgeException if the view given is not an edge
+		 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4y0xAPZKEeS1bO4bMzbjfg" type="_4t7p8PZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4y30UPZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4y6QkPZKEeS1bO4bMzbjfg" name="getSourceEdgeLocation" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4y6QkfZKEeS1bO4bMzbjfg">
+                    <body>
+		 * Returns the source location of the view given as parameter.
+		 * @param view the view of the edge
+		 * @return a precise location of the source
+		 * @throws NotAnEdgeException if the view given is not an edge
+		 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4y8s0PZKEeS1bO4bMzbjfg" type="_4t7p8PZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4zA-QPZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4zFPsPZKEeS1bO4bMzbjfg" name="reconnectEdge" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_4zFPsfZKEeS1bO4bMzbjfg">
+                    <body>
+		 * Changes the source and/or the target of an edge whose the view is given as parameter.
+		 * @param Vedge the view of the edge
+		 * @param Vsource null or the view of the source
+		 * @param Vtarget null or the view of the target
+		 * @throws NotAnEdgeException  if the view given is not an edge
+		 * @throws ExecutionException if the operation is forbidden
+		 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4zITAPZKEeS1bO4bMzbjfg" name="Vedge" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4zMkcPZKEeS1bO4bMzbjfg" name="Vsource" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4zQO0PZKEeS1bO4bMzbjfg" name="Vtarget" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
               </packagedElement>
             </packagedElement>
-            <packagedElement xmi:type="uml:Package" xmi:id="_4isRIPTHEeSBBoW5mwOFzw" name="othersources">
-              <packagedElement xmi:type="uml:Class" xmi:id="_4is4MPTHEeSBBoW5mwOFzw" name="EclipseProject" visibility="public">
-                <ownedComment xmi:type="uml:Comment" xmi:id="_4itfQPTHEeSBBoW5mwOFzw">
-                  <body>&#xD;
- * This class allows to create or load an Eclipse Project.&#xD;
- * This is the projects found in the project explorer.&#xD;
- * This class is mainly used in tests.&#xD;
- *&#xD;
- * @author cedric dumoulin&#xD;
- *&#xD;
- </body>
-                </ownedComment>
-                <ownedAttribute xmi:type="uml:Property" xmi:id="_4iv7gPTHEeSBBoW5mwOFzw" name="project" visibility="protected" type="_4ivUcfTHEeSBBoW5mwOFzw" isUnique="false">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_4iwikPTHEeSBBoW5mwOFzw">
-                    <body>&#xD;
-	 * The underlying Eclipse project.&#xD;
-	 *&#xD;
-	 </body>
-                  </ownedComment>
-                </ownedAttribute>
-                <ownedAttribute xmi:type="uml:Property" xmi:id="_4iyXwPTHEeSBBoW5mwOFzw" name="monitor" visibility="protected" type="_4ixwsPTHEeSBBoW5mwOFzw" isUnique="false"/>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_4iy-0PTHEeSBBoW5mwOFzw" name="initProject" visibility="protected">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_4izl4PTHEeSBBoW5mwOFzw">
-                    <body>&#xD;
-	 * Create or load the project.&#xD;
-	 *&#xD;
-	 * @param projectName&#xD;
-	 * @throws ExecutionException&#xD;
-	 </body>
-                  </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4i0M8PTHEeSBBoW5mwOFzw" name="projectName" type="_7M7fQPTGEeSBBoW5mwOFzw"/>
-                </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_4i00APTHEeSBBoW5mwOFzw" name="getProject" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_4i00AfTHEeSBBoW5mwOFzw">
-                    <body>&#xD;
-	 * @return the project&#xD;
-	 </body>
-                  </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4i1bEPTHEeSBBoW5mwOFzw" type="_4ivUcfTHEeSBBoW5mwOFzw" direction="return"/>
-                </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_4i2CIPTHEeSBBoW5mwOFzw" name="copyResource" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_4i2pMPTHEeSBBoW5mwOFzw">
-                    <body>&#xD;
-	 *&#xD;
-	 * @param fromBundle&#xD;
-	 * @param fromResourceName&#xD;
-	 * @param toResourceName&#xD;
-	 * @return&#xD;
-	 * @throws ExecutionException&#xD;
-	 </body>
-                  </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4i3QQfTHEeSBBoW5mwOFzw" type="_4i3QQPTHEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4i33UPTHEeSBBoW5mwOFzw" name="fromBundle" type="_7M7fQPTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4i4eYPTHEeSBBoW5mwOFzw" name="fromResourceName" type="_7M7fQPTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4i4eYfTHEeSBBoW5mwOFzw" name="toResourceName" type="_7M7fQPTGEeSBBoW5mwOFzw"/>
-                </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_4i5FcPTHEeSBBoW5mwOFzw" name="copyResource" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_4i5sgPTHEeSBBoW5mwOFzw">
-                    <body>&#xD;
-	 * Copy the specified resource from the specified bundle to this project.&#xD;
-	 * Use the same path in src and target.&#xD;
-	 *&#xD;
-	 * @param fromBundle&#xD;
-	 * @param fromResourceName&#xD;
-	 * @return&#xD;
-	 * @throws ExecutionException&#xD;
-	 </body>
-                  </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4i5sgfTHEeSBBoW5mwOFzw" type="_4i3QQPTHEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4i6TkPTHEeSBBoW5mwOFzw" name="fromBundle" type="_7M7fQPTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4i66oPTHEeSBBoW5mwOFzw" name="fromResourceName" type="_7M7fQPTGEeSBBoW5mwOFzw"/>
-                </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_4i66ofTHEeSBBoW5mwOFzw" name="copyResources" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_4i7hsPTHEeSBBoW5mwOFzw">
-                    <body>&#xD;
-	 *&#xD;
-	 * @param fromBundle&#xD;
-	 * @param fromResourceNames&#xD;
-	 * @throws ExecutionException&#xD;
-	 </body>
-                  </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4i7hsfTHEeSBBoW5mwOFzw" name="fromBundle" type="_7M7fQPTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4i8IwPTHEeSBBoW5mwOFzw" name="fromResourceNames" type="_7M7fQPTGEeSBBoW5mwOFzw"/>
-                </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_4i8v0PTHEeSBBoW5mwOFzw" name="ensureFolders" visibility="protected">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_4i8v0fTHEeSBBoW5mwOFzw">
-                    <body>&#xD;
-	 * Ensure that the intermediates folders exist in the project.&#xD;
-	 *&#xD;
-	 * @param project&#xD;
-	 * @param name&#xD;
-	 * @throws CoreException&#xD;
-	 </body>
-                  </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4i9W4PTHEeSBBoW5mwOFzw" name="file" type="_4i3QQPTHEeSBBoW5mwOFzw"/>
-                </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_4i998PTHEeSBBoW5mwOFzw" name="createFolder" visibility="private">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_4i998fTHEeSBBoW5mwOFzw">
-                    <body>&#xD;
-	 *&#xD;
-	 * @param folderPath&#xD;
-	 * @throws CoreException&#xD;
-	 </body>
-                  </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4i-lAPTHEeSBBoW5mwOFzw" name="folderPath" type="_4i9W4fTHEeSBBoW5mwOFzw"/>
-                </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_4i-lAfTHEeSBBoW5mwOFzw" name="createFolders" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_4i_MEPTHEeSBBoW5mwOFzw">
-                    <body>&#xD;
-	 * Creates all the folders that are needed to contains the resource.&#xD;
-	 *&#xD;
-	 * @param modelName&#xD;
-	 * @throws ExecutionException&#xD;
-	 </body>
-                  </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4i_MEfTHEeSBBoW5mwOFzw" name="modelName" type="_7M7fQPTGEeSBBoW5mwOFzw"/>
-                </ownedOperation>
-              </packagedElement>
-              <packagedElement xmi:type="uml:Class" xmi:id="_4jDdgPTHEeSBBoW5mwOFzw" name="EditorCreationException" visibility="public">
-                <ownedComment xmi:type="uml:Comment" xmi:id="_4jEroPTHEeSBBoW5mwOFzw">
-                  <body>&#xD;
- * @author cedric dumoulin&#xD;
- *&#xD;
- </body>
-                </ownedComment>
-                <generalization xmi:type="uml:Generalization" xmi:id="_4jW_gPTHEeSBBoW5mwOFzw" general="_4jF5wPTHEeSBBoW5mwOFzw"/>
-                <ownedAttribute xmi:type="uml:Property" xmi:id="_4jYNoPTHEeSBBoW5mwOFzw" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" type="_4jXmkPTHEeSBBoW5mwOFzw" isUnique="false">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_4jY0sPTHEeSBBoW5mwOFzw">
-                    <body>&#xD;
-	 *&#xD;
-	 </body>
-                  </ownedComment>
-                </ownedAttribute>
-              </packagedElement>
-              <packagedElement xmi:type="uml:Class" xmi:id="_4jF5wPTHEeSBBoW5mwOFzw" name="ExecutionException" visibility="public">
-                <ownedComment xmi:type="uml:Comment" xmi:id="_4jap4PTHEeSBBoW5mwOFzw">
-                  <body>&#xD;
- * Root exception of the package.&#xD;
- *&#xD;
- * @author cedric dumoulin&#xD;
- *&#xD;
- </body>
-                </ownedComment>
-                <generalization xmi:type="uml:Generalization" xmi:id="_4jbQ8PTHEeSBBoW5mwOFzw" general="_4jap4fTHEeSBBoW5mwOFzw"/>
-                <ownedAttribute xmi:type="uml:Property" xmi:id="_4jb4APTHEeSBBoW5mwOFzw" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" type="_4jXmkPTHEeSBBoW5mwOFzw" isUnique="false">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_4jcfEPTHEeSBBoW5mwOFzw">
-                    <body>&#xD;
-	 *&#xD;
-	 </body>
-                  </ownedComment>
-                </ownedAttribute>
-              </packagedElement>
-              <packagedElement xmi:type="uml:Class" xmi:id="_4jm3IPTHEeSBBoW5mwOFzw" name="PapyrusEditor" visibility="public">
-                <ownedComment xmi:type="uml:Comment" xmi:id="_4jneMPTHEeSBBoW5mwOFzw">
-                  <body>&#xD;
- * This class allows to create a Papyrus Editor programmatically.&#xD;
- * The creation require the name of a project and the name of the model to create.&#xD;
- * This class is for use in tests.&#xD;
- *&#xD;
- * @author cedric dumoulin&#xD;
- *&#xD;
- </body>
-                </ownedComment>
-                <ownedAttribute xmi:type="uml:Property" xmi:id="_4jneMfTHEeSBBoW5mwOFzw" name="DEFAULT_PROJECT_NAME" visibility="protected" isLeaf="true" isStatic="true" type="_7M7fQPTGEeSBBoW5mwOFzw" isUnique="false"/>
-                <ownedAttribute xmi:type="uml:Property" xmi:id="_4joFQPTHEeSBBoW5mwOFzw" name="DEFAULT_MODEL_NAME" visibility="protected" isLeaf="true" isStatic="true" type="_7M7fQPTGEeSBBoW5mwOFzw" isUnique="false"/>
-                <ownedAttribute xmi:type="uml:Property" xmi:id="_4josUPTHEeSBBoW5mwOFzw" name="modelName" visibility="protected" type="_7M7fQPTGEeSBBoW5mwOFzw" isUnique="false">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_4jpTYPTHEeSBBoW5mwOFzw">
-                    <body>&#xD;
-	 * Name of the model to create.&#xD;
-	 </body>
-                  </ownedComment>
-                </ownedAttribute>
-                <ownedAttribute xmi:type="uml:Property" xmi:id="_4jrvoPTHEeSBBoW5mwOFzw" name="page" visibility="protected" type="_4jrIkfTHEeSBBoW5mwOFzw" isUnique="false">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_4jrvofTHEeSBBoW5mwOFzw">
-                    <body> The page. </body>
-                  </ownedComment>
-                </ownedAttribute>
-                <ownedAttribute xmi:type="uml:Property" xmi:id="_4juL4fTHEeSBBoW5mwOFzw" name="papyrusEditor" visibility="protected" type="_4juL4PTHEeSBBoW5mwOFzw" isUnique="false">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_4juy8PTHEeSBBoW5mwOFzw">
-                    <body> The papyrus editor. </body>
-                  </ownedComment>
-                </ownedAttribute>
-                <ownedAttribute xmi:type="uml:Property" xmi:id="_4j2uwPTHEeSBBoW5mwOFzw" name="modelSet" visibility="private" type="_4j2HsfTHEeSBBoW5mwOFzw" isUnique="false">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_4j2uwfTHEeSBBoW5mwOFzw">
-                    <body>&#xD;
-	 * Cached value of modelSet.&#xD;
-	 </body>
-                  </ownedComment>
-                </ownedAttribute>
-                <ownedAttribute xmi:type="uml:Property" xmi:id="_nfbvAPTIEeSBBoW5mwOFzw" name="eclipseProject" type="_4is4MPTHEeSBBoW5mwOFzw" association="_nfdkMPTIEeSBBoW5mwOFzw">
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nfbvAfTIEeSBBoW5mwOFzw" value="1"/>
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nfbvAvTIEeSBBoW5mwOFzw" value="1"/>
-                </ownedAttribute>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_4jwBEPTHEeSBBoW5mwOFzw" name="initResources" visibility="private">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_4jwBEfTHEeSBBoW5mwOFzw">
-                    <body>&#xD;
-	 * Init the resources.&#xD;
-	 * The {@link #eclipseProject} should be initialized.&#xD;
-	 *&#xD;
-	 * @throws ExecutionException&#xD;
-	 * @throws CoreException&#xD;
-	 * @throws IOException&#xD;
-	 </body>
-                  </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4jwoIPTHEeSBBoW5mwOFzw" name="deleteFileIfExists" type="_7MO7sPTGEeSBBoW5mwOFzw"/>
-                </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_4jwoIfTHEeSBBoW5mwOFzw" name="createModel" visibility="protected">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_4jxPMPTHEeSBBoW5mwOFzw">
-                    <body>&#xD;
-	 * Create a model suitable for Papyrus uml.&#xD;
-	 * Save it in the provided file.&#xD;
-	 *&#xD;
-	 * @param file&#xD;
-	 * @throws CoreException&#xD;
-	 * @throws IOException&#xD;
-	 </body>
-                  </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4jxPMfTHEeSBBoW5mwOFzw" name="file" type="_4i3QQPTHEeSBBoW5mwOFzw"/>
-                </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_4jx2QPTHEeSBBoW5mwOFzw" name="createEditor" visibility="protected">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_4jx2QfTHEeSBBoW5mwOFzw">
-                    <body>&#xD;
-	 * Create a papyrus editor.&#xD;
-	 *&#xD;
-	 * @return&#xD;
-	 * @throws EditorCreationException&#xD;
-	 </body>
-                  </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4jydUPTHEeSBBoW5mwOFzw" type="_4juL4PTHEeSBBoW5mwOFzw" direction="return"/>
-                </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_4jzEYPTHEeSBBoW5mwOFzw" name="dispose" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_4jzEYfTHEeSBBoW5mwOFzw">
-                    <body>&#xD;
-	 * Dispose the editor.&#xD;
-	 </body>
-                  </ownedComment>
-                </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_4jzEYvTHEeSBBoW5mwOFzw" name="getEditor" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_4jzrcPTHEeSBBoW5mwOFzw">
-                    <body>&#xD;
-	 *&#xD;
-	 * @return&#xD;
-	 </body>
-                  </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4jzrcfTHEeSBBoW5mwOFzw" type="_4juL4PTHEeSBBoW5mwOFzw" direction="return"/>
-                </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_4j0SgPTHEeSBBoW5mwOFzw" name="getServiceRegistry" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_4j0SgfTHEeSBBoW5mwOFzw">
-                    <body>&#xD;
-	 * Get the {@link ServicesRegistry} associated to the editor.&#xD;
-	 *&#xD;
-	 * @return The service registry.&#xD;
-	 </body>
-                  </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4j1goPTHEeSBBoW5mwOFzw" type="_4j05kfTHEeSBBoW5mwOFzw" direction="return"/>
-                </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_4j3V0PTHEeSBBoW5mwOFzw" name="getModelSet" visibility="public">
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4j3V0fTHEeSBBoW5mwOFzw" type="_4j2HsfTHEeSBBoW5mwOFzw" direction="return"/>
-                </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_4j384PTHEeSBBoW5mwOFzw" name="undo" visibility="public"/>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_4j384fTHEeSBBoW5mwOFzw" name="redo" visibility="public"/>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_4j4j8PTHEeSBBoW5mwOFzw" name="getIOperationHistory" visibility="public">
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4j5yEPTHEeSBBoW5mwOFzw" type="_4j5LAfTHEeSBBoW5mwOFzw" direction="return"/>
-                </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_4j5yEfTHEeSBBoW5mwOFzw" name="getTransactionalEditingDomain" visibility="public">
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_4j6ZIPTHEeSBBoW5mwOFzw" type="_7MGY0PTGEeSBBoW5mwOFzw" direction="return"/>
-                </ownedOperation>
-              </packagedElement>
-              <packagedElement xmi:type="uml:Association" xmi:id="_nfdkMPTIEeSBBoW5mwOFzw" memberEnd="_nfdkMfTIEeSBBoW5mwOFzw _nfbvAPTIEeSBBoW5mwOFzw">
-                <name xsi:nil="true"/>
-                <ownedEnd xmi:type="uml:Property" xmi:id="_nfdkMfTIEeSBBoW5mwOFzw" name="papyrusEditor" type="_4jm3IPTHEeSBBoW5mwOFzw" association="_nfdkMPTIEeSBBoW5mwOFzw">
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nfdkMvTIEeSBBoW5mwOFzw" value="1"/>
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nfdkM_TIEeSBBoW5mwOFzw" value="1"/>
-                </ownedEnd>
-              </packagedElement>
-            </packagedElement>
-            <packagedElement xmi:type="uml:Package" xmi:id="_1TUVoPTIEeSBBoW5mwOFzw" name="factories">
-              <packagedElement xmi:type="uml:Class" xmi:id="_1TWK0PTIEeSBBoW5mwOFzw" name="DiagramFactory" visibility="public">
-                <ownedComment xmi:type="uml:Comment" xmi:id="_1TXY8PTIEeSBBoW5mwOFzw">
+            <packagedElement xmi:type="uml:Package" xmi:id="_5dUfgPZKEeS1bO4bMzbjfg" name="factories">
+              <packagedElement xmi:type="uml:Class" xmi:id="_5dVtoPZKEeS1bO4bMzbjfg" name="DiagramFactory" visibility="public">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_5dWUsPZKEeS1bO4bMzbjfg">
                   <body>
  * Lets to create new papyrus diagram inside a project programatically. The main use is to call
  * the method build to create a new diagramHandler
@@ -1040,9 +983,9 @@
  *
  </body>
                 </ownedComment>
-                <ownedAttribute xmi:type="uml:Property" xmi:id="_1TYAAPTIEeSBBoW5mwOFzw" name="instance" visibility="public" isLeaf="true" isStatic="true" type="_1TWK0PTIEeSBBoW5mwOFzw" isUnique="false"/>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_1TacQPTIEeSBBoW5mwOFzw" name="create" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_1TacQfTIEeSBBoW5mwOFzw">
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_5dW7wPZKEeS1bO4bMzbjfg" name="instance" visibility="public" isLeaf="true" isStatic="true" type="_5dVtoPZKEeS1bO4bMzbjfg" isUnique="false"/>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_5dYw8PZKEeS1bO4bMzbjfg" name="create" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_5dYw8fZKEeS1bO4bMzbjfg">
                     <body>
 	 * Creates a new diagram inside the model modelname inside the project.
 	 * @param diagramName
@@ -1054,14 +997,14 @@
 	 * @throws ExecutionException
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_1TbDUPTIEeSBBoW5mwOFzw" type="_7LWK4PTGEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_1TcRcPTIEeSBBoW5mwOFzw" name="diagramName" type="_7M7fQPTGEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_1Tc4gPTIEeSBBoW5mwOFzw" name="diagramType"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_1TdfkPTIEeSBBoW5mwOFzw" name="papyrusEditor" type="_4jm3IPTHEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_5dZYAPZKEeS1bO4bMzbjfg" type="_4sYx0PZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_5dZYAfZKEeS1bO4bMzbjfg" name="diagramName" type="_4tp9IvZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_5dZ_EPZKEeS1bO4bMzbjfg" name="diagramType" type="_5dYJ4fZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_5damIPZKEeS1bO4bMzbjfg" name="papyrusEditor" type="_5dYJ4vZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
               </packagedElement>
-              <packagedElement xmi:type="uml:Class" xmi:id="_1TiYEPTIEeSBBoW5mwOFzw" name="PapyrusEditorFactory" visibility="public">
-                <ownedComment xmi:type="uml:Comment" xmi:id="_1Ti_IPTIEeSBBoW5mwOFzw">
+              <packagedElement xmi:type="uml:Class" xmi:id="_5de3kPZKEeS1bO4bMzbjfg" name="PapyrusEditorFactory" visibility="public">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_5de3kfZKEeS1bO4bMzbjfg">
                   <body>
  * Creates a new papyrus editor which contains a reference to the model
  * and the transactional editing domain.
@@ -1069,9 +1012,9 @@
  *
  </body>
                 </ownedComment>
-                <ownedAttribute xmi:type="uml:Property" xmi:id="_1Ti_IfTIEeSBBoW5mwOFzw" name="instance" visibility="public" isLeaf="true" isStatic="true" type="_1TiYEPTIEeSBBoW5mwOFzw" isUnique="false"/>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_1TjmMPTIEeSBBoW5mwOFzw" name="create" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_1TjmMfTIEeSBBoW5mwOFzw">
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_5dfeoPZKEeS1bO4bMzbjfg" name="instance" visibility="public" isLeaf="true" isStatic="true" type="_5de3kPZKEeS1bO4bMzbjfg" isUnique="false"/>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_5dh64PZKEeS1bO4bMzbjfg" name="create" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_5dh64fZKEeS1bO4bMzbjfg">
                     <body>
 	 * Creates a new papyrus editor inside the model of the given project.
 	 * If the model doesn't exist, it will be automatically created
@@ -1081,13 +1024,13 @@
 	 * @throws ExecutionException 
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_1TkNQPTIEeSBBoW5mwOFzw" type="_4jm3IPTHEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_1Tk0UPTIEeSBBoW5mwOFzw" name="project" type="_4is4MPTHEeSBBoW5mwOFzw"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_1Tk0UfTIEeSBBoW5mwOFzw" name="modelname" type="_7M7fQPTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_5dih8PZKEeS1bO4bMzbjfg" type="_5dYJ4vZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_5dih8fZKEeS1bO4bMzbjfg" name="project" type="_5dgswPZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_5djJAPZKEeS1bO4bMzbjfg" name="modelname" type="_4tp9IvZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
               </packagedElement>
-              <packagedElement xmi:type="uml:Class" xmi:id="_1TwagPTIEeSBBoW5mwOFzw" name="ProjectFactory" visibility="public">
-                <ownedComment xmi:type="uml:Comment" xmi:id="_1TxBkPTIEeSBBoW5mwOFzw">
+              <packagedElement xmi:type="uml:Class" xmi:id="_5dp2sPZKEeS1bO4bMzbjfg" name="ProjectFactory" visibility="public">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_5dp2sfZKEeS1bO4bMzbjfg">
                   <body>
  * Lets to create new papyrus project programatically.
  * The main use is to call the method build to create a new project
@@ -1095,9 +1038,9 @@
  *
  </body>
                 </ownedComment>
-                <ownedAttribute xmi:type="uml:Property" xmi:id="_1TxooPTIEeSBBoW5mwOFzw" name="instance" visibility="public" isLeaf="true" isStatic="true" type="_1TwagPTIEeSBBoW5mwOFzw" isUnique="false"/>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_1TyPsPTIEeSBBoW5mwOFzw" name="build" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_1TyPsfTIEeSBBoW5mwOFzw">
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_5dqdwPZKEeS1bO4bMzbjfg" name="instance" visibility="public" isLeaf="true" isStatic="true" type="_5dp2sPZKEeS1bO4bMzbjfg" isUnique="false"/>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_5drE0PZKEeS1bO4bMzbjfg" name="build" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_5drr4PZKEeS1bO4bMzbjfg">
                     <body>
 	 * Creates a new eclipse project with the given project name or loads it if it exists in the workspace
 	 * @param projectName
@@ -1105,42 +1048,406 @@
 	 * @throws ExecutionException
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_1Ty2wPTIEeSBBoW5mwOFzw" type="_4is4MPTHEeSBBoW5mwOFzw" direction="return"/>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_1Tzd0PTIEeSBBoW5mwOFzw" name="projectName" type="_7M7fQPTGEeSBBoW5mwOFzw"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_5dsS8PZKEeS1bO4bMzbjfg" type="_5dgswPZKEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_5ds6APZKEeS1bO4bMzbjfg" name="projectName" type="_4tp9IvZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
               </packagedElement>
             </packagedElement>
-            <packagedElement xmi:type="uml:Package" xmi:id="_tjZnIPTJEeSBBoW5mwOFzw" name="helpers">
-              <packagedElement xmi:type="uml:Class" xmi:id="_tjbcUPTJEeSBBoW5mwOFzw" name="UmlModelHelper" visibility="public">
-                <ownedComment xmi:type="uml:Comment" xmi:id="_tjcDYPTJEeSBBoW5mwOFzw">
+            <packagedElement xmi:type="uml:Package" xmi:id="_5dYJ4PZKEeS1bO4bMzbjfg" name="utils">
+              <packagedElement xmi:type="uml:Class" xmi:id="_5dYJ4fZKEeS1bO4bMzbjfg" name="DiagramType"/>
+              <packagedElement xmi:type="uml:Class" xmi:id="_5dYJ4vZKEeS1bO4bMzbjfg" name="PapyrusEditor" visibility="public">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_CtF6YPZOEeS1bO4bMzbjfg">
+                  <body>&#xD;
+ * This class allows to create a Papyrus Editor programmatically.&#xD;
+ * The creation require the name of a project and the name of the model to create.&#xD;
+ * This class is for use in tests.&#xD;
+ *&#xD;
+ * @author cedric dumoulin&#xD;
+ *&#xD;
+ </body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_CtHIgPZOEeS1bO4bMzbjfg" name="DEFAULT_PROJECT_NAME" visibility="protected" isLeaf="true" isStatic="true" type="_4tp9IvZKEeS1bO4bMzbjfg" isUnique="false"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_CtIWoPZOEeS1bO4bMzbjfg" name="DEFAULT_MODEL_NAME" visibility="protected" isLeaf="true" isStatic="true" type="_4tp9IvZKEeS1bO4bMzbjfg" isUnique="false"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_CtJkwPZOEeS1bO4bMzbjfg" name="modelName" visibility="protected" type="_4tp9IvZKEeS1bO4bMzbjfg" isUnique="false">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_CtKy4PZOEeS1bO4bMzbjfg">
+                    <body>&#xD;
+	 * Name of the model to create.&#xD;
+	 </body>
+                  </ownedComment>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_CtMBAvZOEeS1bO4bMzbjfg" name="page" visibility="protected" type="_CtMBAfZOEeS1bO4bMzbjfg" isUnique="false">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_CtNPIPZOEeS1bO4bMzbjfg">
+                    <body> The page. </body>
+                  </ownedComment>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_CtPEUPZOEeS1bO4bMzbjfg" name="papyrusEditor" visibility="protected" type="_CtOdQvZOEeS1bO4bMzbjfg" isUnique="false">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_CtPrYPZOEeS1bO4bMzbjfg">
+                    <body> The papyrus editor. </body>
+                  </ownedComment>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_CtQScPZOEeS1bO4bMzbjfg" name="eclipseProject" visibility="protected" type="_5dgswPZKEeS1bO4bMzbjfg" isUnique="false">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_CtRgkPZOEeS1bO4bMzbjfg">
+                    <body>&#xD;
+	 * An object representing an EclipseProject.&#xD;
+	 </body>
+                  </ownedComment>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_Ctb4oPZOEeS1bO4bMzbjfg" name="modelSet" visibility="private" type="_CtbRkvZOEeS1bO4bMzbjfg" isUnique="false">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_CtdGwPZOEeS1bO4bMzbjfg">
+                    <body>&#xD;
+	 * Cached value of modelSet.&#xD;
+	 </body>
+                  </ownedComment>
+                </ownedAttribute>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_CtRgkfZOEeS1bO4bMzbjfg" name="initResources" visibility="private">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_CtSHoPZOEeS1bO4bMzbjfg">
+                    <body>&#xD;
+	 * Init the resources.&#xD;
+	 * The {@link #eclipseProject} should be initialized.&#xD;
+	 *&#xD;
+	 * @throws ExecutionException&#xD;
+	 * @throws CoreException&#xD;
+	 * @throws IOException&#xD;
+	 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_CtSusPZOEeS1bO4bMzbjfg" name="deleteFileIfExists" type="_4tUl8fZKEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_CtSusfZOEeS1bO4bMzbjfg" name="createModel" visibility="protected">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_CtT80PZOEeS1bO4bMzbjfg">
+                    <body>&#xD;
+	 * Create a model suitable for Papyrus uml.&#xD;
+	 * Save it in the provided file.&#xD;
+	 *&#xD;
+	 * @param file&#xD;
+	 * @throws CoreException&#xD;
+	 * @throws IOException&#xD;
+	 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_CtUj4PZOEeS1bO4bMzbjfg" name="file" type="_-psWYPZNEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_CtVK8PZOEeS1bO4bMzbjfg" name="createEditor" visibility="protected">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_CtVyAPZOEeS1bO4bMzbjfg">
+                    <body>&#xD;
+	 * Create a papyrus editor.&#xD;
+	 *&#xD;
+	 * @return&#xD;
+	 * @throws EditorCreationException&#xD;
+	 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_CtWZEPZOEeS1bO4bMzbjfg" type="_CtOdQvZOEeS1bO4bMzbjfg" direction="return"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_CtXAIPZOEeS1bO4bMzbjfg" name="dispose" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_CtXnMPZOEeS1bO4bMzbjfg">
+                    <body>&#xD;
+	 * Dispose the editor.&#xD;
+	 </body>
+                  </ownedComment>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_CtXnMfZOEeS1bO4bMzbjfg" name="getEditor" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_CtY1UPZOEeS1bO4bMzbjfg">
+                    <body>&#xD;
+	 *&#xD;
+	 * @return&#xD;
+	 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_CtY1UfZOEeS1bO4bMzbjfg" type="_CtOdQvZOEeS1bO4bMzbjfg" direction="return"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_CtZcYPZOEeS1bO4bMzbjfg" name="getServiceRegistry" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_CtaDcPZOEeS1bO4bMzbjfg">
+                    <body>&#xD;
+	 * Get the {@link ServicesRegistry} associated to the editor.&#xD;
+	 *&#xD;
+	 * @return The service registry.&#xD;
+	 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_CtbRkPZOEeS1bO4bMzbjfg" type="_CtaqgfZOEeS1bO4bMzbjfg" direction="return"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_CtdGwfZOEeS1bO4bMzbjfg" name="getModelSet" visibility="public">
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_Cte78PZOEeS1bO4bMzbjfg" type="_CtbRkvZOEeS1bO4bMzbjfg" direction="return"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_CtfjAPZOEeS1bO4bMzbjfg" name="undo" visibility="public"/>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_CtgxIPZOEeS1bO4bMzbjfg" name="redo" visibility="public"/>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_Cth_QPZOEeS1bO4bMzbjfg" name="getIOperationHistory" visibility="public">
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_CtkbgfZOEeS1bO4bMzbjfg" type="_CtkbgPZOEeS1bO4bMzbjfg" direction="return"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_CtkbgvZOEeS1bO4bMzbjfg" name="getTransactionalEditingDomain" visibility="public">
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_CtmQsPZOEeS1bO4bMzbjfg" type="_4tSwwvZKEeS1bO4bMzbjfg" direction="return"/>
+                </ownedOperation>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_5dgswPZKEeS1bO4bMzbjfg" name="EclipseProject" visibility="public">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_-pSGsPZNEeS1bO4bMzbjfg">
+                  <body>&#xD;
+ * This class allows to create or load an Eclipse Project.&#xD;
+ * This is the projects found in the project explorer.&#xD;
+ * This class is mainly used in tests.&#xD;
+ *&#xD;
+ * @author cedric dumoulin&#xD;
+ *&#xD;
+ </body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_-pds4PZNEeS1bO4bMzbjfg" name="project" visibility="protected" type="_-pdF0PZNEeS1bO4bMzbjfg" isUnique="false">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_-pmPwPZNEeS1bO4bMzbjfg">
+                    <body>&#xD;
+	 * The underlying Eclipse project.&#xD;
+	 *&#xD;
+	 </body>
+                  </ownedComment>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_-pnd4fZNEeS1bO4bMzbjfg" name="monitor" visibility="protected" type="_-pnd4PZNEeS1bO4bMzbjfg" isUnique="false"/>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_-posAPZNEeS1bO4bMzbjfg" name="initProject" visibility="protected">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_-ppTEPZNEeS1bO4bMzbjfg">
+                    <body>&#xD;
+	 * Create or load the project.&#xD;
+	 *&#xD;
+	 * @param projectName&#xD;
+	 * @throws ExecutionException&#xD;
+	 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_-ppTEfZNEeS1bO4bMzbjfg" name="projectName" type="_4tp9IvZKEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_-pp6IPZNEeS1bO4bMzbjfg" name="getProject" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_-pqhMPZNEeS1bO4bMzbjfg">
+                    <body>&#xD;
+	 * @return the project&#xD;
+	 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_-prIQPZNEeS1bO4bMzbjfg" type="_-pdF0PZNEeS1bO4bMzbjfg" direction="return"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_-prIQfZNEeS1bO4bMzbjfg" name="copyResource" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_-prvUPZNEeS1bO4bMzbjfg">
+                    <body>&#xD;
+	 *&#xD;
+	 * @param fromBundle&#xD;
+	 * @param fromResourceName&#xD;
+	 * @param toResourceName&#xD;
+	 * @return&#xD;
+	 * @throws ExecutionException&#xD;
+	 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_-psWYfZNEeS1bO4bMzbjfg" type="_-psWYPZNEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_-ps9cPZNEeS1bO4bMzbjfg" name="fromBundle" type="_4tp9IvZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_-ps9cfZNEeS1bO4bMzbjfg" name="fromResourceName" type="_4tp9IvZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_-ptkgPZNEeS1bO4bMzbjfg" name="toResourceName" type="_4tp9IvZKEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_-ptkgfZNEeS1bO4bMzbjfg" name="copyResource" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_-puyoPZNEeS1bO4bMzbjfg">
+                    <body>&#xD;
+	 * Copy the specified resource from the specified bundle to this project.&#xD;
+	 * Use the same path in src and target.&#xD;
+	 *&#xD;
+	 * @param fromBundle&#xD;
+	 * @param fromResourceName&#xD;
+	 * @return&#xD;
+	 * @throws ExecutionException&#xD;
+	 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_-pvZsPZNEeS1bO4bMzbjfg" type="_-psWYPZNEeS1bO4bMzbjfg" direction="return"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_-pvZsfZNEeS1bO4bMzbjfg" name="fromBundle" type="_4tp9IvZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_-pwAwPZNEeS1bO4bMzbjfg" name="fromResourceName" type="_4tp9IvZKEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_-pwn0PZNEeS1bO4bMzbjfg" name="copyResources" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_-pxO4PZNEeS1bO4bMzbjfg">
+                    <body>&#xD;
+	 *&#xD;
+	 * @param fromBundle&#xD;
+	 * @param fromResourceNames&#xD;
+	 * @throws ExecutionException&#xD;
+	 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_-px18PZNEeS1bO4bMzbjfg" name="fromBundle" type="_4tp9IvZKEeS1bO4bMzbjfg"/>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_-pydAPZNEeS1bO4bMzbjfg" name="fromResourceNames" type="_4tp9IvZKEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_-pydAfZNEeS1bO4bMzbjfg" name="ensureFolders" visibility="protected">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_-pzrIPZNEeS1bO4bMzbjfg">
+                    <body>&#xD;
+	 * Ensure that the intermediates folders exist in the project.&#xD;
+	 *&#xD;
+	 * @param project&#xD;
+	 * @param name&#xD;
+	 * @throws CoreException&#xD;
+	 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_-p0SMPZNEeS1bO4bMzbjfg" name="file" type="_-psWYPZNEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_-p05QfZNEeS1bO4bMzbjfg" name="createFolder" visibility="private">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_-p2ucPZNEeS1bO4bMzbjfg">
+                    <body>&#xD;
+	 *&#xD;
+	 * @param folderPath&#xD;
+	 * @throws CoreException&#xD;
+	 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_-p3VgPZNEeS1bO4bMzbjfg" name="folderPath" type="_-p05QPZNEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_-p38kPZNEeS1bO4bMzbjfg" name="createFolders" visibility="public">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_-p6Y0PZNEeS1bO4bMzbjfg">
+                    <body>&#xD;
+	 * Creates all the folders that are needed to contains the resource.&#xD;
+	 *&#xD;
+	 * @param modelName&#xD;
+	 * @throws ExecutionException&#xD;
+	 </body>
+                  </ownedComment>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_-p6_4PZNEeS1bO4bMzbjfg" name="modelName" type="_4tp9IvZKEeS1bO4bMzbjfg"/>
+                </ownedOperation>
+              </packagedElement>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Package" xmi:id="_5_q-oPZKEeS1bO4bMzbjfg" name="exceptions">
+              <packagedElement xmi:type="uml:Class" xmi:id="_5_sz0PZKEeS1bO4bMzbjfg" name="CreationCommandNotFoundException" visibility="public">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_5_uB8PZKEeS1bO4bMzbjfg">
                   <body>
- * Provides methods useful to modify a model.
+ * Exception thrown when the creation command is not found.
  * 
  * @author Thibaud VERBAERE
  *
  </body>
                 </ownedComment>
-                <ownedAttribute xmi:type="uml:Property" xmi:id="_tjcqcPTJEeSBBoW5mwOFzw" name="model" visibility="private" type="_7L-dAPTGEeSBBoW5mwOFzw" isUnique="false">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_tjd4kPTJEeSBBoW5mwOFzw">
+                <generalization xmi:type="uml:Generalization" xmi:id="_5_vQEPZKEeS1bO4bMzbjfg" general="_5_upAPZKEeS1bO4bMzbjfg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_5_xsUPZKEeS1bO4bMzbjfg" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" type="_5_v3IPZKEeS1bO4bMzbjfg" isUnique="false"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_5_upAPZKEeS1bO4bMzbjfg" name="DrawerException" visibility="public">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_5_0IkPZKEeS1bO4bMzbjfg">
+                  <body>
+ * Exception thrown during the plugin execution.
+ * 
+ * @author Thibaud VERBAERE
+ *
+ </body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_5_0vofZKEeS1bO4bMzbjfg" general="_5_0voPZKEeS1bO4bMzbjfg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_5_1WsPZKEeS1bO4bMzbjfg" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" type="_5_v3IPZKEeS1bO4bMzbjfg" isUnique="false"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_5_19wPZKEeS1bO4bMzbjfg" name="InvalidContainerException" visibility="public">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_5_2k0PZKEeS1bO4bMzbjfg">
+                  <body>
+ * Is thrown when an element cannot be placed in the container
+ * @author rakotoarivony
+ *
+ </body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_5_2k0fZKEeS1bO4bMzbjfg" general="_5_upAPZKEeS1bO4bMzbjfg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_5_3L4PZKEeS1bO4bMzbjfg" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" type="_5_v3IPZKEeS1bO4bMzbjfg" isUnique="false">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_5_3y8PZKEeS1bO4bMzbjfg">
                     <body>
-	 * The UML model.
+	 *
 	 </body>
                   </ownedComment>
                 </ownedAttribute>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_tjefoPTJEeSBBoW5mwOFzw" name="delete" visibility="public">
-                  <ownedComment xmi:type="uml:Comment" xmi:id="_tjfGsPTJEeSBBoW5mwOFzw">
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_5_4aAPZKEeS1bO4bMzbjfg" name="LocationNotFoundException" visibility="public">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_5_5BEPZKEeS1bO4bMzbjfg">
+                  <body>
+ * Exception thrown when getLocation is called on views without location.
+ * 
+ * @author Thibaud VERBAERE
+ *
+ </body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_5_5BEfZKEeS1bO4bMzbjfg" general="_5_upAPZKEeS1bO4bMzbjfg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_5_5oIPZKEeS1bO4bMzbjfg" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" type="_5_v3IPZKEeS1bO4bMzbjfg" isUnique="false"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_6AA84PZKEeS1bO4bMzbjfg" name="NonExistantViewException" visibility="public">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_6ABj8PZKEeS1bO4bMzbjfg">
+                  <body>
+ * Is thrown when we want to access to a view that does not exists
+ * @author rakotoarivony
+ *
+ </body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_6ABj8fZKEeS1bO4bMzbjfg" general="_5_upAPZKEeS1bO4bMzbjfg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_6ABj8vZKEeS1bO4bMzbjfg" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" type="_5_v3IPZKEeS1bO4bMzbjfg" isUnique="false">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_6ACLAPZKEeS1bO4bMzbjfg">
                     <body>
-	 * Deletes an element on the model referenced of this helper.
-	 * 
-	 * @param element
-	 *            the element to delete
-	 * 
-	 * @throws NotFoundException
-	 *             if the element cannot be found
+	 *
 	 </body>
                   </ownedComment>
-                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_tjftwPTJEeSBBoW5mwOFzw" name="element" type="_7MKqQPTGEeSBBoW5mwOFzw"/>
-                </ownedOperation>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_6ADZIPZKEeS1bO4bMzbjfg" name="NotAValidLocationException" visibility="public">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_6ADZIfZKEeS1bO4bMzbjfg">
+                  <body>
+ * Exception thrown when an user want to display an element at a bad location.
+ * 
+ * @author Thibaud VERBAERE
+ *
+ </body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_6ADZIvZKEeS1bO4bMzbjfg" general="_5_upAPZKEeS1bO4bMzbjfg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_6AEAMPZKEeS1bO4bMzbjfg" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" type="_5_v3IPZKEeS1bO4bMzbjfg" isUnique="false"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_6AFOUPZKEeS1bO4bMzbjfg" name="NotAValidSizeException" visibility="public">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_6AF1YPZKEeS1bO4bMzbjfg">
+                  <body>
+ * Exception thrown when an user want to display an element with a bad size.
+ * 
+ * @author Thibaud VERBAERE
+ *
+ </body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_6AGccPZKEeS1bO4bMzbjfg" general="_5_upAPZKEeS1bO4bMzbjfg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_6AHDgPZKEeS1bO4bMzbjfg" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" type="_5_v3IPZKEeS1bO4bMzbjfg" isUnique="false"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_6AIRoPZKEeS1bO4bMzbjfg" name="NotAnEdgeException" visibility="public">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_6AI4sPZKEeS1bO4bMzbjfg">
+                  <body>
+ * Exception thrown when an user want to change or return the location of a
+ * edge source/target.
+ * 
+ * @author Thibaud VERBAERE
+ *
+ </body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_6AJfwPZKEeS1bO4bMzbjfg" general="_5_upAPZKEeS1bO4bMzbjfg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_6AKG0PZKEeS1bO4bMzbjfg" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" type="_5_v3IPZKEeS1bO4bMzbjfg" isUnique="false"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_6AL8APZKEeS1bO4bMzbjfg" name="NotDimensionedViewException" visibility="public">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_6AL8AfZKEeS1bO4bMzbjfg">
+                  <body>
+ * Exception thown when getHeigth and getWidth are called on views with no dimensions.
+ * 
+ * @author Thibaud VERBAERE
+ *
+ </body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_6AMjEPZKEeS1bO4bMzbjfg" general="_5_upAPZKEeS1bO4bMzbjfg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_6AMjEfZKEeS1bO4bMzbjfg" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" type="_5_v3IPZKEeS1bO4bMzbjfg" isUnique="false"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_6ANxMPZKEeS1bO4bMzbjfg" name="NotResizableViewException" visibility="public">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_6AOYQPZKEeS1bO4bMzbjfg">
+                  <body>
+ * Exception thrown when resize is called on not a resizable views.
+ * 
+ * @author Thibaud VERBAERE
+ *
+ </body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_6AOYQfZKEeS1bO4bMzbjfg" general="_5_upAPZKEeS1bO4bMzbjfg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_6AO_UPZKEeS1bO4bMzbjfg" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" type="_5_v3IPZKEeS1bO4bMzbjfg" isUnique="false"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_6AQNcPZKEeS1bO4bMzbjfg" name="TargetOrSourceNotDrawnException" visibility="public">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_6AQ0gPZKEeS1bO4bMzbjfg">
+                  <body>
+ * Exception thrown when draw is called with cascade mode on a relationship but
+ * the target or/and the source of this relationship is not drawn.
+ * 
+ * @author Thibaud VERBAERE
+ *
+ </body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_6AQ0gfZKEeS1bO4bMzbjfg" general="_5_upAPZKEeS1bO4bMzbjfg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_6ARbkPZKEeS1bO4bMzbjfg" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" type="_5_v3IPZKEeS1bO4bMzbjfg" isUnique="false"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_6ATQwPZKEeS1bO4bMzbjfg" name="UnmovableViewException" visibility="public">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_6ATQwfZKEeS1bO4bMzbjfg">
+                  <body>
+ * Exception thrown if a view is unmovable.
+ * 
+ * @author Thibaud VERBAERE
+ *
+ </body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_6AT30PZKEeS1bO4bMzbjfg" general="_5_upAPZKEeS1bO4bMzbjfg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_6AT30fZKEeS1bO4bMzbjfg" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" type="_5_v3IPZKEeS1bO4bMzbjfg" isUnique="false"/>
               </packagedElement>
             </packagedElement>
           </packagedElement>
@@ -1148,25 +1455,14 @@
       </packagedElement>
     </packagedElement>
   </packagedElement>
-  <packagedElement xmi:type="uml:Model" xmi:id="_7LyPwPTGEeSBBoW5mwOFzw" name="draw2d">
-    <packagedElement xmi:type="uml:Package" xmi:id="_7Ly20PTGEeSBBoW5mwOFzw" name="org">
-      <packagedElement xmi:type="uml:Package" xmi:id="_7Lzd4PTGEeSBBoW5mwOFzw" name="eclipse">
-        <packagedElement xmi:type="uml:Package" xmi:id="_7Lzd4fTGEeSBBoW5mwOFzw" name="draw2d">
-          <packagedElement xmi:type="uml:Package" xmi:id="_7L0E8PTGEeSBBoW5mwOFzw" name="geometry">
-            <packagedElement xmi:type="uml:Class" xmi:id="_7L0E8fTGEeSBBoW5mwOFzw" name="Point"/>
-          </packagedElement>
-        </packagedElement>
-      </packagedElement>
-    </packagedElement>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Model" xmi:id="_7L8AwPTGEeSBBoW5mwOFzw" name="uml">
-    <packagedElement xmi:type="uml:Package" xmi:id="_7L8n0PTGEeSBBoW5mwOFzw" name="org">
-      <packagedElement xmi:type="uml:Package" xmi:id="_7L8n0fTGEeSBBoW5mwOFzw" name="eclipse">
-        <packagedElement xmi:type="uml:Package" xmi:id="_7L9O4PTGEeSBBoW5mwOFzw" name="papyrus">
-          <packagedElement xmi:type="uml:Package" xmi:id="_7L9O4fTGEeSBBoW5mwOFzw" name="uml">
-            <packagedElement xmi:type="uml:Package" xmi:id="_7L918PTGEeSBBoW5mwOFzw" name="tools">
-              <packagedElement xmi:type="uml:Package" xmi:id="_7L918fTGEeSBBoW5mwOFzw" name="model">
-                <packagedElement xmi:type="uml:Class" xmi:id="_7L-dAPTGEeSBBoW5mwOFzw" name="UmlModel"/>
+  <packagedElement xmi:type="uml:Model" xmi:id="_0ftWAPZKEeS1bO4bMzbjfg" name="uml">
+    <packagedElement xmi:type="uml:Package" xmi:id="_0ftWAfZKEeS1bO4bMzbjfg" name="org">
+      <packagedElement xmi:type="uml:Package" xmi:id="_0ft9EPZKEeS1bO4bMzbjfg" name="eclipse">
+        <packagedElement xmi:type="uml:Package" xmi:id="_0ft9EfZKEeS1bO4bMzbjfg" name="papyrus">
+          <packagedElement xmi:type="uml:Package" xmi:id="_0fukIPZKEeS1bO4bMzbjfg" name="uml">
+            <packagedElement xmi:type="uml:Package" xmi:id="_0fvLMPZKEeS1bO4bMzbjfg" name="tools">
+              <packagedElement xmi:type="uml:Package" xmi:id="_0fvLMfZKEeS1bO4bMzbjfg" name="model">
+                <packagedElement xmi:type="uml:Class" xmi:id="_0fvyQPZKEeS1bO4bMzbjfg" name="UmlModel"/>
               </packagedElement>
             </packagedElement>
           </packagedElement>
@@ -1174,116 +1470,128 @@
       </packagedElement>
     </packagedElement>
   </packagedElement>
-  <packagedElement xmi:type="uml:Model" xmi:id="_7L_rIfTGEeSBBoW5mwOFzw" name="gmf">
-    <packagedElement xmi:type="uml:Package" xmi:id="_7MASMPTGEeSBBoW5mwOFzw" name="org">
-      <packagedElement xmi:type="uml:Package" xmi:id="_7MASMfTGEeSBBoW5mwOFzw" name="eclipse">
-        <packagedElement xmi:type="uml:Package" xmi:id="_7MA5QPTGEeSBBoW5mwOFzw" name="gmf">
-          <packagedElement xmi:type="uml:Package" xmi:id="_7MA5QfTGEeSBBoW5mwOFzw" name="runtime">
-            <packagedElement xmi:type="uml:Package" xmi:id="_7MBgUPTGEeSBBoW5mwOFzw" name="diagram">
-              <packagedElement xmi:type="uml:Package" xmi:id="_7MBgUfTGEeSBBoW5mwOFzw" name="ui">
-                <packagedElement xmi:type="uml:Package" xmi:id="_7MCHYPTGEeSBBoW5mwOFzw" name="editparts">
-                  <packagedElement xmi:type="uml:Class" xmi:id="_7MCHYfTGEeSBBoW5mwOFzw" name="DiagramEditPart"/>
+  <packagedElement xmi:type="uml:Model" xmi:id="_0fyOgPZKEeS1bO4bMzbjfg" name="uml2">
+    <packagedElement xmi:type="uml:Package" xmi:id="_0fyOgfZKEeS1bO4bMzbjfg" name="org">
+      <packagedElement xmi:type="uml:Package" xmi:id="_0fy1kPZKEeS1bO4bMzbjfg" name="eclipse">
+        <packagedElement xmi:type="uml:Package" xmi:id="_0fy1kfZKEeS1bO4bMzbjfg" name="uml2">
+          <packagedElement xmi:type="uml:Package" xmi:id="_0fzcoPZKEeS1bO4bMzbjfg" name="uml">
+            <packagedElement xmi:type="uml:Class" xmi:id="_0fzcofZKEeS1bO4bMzbjfg" name="Element"/>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Model" xmi:id="_4tMDEPZKEeS1bO4bMzbjfg" name="draw2d">
+    <packagedElement xmi:type="uml:Package" xmi:id="_4tMDEfZKEeS1bO4bMzbjfg" name="org">
+      <packagedElement xmi:type="uml:Package" xmi:id="_4tMqIPZKEeS1bO4bMzbjfg" name="eclipse">
+        <packagedElement xmi:type="uml:Package" xmi:id="_4tMqIfZKEeS1bO4bMzbjfg" name="draw2d">
+          <packagedElement xmi:type="uml:Package" xmi:id="_4tMqIvZKEeS1bO4bMzbjfg" name="geometry">
+            <packagedElement xmi:type="uml:Class" xmi:id="_4tNRMPZKEeS1bO4bMzbjfg" name="Point"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_4t7p8PZKEeS1bO4bMzbjfg" name="PrecisionPoint"/>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Model" xmi:id="_4tPGYPZKEeS1bO4bMzbjfg" name="gmf">
+    <packagedElement xmi:type="uml:Package" xmi:id="_4tPGYfZKEeS1bO4bMzbjfg" name="org">
+      <packagedElement xmi:type="uml:Package" xmi:id="_4tPtcPZKEeS1bO4bMzbjfg" name="eclipse">
+        <packagedElement xmi:type="uml:Package" xmi:id="_4tPtcfZKEeS1bO4bMzbjfg" name="gmf">
+          <packagedElement xmi:type="uml:Package" xmi:id="_4tPtcvZKEeS1bO4bMzbjfg" name="runtime">
+            <packagedElement xmi:type="uml:Package" xmi:id="_4tQUgPZKEeS1bO4bMzbjfg" name="diagram">
+              <packagedElement xmi:type="uml:Package" xmi:id="_4tQUgfZKEeS1bO4bMzbjfg" name="ui">
+                <packagedElement xmi:type="uml:Package" xmi:id="_4tQUgvZKEeS1bO4bMzbjfg" name="editparts">
+                  <packagedElement xmi:type="uml:Class" xmi:id="_4tQ7kPZKEeS1bO4bMzbjfg" name="DiagramEditPart"/>
                 </packagedElement>
               </packagedElement>
             </packagedElement>
-            <packagedElement xmi:type="uml:Package" xmi:id="_7MWQcPTGEeSBBoW5mwOFzw" name="notation">
-              <packagedElement xmi:type="uml:Class" xmi:id="_7MWQcfTGEeSBBoW5mwOFzw" name="View"/>
+            <packagedElement xmi:type="uml:Package" xmi:id="_4tVNAvZKEeS1bO4bMzbjfg" name="notation">
+              <packagedElement xmi:type="uml:Class" xmi:id="_4tV0EPZKEeS1bO4bMzbjfg" name="View"/>
             </packagedElement>
           </packagedElement>
         </packagedElement>
       </packagedElement>
     </packagedElement>
   </packagedElement>
-  <packagedElement xmi:type="uml:Model" xmi:id="_7MEjoPTGEeSBBoW5mwOFzw" name="emf">
-    <packagedElement xmi:type="uml:Package" xmi:id="_7MFKsPTGEeSBBoW5mwOFzw" name="org">
-      <packagedElement xmi:type="uml:Package" xmi:id="_7MFKsfTGEeSBBoW5mwOFzw" name="eclipse">
-        <packagedElement xmi:type="uml:Package" xmi:id="_7MFxwPTGEeSBBoW5mwOFzw" name="emf">
-          <packagedElement xmi:type="uml:Package" xmi:id="_7MFxwfTGEeSBBoW5mwOFzw" name="transaction">
-            <packagedElement xmi:type="uml:Class" xmi:id="_7MGY0PTGEeSBBoW5mwOFzw" name="TransactionalEditingDomain"/>
+  <packagedElement xmi:type="uml:Model" xmi:id="_4tSJsPZKEeS1bO4bMzbjfg" name="emf">
+    <packagedElement xmi:type="uml:Package" xmi:id="_4tSJsfZKEeS1bO4bMzbjfg" name="org">
+      <packagedElement xmi:type="uml:Package" xmi:id="_4tSJsvZKEeS1bO4bMzbjfg" name="eclipse">
+        <packagedElement xmi:type="uml:Package" xmi:id="_4tSwwPZKEeS1bO4bMzbjfg" name="emf">
+          <packagedElement xmi:type="uml:Package" xmi:id="_4tSwwfZKEeS1bO4bMzbjfg" name="transaction">
+            <packagedElement xmi:type="uml:Class" xmi:id="_4tSwwvZKEeS1bO4bMzbjfg" name="TransactionalEditingDomain"/>
           </packagedElement>
         </packagedElement>
       </packagedElement>
     </packagedElement>
   </packagedElement>
-  <packagedElement xmi:type="uml:Model" xmi:id="_7MIOAPTGEeSBBoW5mwOFzw" name="uml2">
-    <packagedElement xmi:type="uml:Package" xmi:id="_7MI1EPTGEeSBBoW5mwOFzw" name="org">
-      <packagedElement xmi:type="uml:Package" xmi:id="_7MI1EfTGEeSBBoW5mwOFzw" name="eclipse">
-        <packagedElement xmi:type="uml:Package" xmi:id="_7MJcIPTGEeSBBoW5mwOFzw" name="uml2">
-          <packagedElement xmi:type="uml:Package" xmi:id="_7MKDMPTGEeSBBoW5mwOFzw" name="uml">
-            <packagedElement xmi:type="uml:Class" xmi:id="_7MKqQPTGEeSBBoW5mwOFzw" name="Element"/>
-          </packagedElement>
+  <packagedElement xmi:type="uml:Model" xmi:id="_4tT-4fZKEeS1bO4bMzbjfg" name="datatype">
+    <packagedElement xmi:type="uml:Package" xmi:id="_4tUl8PZKEeS1bO4bMzbjfg" name="datatype">
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_4tUl8fZKEeS1bO4bMzbjfg" name="Boolean"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_4txR4PZKEeS1bO4bMzbjfg" name="Integer"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_5_v3IPZKEeS1bO4bMzbjfg" name="Long"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Model" xmi:id="_4tpWEfZKEeS1bO4bMzbjfg" name="java">
+    <packagedElement xmi:type="uml:Package" xmi:id="_4tp9IPZKEeS1bO4bMzbjfg" name="java">
+      <packagedElement xmi:type="uml:Package" xmi:id="_4tp9IfZKEeS1bO4bMzbjfg" name="lang">
+        <packagedElement xmi:type="uml:Class" xmi:id="_4tp9IvZKEeS1bO4bMzbjfg" name="String"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_5_0voPZKEeS1bO4bMzbjfg" name="Exception"/>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Model" xmi:id="_4uMvsPZKEeS1bO4bMzbjfg" name="gef">
+    <packagedElement xmi:type="uml:Package" xmi:id="_4uMvsfZKEeS1bO4bMzbjfg" name="org">
+      <packagedElement xmi:type="uml:Package" xmi:id="_4uNWwPZKEeS1bO4bMzbjfg" name="eclipse">
+        <packagedElement xmi:type="uml:Package" xmi:id="_4uNWwfZKEeS1bO4bMzbjfg" name="gef">
+          <packagedElement xmi:type="uml:Class" xmi:id="_4uN90PZKEeS1bO4bMzbjfg" name="EditPart"/>
         </packagedElement>
       </packagedElement>
     </packagedElement>
   </packagedElement>
-  <packagedElement xmi:type="uml:Model" xmi:id="_7MLRUPTGEeSBBoW5mwOFzw" name="datatype">
-    <packagedElement xmi:type="uml:Package" xmi:id="_7ML4YPTGEeSBBoW5mwOFzw" name="datatype">
-      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_7MO7sPTGEeSBBoW5mwOFzw" name="Boolean"/>
-      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_7NEpMfTGEeSBBoW5mwOFzw" name="Integer"/>
-      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_4jXmkPTHEeSBBoW5mwOFzw" name="Long"/>
-    </packagedElement>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Model" xmi:id="_7M6RIPTGEeSBBoW5mwOFzw" name="java">
-    <packagedElement xmi:type="uml:Package" xmi:id="_7M64MPTGEeSBBoW5mwOFzw" name="java">
-      <packagedElement xmi:type="uml:Package" xmi:id="_7M64MfTGEeSBBoW5mwOFzw" name="lang">
-        <packagedElement xmi:type="uml:Class" xmi:id="_7M7fQPTGEeSBBoW5mwOFzw" name="String"/>
-        <packagedElement xmi:type="uml:Class" xmi:id="_4jap4fTHEeSBBoW5mwOFzw" name="Exception"/>
-      </packagedElement>
-    </packagedElement>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Model" xmi:id="_7NaAYPTGEeSBBoW5mwOFzw" name="gef">
-    <packagedElement xmi:type="uml:Package" xmi:id="_7NaAYfTGEeSBBoW5mwOFzw" name="org">
-      <packagedElement xmi:type="uml:Package" xmi:id="_7NancPTGEeSBBoW5mwOFzw" name="eclipse">
-        <packagedElement xmi:type="uml:Package" xmi:id="_7NancfTGEeSBBoW5mwOFzw" name="gef">
-          <packagedElement xmi:type="uml:Class" xmi:id="_7NbOgPTGEeSBBoW5mwOFzw" name="EditPart"/>
-        </packagedElement>
-      </packagedElement>
-    </packagedElement>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Model" xmi:id="_4iuGUPTHEeSBBoW5mwOFzw" name="core">
-    <packagedElement xmi:type="uml:Package" xmi:id="_4iuGUfTHEeSBBoW5mwOFzw" name="org">
-      <packagedElement xmi:type="uml:Package" xmi:id="_4iutYPTHEeSBBoW5mwOFzw" name="eclipse">
-        <packagedElement xmi:type="uml:Package" xmi:id="_4iutYfTHEeSBBoW5mwOFzw" name="core">
-          <packagedElement xmi:type="uml:Package" xmi:id="_4ivUcPTHEeSBBoW5mwOFzw" name="resources">
-            <packagedElement xmi:type="uml:Interface" xmi:id="_4ivUcfTHEeSBBoW5mwOFzw" name="IProject"/>
-            <packagedElement xmi:type="uml:Interface" xmi:id="_4i3QQPTHEeSBBoW5mwOFzw" name="IFile"/>
+  <packagedElement xmi:type="uml:Model" xmi:id="_-paCgPZNEeS1bO4bMzbjfg" name="core">
+    <packagedElement xmi:type="uml:Package" xmi:id="_-papkPZNEeS1bO4bMzbjfg" name="org">
+      <packagedElement xmi:type="uml:Package" xmi:id="_-pbQoPZNEeS1bO4bMzbjfg" name="eclipse">
+        <packagedElement xmi:type="uml:Package" xmi:id="_-pb3sPZNEeS1bO4bMzbjfg" name="core">
+          <packagedElement xmi:type="uml:Package" xmi:id="_-pcewPZNEeS1bO4bMzbjfg" name="resources">
+            <packagedElement xmi:type="uml:Interface" xmi:id="_-pdF0PZNEeS1bO4bMzbjfg" name="IProject"/>
+            <packagedElement xmi:type="uml:Interface" xmi:id="_-psWYPZNEeS1bO4bMzbjfg" name="IFile"/>
           </packagedElement>
-          <packagedElement xmi:type="uml:Package" xmi:id="_4ixJoPTHEeSBBoW5mwOFzw" name="runtime">
-            <packagedElement xmi:type="uml:Interface" xmi:id="_4ixwsPTHEeSBBoW5mwOFzw" name="IProgressMonitor"/>
-            <packagedElement xmi:type="uml:Interface" xmi:id="_4i9W4fTHEeSBBoW5mwOFzw" name="IPath"/>
+          <packagedElement xmi:type="uml:Package" xmi:id="_-pm20PZNEeS1bO4bMzbjfg" name="runtime">
+            <packagedElement xmi:type="uml:Interface" xmi:id="_-pnd4PZNEeS1bO4bMzbjfg" name="IProgressMonitor"/>
+            <packagedElement xmi:type="uml:Interface" xmi:id="_-p05QPZNEeS1bO4bMzbjfg" name="IPath"/>
           </packagedElement>
-          <packagedElement xmi:type="uml:Package" xmi:id="_4j4j8fTHEeSBBoW5mwOFzw" name="commands">
-            <packagedElement xmi:type="uml:Package" xmi:id="_4j5LAPTHEeSBBoW5mwOFzw" name="operations">
-              <packagedElement xmi:type="uml:Interface" xmi:id="_4j5LAfTHEeSBBoW5mwOFzw" name="IOperationHistory"/>
+          <packagedElement xmi:type="uml:Package" xmi:id="_Ctj0cPZOEeS1bO4bMzbjfg" name="commands">
+            <packagedElement xmi:type="uml:Package" xmi:id="_Ctj0cfZOEeS1bO4bMzbjfg" name="operations">
+              <packagedElement xmi:type="uml:Interface" xmi:id="_CtkbgPZOEeS1bO4bMzbjfg" name="IOperationHistory"/>
             </packagedElement>
           </packagedElement>
         </packagedElement>
       </packagedElement>
     </packagedElement>
   </packagedElement>
-  <packagedElement xmi:type="uml:Model" xmi:id="_4jp6cPTHEeSBBoW5mwOFzw" name="ui">
-    <packagedElement xmi:type="uml:Package" xmi:id="_4jqhgPTHEeSBBoW5mwOFzw" name="org">
-      <packagedElement xmi:type="uml:Package" xmi:id="_4jqhgfTHEeSBBoW5mwOFzw" name="eclipse">
-        <packagedElement xmi:type="uml:Package" xmi:id="_4jrIkPTHEeSBBoW5mwOFzw" name="ui">
-          <packagedElement xmi:type="uml:Interface" xmi:id="_4jrIkfTHEeSBBoW5mwOFzw" name="IWorkbenchPage"/>
+  <packagedElement xmi:type="uml:Model" xmi:id="_CtLZ8PZOEeS1bO4bMzbjfg" name="ui">
+    <packagedElement xmi:type="uml:Package" xmi:id="_CtLZ8fZOEeS1bO4bMzbjfg" name="org">
+      <packagedElement xmi:type="uml:Package" xmi:id="_CtLZ8vZOEeS1bO4bMzbjfg" name="eclipse">
+        <packagedElement xmi:type="uml:Package" xmi:id="_CtMBAPZOEeS1bO4bMzbjfg" name="ui">
+          <packagedElement xmi:type="uml:Interface" xmi:id="_CtMBAfZOEeS1bO4bMzbjfg" name="IWorkbenchPage"/>
         </packagedElement>
       </packagedElement>
     </packagedElement>
   </packagedElement>
-  <packagedElement xmi:type="uml:Model" xmi:id="_4jsWsPTHEeSBBoW5mwOFzw" name="infra">
-    <packagedElement xmi:type="uml:Package" xmi:id="_4jsWsfTHEeSBBoW5mwOFzw" name="org">
-      <packagedElement xmi:type="uml:Package" xmi:id="_4js9wPTHEeSBBoW5mwOFzw" name="eclipse">
-        <packagedElement xmi:type="uml:Package" xmi:id="_4js9wfTHEeSBBoW5mwOFzw" name="papyrus">
-          <packagedElement xmi:type="uml:Package" xmi:id="_4jtk0PTHEeSBBoW5mwOFzw" name="infra">
-            <packagedElement xmi:type="uml:Package" xmi:id="_4jtk0fTHEeSBBoW5mwOFzw" name="core">
-              <packagedElement xmi:type="uml:Package" xmi:id="_4jtk0vTHEeSBBoW5mwOFzw" name="editor">
-                <packagedElement xmi:type="uml:Interface" xmi:id="_4juL4PTHEeSBBoW5mwOFzw" name="IMultiDiagramEditor"/>
+  <packagedElement xmi:type="uml:Model" xmi:id="_CtNPIfZOEeS1bO4bMzbjfg" name="infra">
+    <packagedElement xmi:type="uml:Package" xmi:id="_CtN2MPZOEeS1bO4bMzbjfg" name="org">
+      <packagedElement xmi:type="uml:Package" xmi:id="_CtN2MfZOEeS1bO4bMzbjfg" name="eclipse">
+        <packagedElement xmi:type="uml:Package" xmi:id="_CtN2MvZOEeS1bO4bMzbjfg" name="papyrus">
+          <packagedElement xmi:type="uml:Package" xmi:id="_CtN2M_ZOEeS1bO4bMzbjfg" name="infra">
+            <packagedElement xmi:type="uml:Package" xmi:id="_CtOdQPZOEeS1bO4bMzbjfg" name="core">
+              <packagedElement xmi:type="uml:Package" xmi:id="_CtOdQfZOEeS1bO4bMzbjfg" name="editor">
+                <packagedElement xmi:type="uml:Interface" xmi:id="_CtOdQvZOEeS1bO4bMzbjfg" name="IMultiDiagramEditor"/>
               </packagedElement>
-              <packagedElement xmi:type="uml:Package" xmi:id="_4j05kPTHEeSBBoW5mwOFzw" name="services">
-                <packagedElement xmi:type="uml:Class" xmi:id="_4j05kfTHEeSBBoW5mwOFzw" name="ServicesRegistry"/>
+              <packagedElement xmi:type="uml:Package" xmi:id="_CtaqgPZOEeS1bO4bMzbjfg" name="services">
+                <packagedElement xmi:type="uml:Class" xmi:id="_CtaqgfZOEeS1bO4bMzbjfg" name="ServicesRegistry"/>
               </packagedElement>
-              <packagedElement xmi:type="uml:Package" xmi:id="_4j2HsPTHEeSBBoW5mwOFzw" name="resource">
-                <packagedElement xmi:type="uml:Class" xmi:id="_4j2HsfTHEeSBBoW5mwOFzw" name="ModelSet"/>
+              <packagedElement xmi:type="uml:Package" xmi:id="_CtbRkfZOEeS1bO4bMzbjfg" name="resource">
+                <packagedElement xmi:type="uml:Class" xmi:id="_CtbRkvZOEeS1bO4bMzbjfg" name="ModelSet"/>
               </packagedElement>
             </packagedElement>
           </packagedElement>
