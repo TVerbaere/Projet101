@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.PrecisionPoint;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
@@ -18,8 +19,11 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.requests.DropObjectsRequest;
 import org.eclipse.gmf.runtime.emf.core.util.EMFCoreUtil;
+import org.eclipse.gmf.runtime.notation.Edge;
+import org.eclipse.gmf.runtime.notation.IdentityAnchor;
 import org.eclipse.gmf.runtime.notation.LayoutConstraint;
 import org.eclipse.gmf.runtime.notation.Node;
+import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.gmf.runtime.notation.impl.BoundsImpl;
@@ -28,10 +32,12 @@ import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NonExistantViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotAValidLocationException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotAValidSizeException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.NotAnEdgeException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotDimensionedViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotResizableViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.TargetOrSourceNotDrawnException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.UnmovableViewException;
+import org.eclipse.papyrus.diagramdrawer.utils.ExecutionException;
 import org.eclipse.papyrus.infra.core.resource.NotFoundException;
 import org.eclipse.papyrus.infra.gmfdiag.menu.utils.DeleteActionUtil;
 import org.eclipse.papyrus.uml.diagram.menu.actions.SizeAction;
@@ -110,15 +116,14 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 			if (cascade) {
 				// If the mode cascade is active then draw source and target element.
 				for (Element e : related) {
-					if (!this.isDrawn(e)) {
-						try {
+					try {
+						if (!this.isDrawn(e))
 							this.draw(e,DEFAULT_LOCATION,cascade);
-						}
-						catch (NotAValidLocationException e1) {
-							// Ignore : Impossible because it's the default location.
-						}
 					}
-					
+					catch (NotAValidLocationException e1) {
+						// Ignore : Impossible because it's the default location.
+					}
+				
 				}
 				// Finally draw the relationship.
 				try {
@@ -179,6 +184,17 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 		}
 		
 		if (cascade) {
+			// Draw inside elements.
+			for (Element elem : element.getOwnedElements()) {
+				try {
+					if (!(elem instanceof Relationship))
+						this.drawElementInside(view, elem, cascade);
+				}
+				catch (InvalidContainerException e) {
+					// Ignore
+				}
+			}
+			
 			// Draw all relationships.
 			List<Relationship> relations = element.getRelationships();
 			for (Relationship relation : relations) {
@@ -187,15 +203,6 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 						this.draw(relation,false);
 				} 
 				catch (TargetOrSourceNotDrawnException e) {
-					// Ignore
-				}
-			}
-			
-			for (Element elem : element.getOwnedElements()) {
-				try {
-					this.drawElementInside(view, elem, cascade);
-				}
-				catch (InvalidContainerException e) {
 					// Ignore
 				}
 			}
@@ -266,7 +273,19 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 			// Ignore : Impossible because it's the default location.
 		}
 
-		if (cascade) {
+		if (cascade) {		
+			// Draw inside elements.
+			for (Element elem : element.getOwnedElements()) {
+
+				try {
+					if (!(elem instanceof Relationship))
+						this.drawElementInside(view, elem, cascade);
+				}
+				catch (InvalidContainerException e) {
+					// Ignore
+				}
+			}
+			
 			// Draw all relationships.
 			List<Relationship> relations = element.getRelationships();
 			for (Relationship relation : relations) {
@@ -275,17 +294,6 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 						this.draw(relation,false);
 				} 
 				catch (TargetOrSourceNotDrawnException e) {
-					// Ignore
-				}
-			}
-			
-			// Draw inside elements.
-			for (Element elem : element.getOwnedElements()) {
-
-				try {
-					this.drawElementInside(view, elem, cascade);
-				}
-				catch (InvalidContainerException e) {
 					// Ignore
 				}
 			}
@@ -494,6 +502,60 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 			throw new UnmovableViewException();
 		
 	}
+	
+	
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#setAbscisse(org.eclipse.gmf.runtime.notation.View, int)
+	 *
+	 * @param view
+	 * @param location
+	 * @throws UnmovableViewException
+	 * @throws NotAValidLocationException
+	 */
+	public void setAbscisse(View view, int location) throws UnmovableViewException, NotAValidLocationException {
+		if (location < 0)
+			throw new NotAValidLocationException();
+		// X can be set only if the view is an instance of Node. 
+		if (view instanceof Node) {
+			
+			LayoutConstraint sh = ((Node) view).getLayoutConstraint();
+			BoundsImpl bounds = ((BoundsImpl)sh);
+			// Change x :
+			bounds.setX(location);
+
+		}
+		else
+			throw new UnmovableViewException();
+		
+	}
+	
+	
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#setOrdonnee(org.eclipse.gmf.runtime.notation.View, int)
+	 *
+	 * @param view
+	 * @param location
+	 * @throws UnmovableViewException
+	 * @throws NotAValidLocationException
+	 */
+	public void setOrdonnee(View view, int location) throws UnmovableViewException, NotAValidLocationException {
+		if (location < 0)
+			throw new NotAValidLocationException();
+		// Y can be set only if the view is an instance of Node. 
+		if (view instanceof Node) {
+			
+			LayoutConstraint sh = ((Node) view).getLayoutConstraint();
+			BoundsImpl bounds = ((BoundsImpl)sh);
+			// Change y :
+			bounds.setY(location);
+
+		}
+		else
+			throw new UnmovableViewException();
+		
+	}
 
 	
 	/**
@@ -597,6 +659,160 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	
 	/**
 	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getSourceEdgeLocation(org.eclipse.gmf.runtime.notation.View)
+	 *
+	 * @param view
+	 * @return
+	 * @throws NotAnEdgeException
+	 */
+	public PrecisionPoint getSourceEdgeLocation(View view) throws NotAnEdgeException {
+		if (view instanceof Edge) {
+			// If the view is an instance of edge it's ok.
+			Edge edge = (Edge)view;
+			IdentityAnchor id = (IdentityAnchor) edge.getSourceAnchor();
+			// Get the source location :
+			if (id != null) {
+				String value = id.getId().substring(1, id.getId().length()-1);
+				String[] xy = value.split(",");
+				
+				return new PrecisionPoint(Float.valueOf(xy[0]),Float.valueOf(xy[1]));
+			}
+			else
+				//If not set, so return a point by default.
+				return new PrecisionPoint(-1.0,-1.0);
+		}
+		else
+			throw new NotAnEdgeException();
+	}
+	
+	
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getTargetEdgeLocation(org.eclipse.gmf.runtime.notation.View)
+	 *
+	 * @param view
+	 * @return
+	 * @throws NotAnEdgeException
+	 */
+	public PrecisionPoint getTargetEdgeLocation(View view) throws NotAnEdgeException {
+		if (view instanceof Edge) {
+			// If the view is an instance of edge it's ok.
+			Edge edge = (Edge)view;
+			IdentityAnchor id = (IdentityAnchor) edge.getTargetAnchor();
+			// Get the target location :
+			if (id != null) {
+				String value = id.getId().substring(1, id.getId().length()-1);
+				String[] xy = value.split(",");
+				
+				return new PrecisionPoint(Float.valueOf(xy[0]),Float.valueOf(xy[1]));
+			}
+			else
+				//If not set, so return a point by default.
+				return new PrecisionPoint(-1.0,-1.0);
+		}
+		else
+			throw new NotAnEdgeException();
+	}
+	
+	
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#setEdgeLocation(org.eclipse.gmf.runtime.notation.View, org.eclipse.draw2d.geometry.PrecisionPoint, org.eclipse.draw2d.geometry.PrecisionPoint)
+	 *
+	 * @param view
+	 * @param location_source
+	 * @param location_target
+	 * @throws NotAnEdgeException
+	 * @throws NotAValidLocationException
+	 */
+	public void setEdgeLocation(View view, PrecisionPoint location_source, PrecisionPoint location_target) throws NotAnEdgeException, NotAValidLocationException {
+		
+		// Check if the source is valid.
+		if (location_source != null) {
+			if (location_source.preciseX() > 1.0 || location_source.preciseX() < 0.0
+					&& location_source.preciseY() > 1.0 || location_source.preciseY() < 0.0)
+				throw new NotAValidLocationException();	
+			
+				
+		}
+		// Check if the target is valid.
+		if (location_target != null) {
+			if (location_target.preciseX() > 1.0 || location_target.preciseX() < 0.0
+					&& location_target.preciseY() > 1.0 || location_target.preciseY() < 0.0)
+				throw new NotAValidLocationException();	
+
+		}
+		
+		if (view instanceof Edge) {
+			// If the view is an instance of edge it's ok.
+			Edge edge = (Edge)view;
+			
+			if (location_source != null) {
+				IdentityAnchor ids = (IdentityAnchor) edge.getSourceAnchor();
+				// Create ID :
+				String n_ids = "("+location_source.preciseX()+","+location_source.preciseY()+")";
+				if (ids != null)
+					// Anchor already set.
+					ids.setId(n_ids);
+				else {
+					// Create Anchor.
+					final IdentityAnchor targetAnchor = NotationFactory.eINSTANCE.createIdentityAnchor();
+					targetAnchor.setId(n_ids);
+					edge.setSourceAnchor(targetAnchor);
+				}
+			}
+			
+			if (location_target != null) {
+				IdentityAnchor idt = (IdentityAnchor) edge.getTargetAnchor();
+				// Create ID :
+				String n_idt = "("+location_target.preciseX()+","+location_target.preciseY()+")";
+				if (idt != null)
+					// Anchor already set.
+					idt.setId(n_idt);
+				else {
+					// Create Anchor.
+					final IdentityAnchor targetAnchor = NotationFactory.eINSTANCE.createIdentityAnchor();
+					targetAnchor.setId(n_idt);
+					edge.setTargetAnchor(targetAnchor);
+				}
+			}
+			
+		}
+		else
+			throw new NotAnEdgeException();
+	}
+	
+	
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#reconnectEdge(org.eclipse.gmf.runtime.notation.View, org.eclipse.gmf.runtime.notation.View, org.eclipse.gmf.runtime.notation.View)
+	 *
+	 * @param Vedge
+	 * @param Vsource
+	 * @param Vtarget
+	 * @throws NotAnEdgeException
+	 * @throws ExecutionException
+	 */
+	public void reconnectEdge(View Vedge,View Vsource, View Vtarget) throws NotAnEdgeException, ExecutionException {
+		if (Vedge instanceof Edge) {
+			try {
+				Edge edge = (Edge)Vedge;
+				if (Vsource != null)
+					edge.setSource(Vsource);
+				if (Vtarget != null)
+					edge.setTarget(Vtarget);
+			}
+			catch (Exception e) {
+				throw new ExecutionException();
+			}
+		}
+		else
+			throw new NotAnEdgeException();
+	}
+	
+	
+	/**
+	 * 
 	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#getModel()
 	 *
 	 * @return
@@ -629,6 +845,22 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 			DEFAULT_LOCATION = location;
 		else
 			throw new NotAValidLocationException();
+	}
+	
+
+	/**
+	 * 
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#isDrawn(org.eclipse.uml2.uml.Element)
+	 *
+	 * @param element
+	 * @return
+	 */
+	public boolean isDrawn(Element element) {
+		List<View> views = getViewByElement(element);
+
+		// No associated view, so not drawn !
+		return !views.isEmpty();
+
 	}
 	
 
@@ -724,8 +956,10 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 		// Remove before-elements to find the view created.
 		views_after.removeAll(views_before);
 
-		
-		return views_after.get(0);
+		if (!views_after.isEmpty())
+			return views_after.get(0);
+		else
+			return null;
 
 	}
 	
@@ -776,7 +1010,7 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	 * @return EditParts associated to the view
 	 * @throws NonExistantViewException if the view doesn't exist
 	 */
-	private List<EditPart> viewToEditParts(View view) throws NonExistantViewException {
+	public List<EditPart> viewToEditParts(View view) throws NonExistantViewException {
 		// Find the diagramGraphicalViewer of the diagram.
 		IDiagramGraphicalViewer viewer=(IDiagramGraphicalViewer)this.diagrameditPart.getViewer();
 		// Find the ID of the element.
@@ -791,20 +1025,6 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 		else
 			return editparts;
 	
-	}
-	
-	
-	/**
-	 * Check if an element is drawn on the diagram.
-	 * @param element the element
-	 * @return True or False if the element is drawn
-	 */
-	public boolean isDrawn(Element element) {
-		List<View> views = getViewByElement(element);
-
-		// No associated view, so not drawn !
-		return !views.isEmpty();
-
 	}
 	
 	

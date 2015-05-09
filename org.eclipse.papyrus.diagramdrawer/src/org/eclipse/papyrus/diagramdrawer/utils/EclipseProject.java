@@ -12,7 +12,7 @@
  *
  *****************************************************************************/
 
-package org.eclipse.papyrus.diagramdrawer.othersources;
+package org.eclipse.papyrus.diagramdrawer.utils;
 
 import java.net.URL;
 

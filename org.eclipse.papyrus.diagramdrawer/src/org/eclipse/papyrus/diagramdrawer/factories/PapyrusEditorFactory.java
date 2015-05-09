@@ -1,8 +1,8 @@
 package org.eclipse.papyrus.diagramdrawer.factories;
 
-import org.eclipse.papyrus.diagramdrawer.othersources.EclipseProject;
-import org.eclipse.papyrus.diagramdrawer.othersources.ExecutionException;
-import org.eclipse.papyrus.diagramdrawer.othersources.PapyrusEditor;
+import org.eclipse.papyrus.diagramdrawer.utils.EclipseProject;
+import org.eclipse.papyrus.diagramdrawer.utils.ExecutionException;
+import org.eclipse.papyrus.diagramdrawer.utils.PapyrusEditor;
 
 /**
  * Creates a new papyrus editor which contains a reference to the model

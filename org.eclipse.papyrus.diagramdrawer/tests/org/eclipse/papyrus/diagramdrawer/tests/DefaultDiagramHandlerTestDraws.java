@@ -1,26 +1,39 @@
 package org.eclipse.papyrus.diagramdrawer.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.papyrus.diagramdrawer.exceptions.CreationCommandNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.InvalidContainerException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NonExistantViewException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.NotAValidLocationException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.TargetOrSourceNotDrawnException;
-import org.eclipse.papyrus.diagramdrawer.handlers.DefaultDiagramHandler;
-import org.eclipse.papyrus.diagramdrawer.othersources.ExecutionException;
+import org.eclipse.papyrus.diagramdrawer.factories.DiagramFactory;
+import org.eclipse.papyrus.diagramdrawer.factories.PapyrusEditorFactory;
+import org.eclipse.papyrus.diagramdrawer.factories.ProjectFactory;
+import org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler;
+import org.eclipse.papyrus.diagramdrawer.utils.DiagramType;
+import org.eclipse.papyrus.diagramdrawer.utils.EclipseProject;
+import org.eclipse.papyrus.diagramdrawer.utils.ExecutionException;
+import org.eclipse.papyrus.diagramdrawer.utils.PapyrusEditor;
+import org.eclipse.papyrus.infra.core.resource.NotFoundException;
+import org.eclipse.papyrus.infra.core.services.ServiceException;
 import org.eclipse.uml2.uml.AggregationKind;
 import org.eclipse.uml2.uml.Association;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Element;
+import org.eclipse.uml2.uml.Operation;
 import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.Property;
-import org.eclipse.uml2.uml.Operation;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -32,54 +45,58 @@ import org.junit.Test;
  */
 public class DefaultDiagramHandlerTestDraws {
 	
-	private DefaultDiagramHandler handler;
+	private static IDiagramHandler handler;
 	
-	private Class element;
+	private static Class element;
 	
-	private Class element2;
+	private static Class element2;
 	
-	private Class element3;
+	private static Class element3;
 	
-	private Association association;
+	private static Association association;
 	
-	private Association association2;
+	private static Association association2;
 	
-	private Property attribute;
+	private static Property attribute;
 	
-	private Property attribute2;
+	private static Property attribute2;
 	
-	private Property attribute3;
+	private static Property attribute3;
 	
-	private Operation method;
+	private static Operation method;
 	
-	private Operation method2;
+	private static Operation method2;
 	
-	private Operation method3;
+	private static Operation method3;
 	
 	
 	@BeforeClass
-	public void setUp() throws ExecutionException {
+	public static void setUp() throws ExecutionException, ServiceException, CreationCommandNotFoundException, NotFoundException {
 	
-		//TODO : Creer un model avec les factories + creer des classes/associations/propriétés.
-		// -> Quand les factories seront créées !
+		EclipseProject eclipseProject = ProjectFactory.instance.build("test project");
+		PapyrusEditor papyrusEditor = PapyrusEditorFactory.instance.create(eclipseProject, "test model");
+		TransactionalEditingDomain ted = papyrusEditor.getTransactionalEditingDomain();
+		handler = DiagramFactory.instance.create("test diagram", DiagramType.Class, papyrusEditor);
 		
-		Package model = null;
-		handler = null;
 		
-		// Dans la transaction :
-		element = model.createOwnedClass("Class1", false);
-		element2 = model.createOwnedClass("Class2", false);
-		element3 = model.createOwnedClass("Class3", false);
-		attribute = element.createOwnedAttribute("att1", null);
-		attribute2 = element2.createOwnedAttribute("att2", null);
-		attribute3 = element3.createOwnedAttribute("att3", null);
-		method = element.createOwnedOperation("meth1", null, null);
-		method2 = element2.createOwnedOperation("meth2", null, null);
-		method3 = element3.createOwnedOperation("meth3", null, null);
-		association = element.createAssociation(false, AggregationKind.COMPOSITE_LITERAL, "name1", 1, 1, element2, false, AggregationKind.SHARED_LITERAL, "name2", 0, 1);
-		association.setName("asso1");
-		association2 = element.createAssociation(false, AggregationKind.COMPOSITE_LITERAL, "name3", 1, 1, element3, false, AggregationKind.SHARED_LITERAL, "name4", 0, 1);
-		association2.setName("asso2");
+		final Package model = (Package)handler.getModel().lookupRoot();
+		
+		ted.getCommandStack().execute(new RecordingCommand(ted) {
+			protected void doExecute() {	
+				element = model.createOwnedClass("Class1", false);
+				element2 = model.createOwnedClass("Class2", false);
+				element3 = model.createOwnedClass("Class3", false);
+				attribute = element.createOwnedAttribute("att1", null);
+				attribute2 = element2.createOwnedAttribute("att2", null);
+				attribute3 = element3.createOwnedAttribute("att3", null);
+				method = element.createOwnedOperation("meth1", null, null);
+				method2 = element2.createOwnedOperation("meth2", null, null);
+				method3 = element3.createOwnedOperation("meth3", null, null);
+				association = element.createAssociation(false, AggregationKind.COMPOSITE_LITERAL, "name1", 1, 1, element2, false, AggregationKind.SHARED_LITERAL, "name2", 0, 1);
+				association.setName("asso1");
+				association2 = element.createAssociation(false, AggregationKind.COMPOSITE_LITERAL, "name3", 1, 1, element3, false, AggregationKind.SHARED_LITERAL, "name4", 0, 1);
+				association2.setName("asso2");
+			}});
 
 	}
 	
@@ -597,6 +614,6 @@ public class DefaultDiagramHandlerTestDraws {
 			// Normally it's impossible !
 			assertTrue(false);
 		}
-	}
+	}	
 
 }

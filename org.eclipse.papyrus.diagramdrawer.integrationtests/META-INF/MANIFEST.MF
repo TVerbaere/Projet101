@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Integrationtests
+Bundle-SymbolicName: org.eclipse.papyrus.diagramdrawer.integrationtests;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipse.papyrus.diagramdrawer.integrationtests.Activator
+Bundle-Vendor: Thibaud VERBAERE & Allan RAKOTOARIVONY
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.papyrus.diagramdrawer,
+ org.eclipse.papyrus.infra.core,
+ org.eclipse.papyrus.uml.tools,
+ org.eclipse.emf.transaction,
+ org.eclipse.draw2d
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Import-Package: org.eclipse.gmf.runtime.notation
