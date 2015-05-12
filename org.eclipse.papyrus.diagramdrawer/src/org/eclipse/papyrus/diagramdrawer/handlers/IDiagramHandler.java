@@ -142,7 +142,7 @@ public interface IDiagramHandler {
 		 * @throws UnmovableViewException If the view cannot be moved
 		 * @throws NotAValidLocationException If the location is not valid 
 		 */
-		public void setOrdonnee(View view, int location) throws UnmovableViewException, NotAValidLocationException;
+		public void setYLocation(View view, int location) throws UnmovableViewException, NotAValidLocationException;
 		
 		/**
 		 * 
@@ -152,7 +152,7 @@ public interface IDiagramHandler {
 		 * @throws UnmovableViewException If the view cannot be moved
 		 * @throws NotAValidLocationException If the location is not valid 
 		 */
-		public void setAbscisse(View view, int location) throws UnmovableViewException, NotAValidLocationException;
+		public void setXLocation(View view, int location) throws UnmovableViewException, NotAValidLocationException;
 		
 		/**
 		 * Returns a list of all views representing the element which name is given as parameter.

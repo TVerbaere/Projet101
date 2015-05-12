@@ -772,7 +772,7 @@
                   <ownedParameter xmi:type="uml:Parameter" xmi:id="_4w9v0PZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
                   <ownedParameter xmi:type="uml:Parameter" xmi:id="_4xCBQPZKEeS1bO4bMzbjfg" name="location" type="_4tNRMPZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_4xG5wPZKEeS1bO4bMzbjfg" name="setOrdonnee" visibility="public">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4xG5wPZKEeS1bO4bMzbjfg" name="setYLocation" visibility="public">
                   <ownedComment xmi:type="uml:Comment" xmi:id="_4xG5wfZKEeS1bO4bMzbjfg">
                     <body>
 		 * Change the ordonnee of the view given in parameter.
@@ -785,7 +785,7 @@
                   <ownedParameter xmi:type="uml:Parameter" xmi:id="_4xJ9EPZKEeS1bO4bMzbjfg" name="view" type="_4tV0EPZKEeS1bO4bMzbjfg"/>
                   <ownedParameter xmi:type="uml:Parameter" xmi:id="_4xO1kPZKEeS1bO4bMzbjfg" name="location" type="_4txR4PZKEeS1bO4bMzbjfg"/>
                 </ownedOperation>
-                <ownedOperation xmi:type="uml:Operation" xmi:id="_4xTuEPZKEeS1bO4bMzbjfg" name="setAbscisse" visibility="public">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_4xTuEPZKEeS1bO4bMzbjfg" name="setXLocation" visibility="public">
                   <ownedComment xmi:type="uml:Comment" xmi:id="_4xTuEfZKEeS1bO4bMzbjfg">
                     <body>
 		 * 

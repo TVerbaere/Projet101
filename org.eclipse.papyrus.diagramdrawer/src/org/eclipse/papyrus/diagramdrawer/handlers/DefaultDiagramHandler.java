@@ -506,14 +506,14 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	
 	/**
 	 * 
-	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#setAbscisse(org.eclipse.gmf.runtime.notation.View, int)
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#setXLocation(org.eclipse.gmf.runtime.notation.View, int)
 	 *
 	 * @param view
 	 * @param location
 	 * @throws UnmovableViewException
 	 * @throws NotAValidLocationException
 	 */
-	public void setAbscisse(View view, int location) throws UnmovableViewException, NotAValidLocationException {
+	public void setXLocation(View view, int location) throws UnmovableViewException, NotAValidLocationException {
 		if (location < 0)
 			throw new NotAValidLocationException();
 		// X can be set only if the view is an instance of Node. 
@@ -533,14 +533,14 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	
 	/**
 	 * 
-	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#setOrdonnee(org.eclipse.gmf.runtime.notation.View, int)
+	 * @see org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler#setYLocation(org.eclipse.gmf.runtime.notation.View, int)
 	 *
 	 * @param view
 	 * @param location
 	 * @throws UnmovableViewException
 	 * @throws NotAValidLocationException
 	 */
-	public void setOrdonnee(View view, int location) throws UnmovableViewException, NotAValidLocationException {
+	public void setYLocation(View view, int location) throws UnmovableViewException, NotAValidLocationException {
 		if (location < 0)
 			throw new NotAValidLocationException();
 		// Y can be set only if the view is an instance of Node. 
