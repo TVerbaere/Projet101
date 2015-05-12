@@ -29,7 +29,7 @@ public class FactoriesTest {
 		assertNotNull(project);
 		EclipseProject project2 = ProjectFactory.instance.build("test new project");
 		assertNotNull(project2);
-		assertEquals(project,project2);
+		assertEquals(project.getProject(), project2.getProject());
 	}
 	
 	@Test

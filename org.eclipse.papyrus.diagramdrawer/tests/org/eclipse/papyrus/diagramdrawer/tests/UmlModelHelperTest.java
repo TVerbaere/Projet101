@@ -26,7 +26,6 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Package;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -73,11 +72,11 @@ public class UmlModelHelperTest {
 		});
 	}
 	
-	
-	@Before
-	public void elementsInModel() {
+	@Test
+	public void deleteTest() {
 		ted.getCommandStack().execute(new RecordingCommand(ted) {
 			protected void doExecute() {
+				
 				// Normally, ClassTest, ClassTest2 and the association are in the model.
 				List<Element> elements = getElementByName("ClassTest");
 				assertTrue(elements.size() == 1 && elements.get(0) == tested_element);
@@ -85,16 +84,8 @@ public class UmlModelHelperTest {
 				assertTrue(elements.size() == 1 && elements.get(0) == tested_element2);
 				elements = getElementByName("asso1");
 				assertTrue(elements.size() == 1 && elements.get(0) == tested_association);
-			}
-		});
-		
-	}
-	
-	
-	@Test
-	public void deleteTest() {
-		ted.getCommandStack().execute(new RecordingCommand(ted) {
-			protected void doExecute() {
+				
+				
 				// Delete element ClassTest1 (-> and the association in cascade).
 				try {
 					helper.delete(tested_element);
@@ -104,12 +95,12 @@ public class UmlModelHelperTest {
 				}
 						
 				// Normally, just ClassTes2 in the model.
-				List<Element> elements = getElementByName("ClassTest");
-				assertTrue(elements.size() == 0);
-				elements = getElementByName("ClassTest2");
-				assertTrue(elements.size() == 1);
-				elements = getElementByName("asso1");
-				assertTrue(elements.size() == 0);
+				List<Element> elements1 = getElementByName("ClassTest");
+				assertTrue(elements1.size() == 0);
+				elements1 = getElementByName("ClassTest2");
+				assertTrue(elements1.size() == 1);
+				elements1 = getElementByName("asso1");
+				assertTrue(elements1.size() == 0);
 			}
 		});
 		
