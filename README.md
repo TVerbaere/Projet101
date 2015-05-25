@@ -29,8 +29,3 @@ Scénarios concrets :
 + Guerres médiques - Diagramme de Classe [OK : TV]
 + Le restaurant - Diagramme de Séquence [OK : TV]
 + Requêtes - Diagramme de Cas d'utilisation [OK : TV]
-
-Autre :
--------
--------
-+ Rapport (97%)

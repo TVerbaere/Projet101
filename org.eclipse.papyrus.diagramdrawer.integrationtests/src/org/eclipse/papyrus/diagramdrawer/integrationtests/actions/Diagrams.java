@@ -240,9 +240,9 @@ public class Diagrams {
 					handler.setHeight(behavior1, 150);
 					handler.setHeight(behavior11, 100);
 				
-					handler.setOrdonnee(behavior,100);
-					handler.setOrdonnee(behavior1,170);
-					handler.setOrdonnee(behavior11,320);
+					handler.setYLocation(behavior,100);
+					handler.setYLocation(behavior1,170);
+					handler.setYLocation(behavior11,320);
 					
 					// Draw messages :
 					View message_view = handler.draw(message, true);
