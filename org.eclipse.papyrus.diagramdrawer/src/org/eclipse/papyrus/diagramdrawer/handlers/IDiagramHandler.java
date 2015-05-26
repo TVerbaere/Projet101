@@ -61,7 +61,7 @@ public interface IDiagramHandler {
 		 * @param location The location of the element
 		 * @param cascade True if all contents in the element must be drawn in the same time, False in the other case
 		 * @return A view representing the drawn element
-		 * @throws NotAValidLocationException 
+		 * @throws NotAValidLocationException if the location is invalid 
 		 */
 		
 		public View draw(Element element, Point location, boolean cascade) throws NotAValidLocationException;
@@ -73,8 +73,8 @@ public interface IDiagramHandler {
 		 * @param container The view n which the element will be drawn
 		 * @param element The element to be drawn in the view
 		 * @param cascade True if all contents in the element must be drawn in the same time, False in the other case
-		 * @throws InvalidContainerException if the element cannot be placed inside the container or the container does not exists
 		 * @return A view representing the drawn element
+		 * @throws InvalidContainerException if the element cannot be placed inside the container or the container does not exists
 		 */
 		public View drawElementInside(View container, Element element, boolean cascade) throws InvalidContainerException;
 		
@@ -86,9 +86,9 @@ public interface IDiagramHandler {
 		 * @param element The element to be drawn in the view
 		 * @param location the location in the container
 		 * @param cascade True if all contents in the element must be drawn in the same time, False in the other case
+		 * @return A view representing the drawn element
 		 * @throws InvalidContainerException if the element cannot be placed inside the container or the container does not exists
 		 * @throws NotAValidLocationException if the location is invalid 
-		 * @return A view representing the drawn element
 		 */
 		public View drawElementInsideAtLocation(View container, Element element, Point location, boolean cascade) throws InvalidContainerException, NotAValidLocationException;
 		
@@ -98,9 +98,9 @@ public interface IDiagramHandler {
 		 * @param elements A list of elements to be drawn
 		 * @param locations A list of location corresponding to the elements
 		 * @param cascade True if all contents in the element must be drawn in the same time, False in the other case
+		 * @return A list of the drawn views
 		 * @throws IllegalArgumentException If the number of locations is smaller than the  number of elements
 		 * @throws NotAValidLocationException If the location is not valid 
-		 * @return A list of the drawn views
 		 */
 		public List<View> drawAll(List<Element> elements,List<Point>locations, boolean cascade) throws IllegalArgumentException, NotAValidLocationException;
 		
