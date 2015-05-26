@@ -87,9 +87,10 @@ public interface IDiagramHandler {
 		 * @param location the location in the container
 		 * @param cascade True if all contents in the element must be drawn in the same time, False in the other case
 		 * @throws InvalidContainerException if the element cannot be placed inside the container or the container does not exists
+		 * @throws NotAValidLocationException if the location is invalid 
 		 * @return A view representing the drawn element
 		 */
-		public View drawElementInsideAtLocation(View container, Element element, Point location, boolean cascade) throws InvalidContainerException;
+		public View drawElementInsideAtLocation(View container, Element element, Point location, boolean cascade) throws InvalidContainerException, NotAValidLocationException;
 		
 		/**
 		 * Draws all elements at their locations.

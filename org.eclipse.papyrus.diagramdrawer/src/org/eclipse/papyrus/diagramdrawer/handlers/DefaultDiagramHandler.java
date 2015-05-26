@@ -225,7 +225,12 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	 * @throws InvalidContainerException
 	 */
 	public View drawElementInside(View container, Element element, boolean cascade) throws InvalidContainerException {
-		return this.drawElementInside(container, element, null, cascade);
+		try {
+			return this.drawElementInside(container, element, null, cascade);
+		} catch (NotAValidLocationException e) {
+			// Ignore : the location by default is valid !
+			return null;
+		}
 	}
 	
 	
@@ -239,8 +244,9 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	 * @param cascade
 	 * @return
 	 * @throws InvalidContainerException
+	 * @throws NotAValidLocationException 
 	 */
-	public View drawElementInsideAtLocation(View container, Element element, Point location, boolean cascade) throws InvalidContainerException {
+	public View drawElementInsideAtLocation(View container, Element element, Point location, boolean cascade) throws InvalidContainerException, NotAValidLocationException {
 		return this.drawElementInside(container, element, location, cascade);
 	}
 	
@@ -254,9 +260,10 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 	 * @param location the location in the container
 	 * @param cascade True if all contents in the element must be drawn in the same time, False in the other case
 	 * @throws InvalidContainerException if the element cannot be placed inside the container or the container does not exists
+	 * @throws NotAValidLocationException if the location is invalid
 	 * @return A view representing the drawn element
 	 */
-	private View drawElementInside(View container, Element element,Point location, boolean cascade) throws InvalidContainerException {
+	private View drawElementInside(View container, Element element,Point location, boolean cascade) throws InvalidContainerException, NotAValidLocationException {
 		View view = null;
 
 		// Draw the element
@@ -268,9 +275,6 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 		}
 		catch (NonExistantViewException e1) {
 			throw new InvalidContainerException();
-		}
-		catch (NotAValidLocationException e) {
-			// Ignore : Impossible because it's the default location.
 		}
 
 		if (cascade) {		
