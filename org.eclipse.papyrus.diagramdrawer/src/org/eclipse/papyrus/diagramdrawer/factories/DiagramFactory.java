@@ -1,15 +1,28 @@
 package org.eclipse.papyrus.diagramdrawer.factories;
 
+import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
+import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.papyrus.commands.ICreationCommand;
 import org.eclipse.papyrus.diagramdrawer.exceptions.CreationCommandNotFoundException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.DiagramNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.handlers.DefaultDiagramHandler;
 import org.eclipse.papyrus.diagramdrawer.handlers.IDiagramHandler;
 import org.eclipse.papyrus.diagramdrawer.utils.DiagramType;
 import org.eclipse.papyrus.diagramdrawer.utils.ExecutionException;
 import org.eclipse.papyrus.diagramdrawer.utils.PapyrusEditor;
+import org.eclipse.papyrus.infra.core.editor.IMultiDiagramEditor;
 import org.eclipse.papyrus.infra.core.resource.ModelSet;
+import org.eclipse.papyrus.infra.core.sasheditor.contentprovider.IPageManager;
+import org.eclipse.papyrus.infra.core.sasheditor.editor.IEditorPage;
+import org.eclipse.papyrus.infra.core.sasheditor.editor.ISashWindowsContainer;
 import org.eclipse.papyrus.infra.core.services.ServiceException;
+import org.eclipse.papyrus.infra.core.services.ServicesRegistry;
+import org.eclipse.papyrus.infra.core.utils.ServiceUtils;
+import org.eclipse.papyrus.infra.gmfdiag.common.model.NotationUtils;
 import org.eclipse.papyrus.uml.tools.model.UmlUtils;
 import org.eclipse.ui.IEditorPart;
 
@@ -52,13 +65,39 @@ public class DiagramFactory {
 	 * @throws CreationCommandNotFoundException
 	 * @throws ServiceException
 	 * @throws ExecutionException
+	 * @throws DiagramNotFoundException 
 	 */
-//	public IDiagramHandler load(String diagramName,PapyrusEditor papyrusEditor) throws CreationCommandNotFoundException, ServiceException, ExecutionException{
-//		ModelSet modelSet = papyrusEditor.getModelSet();
-//		IEditorPart activeEditor = papyrusEditor.getEditor().getActiveEditor();		
+	public IDiagramHandler load(final String diagramName,PapyrusEditor papyrusEditor) throws CreationCommandNotFoundException, ServiceException, ExecutionException, DiagramNotFoundException{
+		ModelSet modelSet = papyrusEditor.getModelSet();
+//		IMultiDiagramEditor editor = papyrusEditor.getEditor();
+//		IEditorPart activeEditor = papyrusEditor.getEditor().getActiveEditor();
 //		DiagramEditor diagramEditor = (DiagramEditor) activeEditor; //if there is a cast exception, there is a grave error?
-//		return new DefaultDiagramHandler(UmlUtils.getUmlModel(modelSet),diagramEditor.getDiagramEditPart());			
-//	}
+//		return new DefaultDiagramHandler(UmlUtils.getUmlModel(modelSet),diagramEditor.getDiagramEditPart());
+//		IEditorPart editorPart = ((IEditorPage) editor).getIEditorPart(); // The Papyrus editor, not a nested editorPart
+//		ISashWindowsContainer sashContainer = (ISashWindowsContainer)editorPart.getAdapter(ISashWindowsContainer.class);
+		IPageManager pageManager = ServiceUtils.getInstance().getIPageManager(papyrusEditor.getServicesRegistry());
+		
+		Resource notationResource = NotationUtils.getNotationModel(papyrusEditor.getServicesRegistry().getService(ModelSet.class)).getResource();
+		
+		List<EObject> resources = notationResource.getContents();
+		for(EObject resource : resources){
+			if (resource instanceof Diagram){
+				Diagram d = (Diagram) resource;
+				if (diagramName.equals(d.getName())){
+					if(pageManager.isOpen(d)){
+						pageManager.selectPage(d);						
+					}
+					else{
+						pageManager.openPage(d);
+					}
+					IEditorPart activeEditor = papyrusEditor.getEditor().getActiveEditor();		
+					DiagramEditor diagramEditor = (DiagramEditor) activeEditor; //if there is a cast exception, there is a grave error?
+					return new DefaultDiagramHandler(UmlUtils.getUmlModel(modelSet),diagramEditor.getDiagramEditPart());
+				}
+			}
+		}
+		throw new DiagramNotFoundException();
+	}
 	
 
 

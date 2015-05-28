@@ -287,7 +287,7 @@ public class PapyrusEditor {
 	 *
 	 * @return The service registry.
 	 */
-	public ServicesRegistry getServiceRegistry() {
+	public ServicesRegistry getServicesRegistry() {
 		return papyrusEditor.getServicesRegistry();
 	}
 
@@ -305,7 +305,7 @@ public class PapyrusEditor {
 	}
 
 	public void undo() throws ServiceException {
-		TransactionalEditingDomain domain = getServiceRegistry().getService(TransactionalEditingDomain.class);
+		TransactionalEditingDomain domain = getServicesRegistry().getService(TransactionalEditingDomain.class);
 
 		if (domain.getCommandStack().canUndo()) {
 			domain.getCommandStack().undo();
@@ -313,7 +313,7 @@ public class PapyrusEditor {
 	}
 
 	public void redo() throws ServiceException {
-		TransactionalEditingDomain domain = getServiceRegistry().getService(TransactionalEditingDomain.class);
+		TransactionalEditingDomain domain = getServicesRegistry().getService(TransactionalEditingDomain.class);
 
 		if (domain.getCommandStack().canRedo()) {
 			domain.getCommandStack().redo();
@@ -326,7 +326,7 @@ public class PapyrusEditor {
 	}
 	
 	public TransactionalEditingDomain getTransactionalEditingDomain() throws ServiceException{
-		TransactionalEditingDomain domain = getServiceRegistry().getService(TransactionalEditingDomain.class);
+		TransactionalEditingDomain domain = getServicesRegistry().getService(TransactionalEditingDomain.class);
 		return domain;
 	}
 	
