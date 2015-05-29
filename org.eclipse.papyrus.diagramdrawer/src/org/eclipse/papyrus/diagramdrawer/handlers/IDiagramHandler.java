@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PrecisionPoint;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.papyrus.diagramdrawer.exceptions.InvalidContainerException;
 import org.eclipse.papyrus.diagramdrawer.exceptions.LocationNotFoundException;
@@ -264,4 +265,10 @@ public interface IDiagramHandler {
 		 * @throws ExecutionException if the operation is forbidden
 		 */
 		public void reconnectEdge(View Vedge,View Vsource, View Vtarget) throws NotAnEdgeException, ExecutionException;
+		
+		/**
+		 * Gives the diagram edit part which is handled by this handler
+		 * @return the diagram edit part which is handled by this handler
+		 */
+		public DiagramEditPart getDiagramEditPart();
 }

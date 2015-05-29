@@ -59,7 +59,8 @@ public class DiagramFactory {
 	}
 	
 	/**
-	 * Loads a diagram inside a papyrus editor
+	 * Loads a diagram inside a papyrus editor.
+	 * If there is more than one diagram of the same name, the one which will be loaded is the one which has been created most recently
 	 * @param diagramName the name of the diagram
 	 * @return the diagram handler of the asked diagram
 	 * @throws CreationCommandNotFoundException
@@ -69,12 +70,7 @@ public class DiagramFactory {
 	 */
 	public IDiagramHandler load(final String diagramName,PapyrusEditor papyrusEditor) throws CreationCommandNotFoundException, ServiceException, ExecutionException, DiagramNotFoundException{
 		ModelSet modelSet = papyrusEditor.getModelSet();
-//		IMultiDiagramEditor editor = papyrusEditor.getEditor();
-//		IEditorPart activeEditor = papyrusEditor.getEditor().getActiveEditor();
-//		DiagramEditor diagramEditor = (DiagramEditor) activeEditor; //if there is a cast exception, there is a grave error?
-//		return new DefaultDiagramHandler(UmlUtils.getUmlModel(modelSet),diagramEditor.getDiagramEditPart());
-//		IEditorPart editorPart = ((IEditorPage) editor).getIEditorPart(); // The Papyrus editor, not a nested editorPart
-//		ISashWindowsContainer sashContainer = (ISashWindowsContainer)editorPart.getAdapter(ISashWindowsContainer.class);
+
 		IPageManager pageManager = ServiceUtils.getInstance().getIPageManager(papyrusEditor.getServicesRegistry());
 		
 		Resource notationResource = NotationUtils.getNotationModel(papyrusEditor.getServicesRegistry().getService(ModelSet.class)).getResource();

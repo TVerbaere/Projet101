@@ -1045,4 +1045,7 @@ public class DefaultDiagramHandler implements IDiagramHandler {
 		return false;
 	}
 
+	public DiagramEditPart getDiagramEditPart(){
+		return this.diagrameditPart;
+	}
 }

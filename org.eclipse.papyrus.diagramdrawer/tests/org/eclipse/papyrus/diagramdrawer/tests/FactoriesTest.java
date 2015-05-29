@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.eclipse.papyrus.diagramdrawer.exceptions.CreationCommandNotFoundException;
+import org.eclipse.papyrus.diagramdrawer.exceptions.DiagramNotFoundException;
 import org.eclipse.papyrus.diagramdrawer.factories.DiagramFactory;
 import org.eclipse.papyrus.diagramdrawer.factories.PapyrusEditorFactory;
 import org.eclipse.papyrus.diagramdrawer.factories.ProjectFactory;
@@ -74,6 +75,27 @@ public class FactoriesTest {
 		IDiagramHandler useCaseDiagram = DiagramFactory.instance.create("useCase diagram", DiagramType.UseCase, papyrusEditor);
 		assertNotNull(useCaseDiagram);
 		
+	}
+	
+	@Test
+	public void testLoadDiagram() throws ExecutionException, CreationCommandNotFoundException, ServiceException, DiagramNotFoundException{
+		EclipseProject project = ProjectFactory.instance.build("test diagram creation");
+		PapyrusEditor papyrusEditor = PapyrusEditorFactory.instance.create(project, "test diagram load model");
+		
+		IDiagramHandler classDiagram = DiagramFactory.instance.create("class diagram", DiagramType.Class, papyrusEditor);
+		IDiagramHandler activityDiagram = DiagramFactory.instance.create("activity diagram", DiagramType.Activity, papyrusEditor);
+		
+		IDiagramHandler loadedClassDiagram = DiagramFactory.instance.load("class diagram", papyrusEditor);
+		IDiagramHandler loadedActivityDiagram =  DiagramFactory.instance.load("activity diagram", papyrusEditor);
+		
+		assertEquals("The loaded diagram is not the one excpected",classDiagram.getDiagramEditPart(),loadedClassDiagram.getDiagramEditPart());
+		assertEquals("The loaded diagram is not the one excpected",activityDiagram.getDiagramEditPart(),loadedActivityDiagram.getDiagramEditPart());
+		
+		IDiagramHandler classDiagram2 = DiagramFactory.instance.load("class diagram", papyrusEditor);
+		loadedClassDiagram = DiagramFactory.instance.load("class diagram", papyrusEditor);
+		
+		assertEquals("The loaded diagram is not the one excpected",classDiagram2.getDiagramEditPart(),loadedClassDiagram.getDiagramEditPart());
+
 	}
 
 }
