@@ -68,8 +68,8 @@ public class DefaultDiagramHandlerTestBasicsMethods {
 	@BeforeClass
 	public static void setUp() throws ExecutionException, NotFoundException, ServiceException, CreationCommandNotFoundException {
 	
-		EclipseProject eclipseProject = ProjectFactory.instance.build("test project");
-		PapyrusEditor papyrusEditor = PapyrusEditorFactory.instance.create(eclipseProject, "test model");
+		EclipseProject eclipseProject = ProjectFactory.instance.build("test2 project");
+		PapyrusEditor papyrusEditor = PapyrusEditorFactory.instance.create(eclipseProject, "test2 model");
 		ted = papyrusEditor.getTransactionalEditingDomain();
 		handler = DiagramFactory.instance.create("test diagram", DiagramType.Class, papyrusEditor);	
 		
